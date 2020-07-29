@@ -1,0 +1,29 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AnnouncementRoutingModule } from './announcement-routing.module';
+import { AnnouncementComponent } from './announcement.component';
+import { AddAnnouncementComponent } from './add-announcement/add-announcement.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { AddCategoryAnnouncementComponent } from './add-category-announcement/add-category-announcement.component';
+
+
+@NgModule({
+  declarations: [
+    AnnouncementComponent,
+    AddAnnouncementComponent,
+    AddCategoryAnnouncementComponent
+  ],
+  imports: [
+    CommonModule,
+    AnnouncementRoutingModule,
+    RouterModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    AnnouncementComponent,
+    AddAnnouncementComponent,
+    AddCategoryAnnouncementComponent
+  ],
+})
+export class AnnouncementModule { }

@@ -1,0 +1,26 @@
+.container {
+    position: relative;
+    display: inline;
+    margin: 100px 0px 0px 0px;
+    transform: translate(25%, -50%);
+}
+
+.text--title {
+    // position: absolute;
+    display: inline-table;
+}
+
+.circles {
+    height: 200px;
+    width: 200px;
+    margin: 25px 10px 0 10px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;
+    background-color: #ffffff;
+}
+
+.text__link {
+    display: table-row-group;
+    transform: translate(60%, 200%);
+}

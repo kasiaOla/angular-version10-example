@@ -1,0 +1,44 @@
+.mat-tab-group {
+    margin-bottom: 48px;
+}
+
+.card {
+    justify-content: flex-end;
+}
+
+.card-body {
+    padding: 0;
+}
+
+.navbar {
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+}
+
+.navbar-brand {
+    opacity: .6;
+    margin-right: 3rem;
+    font: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
+}
+
+.bg-light {
+    background-color: white !important;
+    justify-content: flex-end !important;
+}
+
+.navbar .navbar-expand-lg .navbar-light .bg-light {
+    justify-content: flex-end !important;
+}
+
+button {
+    padding: 10px;
+    margin: 10px 5px 0px 15px;
+}
+
+.link-button--save {
+    position: absolute;
+    top: 0px;
+    left: 5%;
+    margin: 0px;
+    box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;
+    border: 1px blue;
+}

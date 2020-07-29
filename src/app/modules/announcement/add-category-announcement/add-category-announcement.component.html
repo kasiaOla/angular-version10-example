@@ -1,0 +1,17 @@
+<div class="container">
+    <div>
+        <label for="type">Wybierz kategorie<sup>*</sup></label>
+    </div>
+    <div *ngIf="announcementsCategoriesLength >= 0">
+        <div class="text--title" for="category" *ngFor="let enum of keys() let indexOfelementCategorie=index;">
+            {{ enum}}
+            <!-- {{'"/announcement/category/${indexOfelementCategorie}/type/${indexOfelementType}"'}} -->
+            <span class="circles" *ngIf="announcementsCategoriesLength >= 0">
+      <a class="text__link" [routerLink]="['/announcement/category', indexOfelementCategorie ,'type' , indexOfelementType]"
+        routerLinkActive="active"
+        *ngFor="let enum of AnnouncementType | keyvalue let indexOfelementType=index;">
+        {{AnnouncementType[indexOfelementType]}}</a>
+    </span>
+        </div>
+    </div>
+</div>

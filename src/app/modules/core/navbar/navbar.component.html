@@ -1,0 +1,17 @@
+<div class="card-body">
+    <nav class="navbar navbar-light bg-light">
+        <div><a class="navbar-brand" [routerLink]="'/home'" routerLinkActive="active">{{authService.isLogged}} Strona główna</a></div>
+        <div><a class="navbar-brand" [routerLink]="'/user/registration'" routerLinkActive="active" *ngIf="!authService.isLogged"> Rejestracja</a></div>
+        <div><a class="navbar-brand" [routerLink]="'/user/login'" routerLinkActive="active" *ngIf="!authService.isLogged"> Zaloguj</a></div>
+        <div><a class="navbar-brand" (click)="loginOut()" *ngIf="authService.isLogged"> Wyloguj</a></div>
+        <div><a class="navbar-brand" [routerLink]="'/user/contact'" routerLinkActive="active">Kontakt</a></div>
+    </nav>
+
+
+    <button class="btn btn-default link-button--save" [routerLink]="'/announcement/category'" routerLinkActive="active">Dodaj ogłoszenie</button>
+
+
+    <p class="card-text">
+        <router-outlet></router-outlet>
+    </p>
+</div>

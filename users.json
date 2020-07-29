@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$oid": "5aba7e8c045115340496becd"
+  },
+  "address": {
+    "street": "Aleje Jerozolimskie 160",
+    "houseNumber": "Aleje Jerozolimskie 160",
+    "city": "Warszawa"
+  },
+  "username": "zzzz",
+  "password": "$2a$05$5gCt7TWfKckJ1VwhDDQGSO8XFe0zbAE6TfeTJCvFR4a6a1YAoTi/i",
+  "description": "<p><span class=\"fr-emoticon fr-deletable fr-emoticon-img\" style=\"background: url(https://cdnjs.cloudflare.com/ajax/libs/emojione/2.0.1/assets/svg/1f61b.svg);\">&nbsp;</span><img src=\"https://i.froala.com/download/a8558dd4dd4c3b4f96459f6247bf6b589ce62484.JPG?1524765356\" style=\"width: 300px;\" class=\"fr-fic fr-dib\">&nbsp;</p>",
+  "email": "zzzz@@weq.",
+  "type": "3",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ad0acdb90442018f8e056a0"
+  },
+  "address": {
+    "street": "Postępu",
+    "houseNumber": "2",
+    "city": "Warszawa"
+  },
+  "username": "www",
+  "password": "$2a$05$NoQ5.RtrtZcx9Q38PJRS9OqPEm.mM1pS/jNxJzh1Lhsq7BUiCA8Ui",
+  "description": "<p>q</p>",
+  "email": "test@www.pl",
+  "type": "1",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5c87d869cd998018743207f7"
+  },
+  "address": {
+    "street": "Matuszewskiego",
+    "houseNumber": "3",
+    "city": "Przasnysz"
+  },
+  "username": "qqq123",
+  "password": "$2a$05$/FXgLM1XOeskolrqcbLPvOANGkprIiwM6YsZ39L22a4dj1bLOM4ZG",
+  "description": "<p>aaaaaaaaa</p>",
+  "email": "bulicka.alexandra@gmail.com",
+  "type": "1",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f194741246258208858bf5b"
+  },
+  "password": "q",
+  "email": "bulicka.alexandra@gmail.com",
+  "type": "1",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f194b250b28d650fce06ffa"
+  },
+  "password": "kasia1",
+  "email": "bulicka.alexandra@gmail.com",
+  "type": "0",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f194b370b28d650fce06ffb"
+  },
+  "username": "admin",
+  "password": "q",
+  "email": "k.bulicka.danka@gmail.com",
+  "type": "1",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5f194d961ccadb4e3ccb8ec7"
+  },
+  "username": "ss",
+  "password": "as",
+  "email": "bulicka.alexandra@gmail.com",
+  "type": "0",
+  "__v": 0
+}]

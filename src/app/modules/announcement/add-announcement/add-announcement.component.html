@@ -1,0 +1,87 @@
+<div class="jumbotron content">
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <h2>Dodaj ogłoszenie - {{AnnouncementsCategories[this.id_category]}}</h2>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-lg-12">
+                <div class="panel-body">
+                    <form [formGroup]="announcementForm" (ngSubmit)="addAnnouncement()">
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-6">
+                                <label for="title">Tytuł <sup>*</sup></label>
+                                <input type="text" class="form-control" formControlName="title" id="title" name="title" />
+                            </div>
+                            <div class="form-group col-sm-12 col-md-2">
+                                <label for="price">Cena  <sup>*</sup></label>
+                                <input type="text" class="form-control" formControlName="price" id="price" name="price" />
+                            </div>
+                            <div class="form-group col-sm-12 col-md-2">
+                                <label for="surface">Powierzchnia  <sup>*</sup></label>
+                                <input type="text" class="form-control" formControlName="surface" id="surface" name="surface" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-2">
+                                <label for="pricePerM">Powierzchnia za m^2</label>
+                                <input type="text" class="form-control" formControlName="pricePerM" id="pricePerM" name="pricePerM" />
+                            </div>
+                            <div class="form-group col-sm-12 col-md-2">
+                                <label for="numberOfRooms">Liczba pokoi</label>
+                                <input type="number" class="form-control" formControlName="numberOfRooms" id="numberOfRooms" name="numberOfRooms" />
+                            </div>
+                            <div class="form-group col-sm-12 col-md-2">
+                                <label for="floor">Pietro</label>
+                                <input type="number" class="form-control" formControlName="floor" id="floor" name="floor" />
+                            </div>
+                            <div class="form-group col-sm-12 col-md-4">
+                                <label for="multimedia">Multimedia</label>
+                                <input required type="text" class="form-control" formControlName="multimedia" id="multimedia" name="multimedia" />
+                            </div>
+                        </div>
+
+                        <fieldset class="border p-2 col-sm-12 col-md-10">
+
+                            <label>Adres:</label>
+                            <div class="row" formGroupName="address">
+                                <div class="form-group col-sm-12 col-md-4">
+                                    <label for="city">Miasto</label>
+                                    <input type="text" class="form-control" formControlName="city" id="city" name="city" />
+                                </div>
+                                <div class="form-group col-sm-12 col-md-4">
+                                    <label for="street">Ulica</label>
+                                    <input type="text" class="form-control" formControlName="street" id="street" name="street" />
+                                </div>
+                                <div class="form-group col-sm-12 col-md-2">
+                                    <label for="houseNumber">Nr domu</label>
+                                    <input type="number" class="form-control" formControlName="houseNumber" id="houseNumber" name="houseNumber" />
+                                </div>
+                                <div class="form-group col-sm-12 col-md-2">
+                                    <label for="postCode">Kod pocztowy</label>
+                                    <input type="text" class="form-control" formControlName="postCode" id="postCode" name="postCode" />
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="row">
+                            <div class="form-group col-sm-12 col-md-8">
+                                <label for="description">Opis</label>
+                                <textarea class="form-control" id="description" name="description" placeholder="Opis" rows="3"></textarea>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-2">
+                                <label for="announcementType">Typ</label>
+                                <input type="text" class="form-control" value="{{AnnouncementType[this.id_type]}}" formControlName="announcementType" id="announcementType" name="announcementType" disabled />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-4 form-group">
+                                <button type="button" class="btn btn-default">Resetuj</button>
+                                <button type="submit" class="btn btn-success">Rejestracja</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
