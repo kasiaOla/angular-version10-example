@@ -12,10 +12,10 @@ export class AnnouncementRoute {
             message: 'Error processing request ' + Error
           });
         } else {
-          res.json(data);
+    //      res.json(data);
           return res.status(200).json({
             success: true,
-            message: 'Register was successful.',
+            message: 'Create was successful.',
             respons: data
           });
         }

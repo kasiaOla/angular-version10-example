@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Address, AnnouncementsCategories, AnnouncementType, Market } from '../announcement';
+import { Address, AnnouncementsCategories, AnnouncementType, Market, Announcement } from '../announcement';
+import { AnnouncementService } from 'src/app/shared-services/announcement.service';
 
 @Component({
   selector: 'app-add-announcement',
@@ -10,32 +11,24 @@ import { Address, AnnouncementsCategories, AnnouncementType, Market } from '../a
 })
 export class AddAnnouncementComponent implements OnInit {
 
-  announcementForm: FormGroup;
+  public announcementForm: FormGroup;
 
-  // id?: number;
-  title?: string;
-  price?: string;
-  surface?: string;
-  pricePerM?: string;
-  numberOfRooms?: number;
-  address?: Address;
   announcementsCategories?: AnnouncementsCategories;
   AnnouncementsCategories = AnnouncementsCategories;
   announcementType?: AnnouncementType;
   AnnouncementType = AnnouncementType;
-  market?: Market;
-  Market = Market;
-
-  multimedia?: Array<any>;
-  description: string;
-  floor: number;
   id_category: string;
   id_type: string;
 
   constructor(private fb: FormBuilder,
+              private announcementService: AnnouncementService,
               private router: Router,
               private route: ActivatedRoute) {
+  }
 
+  ngOnInit(): void {
+    // this.id_category = +this.route.snapshot.paramMap.get('id_category'); // sniszczyc shaphot ostatnia wersje komponentu
+    // this.id_type = +this.route.snapshot.paramMap.get('id_type');
     this.announcementForm = this.fb.group({
 
       title: this.makeFormControl(),
@@ -49,43 +42,54 @@ export class AddAnnouncementComponent implements OnInit {
         postCode: this.makeFormControl(),
         city: this.makeFormControl(),
       }),
-      announcementsCategories: this.makeFormControl(),
-      announcementType: this.makeFormControl(),
-      market: this.makeFormControl(),
       multimedia: this.makeFormControl(),
       description: this.makeFormControl(),
       floor: this.makeFormControl(),
     });
-  }
-
-  ngOnInit(): void {
-    // this.id_category = +this.route.snapshot.paramMap.get('id_category'); // sniszczyc shaphot ostatnia wersje komponentu
-    // this.id_type = +this.route.snapshot.paramMap.get('id_type');
 
     this.route.paramMap.subscribe(params => {
       this.id_category = params.get('id_category');
-      console.log('this.id_category ', this.id_category);
       this.announcementsCategories = AnnouncementsCategories[this.id_category];
-      console.log('AnnouncementsCategories', AnnouncementsCategories[this.id_category]);
-
     });
     this.route.paramMap.subscribe(params => {
       this.id_type = params.get('id_type');
       this.announcementType = AnnouncementType[this.id_type];
-      console.log('AnnouncementType', AnnouncementType[this.id_type]);
-      // this.announcementForm.setValue({ announcementsCategories: AnnouncementType[this.id_type] });
-      this.announcementForm.controls['announcementsCategories'].patchValue(AnnouncementType[this.id_type]);
-
     });
-
   }
-  // tslint:disable-next-line:typedef
-  get f() { return this.announcementForm.controls; }
+
   makeFormControl(): FormControl {
-    const cloned = new FormControl('', [Validators.required]);
+    const cloned = new FormControl(null, [Validators.required]);
     return cloned;
   }
 
-  addAnnouncement() {
+
+  addAnnouncement(): void {
+    const setAnnouncement: Announcement = {
+      title: this.announcementForm.value.title,
+      price: this.announcementForm.value.price,
+      surface: this.announcementForm.value.surface,
+      pricePerM: this.announcementForm.value.pricePerM,
+      numberOfRooms: this.announcementForm.value.numberOfRooms,
+      address: {
+        street: this.announcementForm.value.address.street,
+        houseNumber: this.announcementForm.value.address.houseNumber,
+        postCode: this.announcementForm.value.address.postCode,
+        city: this.announcementForm.value.address.city,
+      },
+      announcementsCategories: AnnouncementsCategories[this.id_category],
+      announcementType: AnnouncementType[this.id_type],
+      multimedia: this.announcementForm.value.title,
+      description: this.announcementForm.value.title,
+      floor: this.announcementForm.value.title,
+    };
+
+    this.announcementService.addAnnouncement(setAnnouncement)
+      .subscribe(data => {
+        if (data.success === false) {
+          if (data.errcode) {
+          }
+        }
+        this.announcementForm.reset();
+      });
   }
 }

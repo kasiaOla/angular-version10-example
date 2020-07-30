@@ -10,33 +10,33 @@
                         <div class="row">
                             <div class="form-group col-sm-12 col-md-6">
                                 <label for="title">Tytuł <sup>*</sup></label>
-                                <input type="text" class="form-control" formControlName="title" id="title" name="title" />
+                                <input type="text" class="form-control" formControlName="title" />
                             </div>
                             <div class="form-group col-sm-12 col-md-2">
                                 <label for="price">Cena  <sup>*</sup></label>
-                                <input type="text" class="form-control" formControlName="price" id="price" name="price" />
+                                <input type="text" class="form-control" formControlName="price" />
                             </div>
                             <div class="form-group col-sm-12 col-md-2">
                                 <label for="surface">Powierzchnia  <sup>*</sup></label>
-                                <input type="text" class="form-control" formControlName="surface" id="surface" name="surface" />
+                                <input type="text" class="form-control" formControlName="surface" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-sm-12 col-md-2">
                                 <label for="pricePerM">Powierzchnia za m^2</label>
-                                <input type="text" class="form-control" formControlName="pricePerM" id="pricePerM" name="pricePerM" />
+                                <input type="text" class="form-control" formControlName="pricePerM" />
                             </div>
                             <div class="form-group col-sm-12 col-md-2">
                                 <label for="numberOfRooms">Liczba pokoi</label>
-                                <input type="number" class="form-control" formControlName="numberOfRooms" id="numberOfRooms" name="numberOfRooms" />
+                                <input type="number" class="form-control" formControlName="numberOfRooms" />
                             </div>
                             <div class="form-group col-sm-12 col-md-2">
                                 <label for="floor">Pietro</label>
-                                <input type="number" class="form-control" formControlName="floor" id="floor" name="floor" />
+                                <input type="number" class="form-control" formControlName="floor" />
                             </div>
                             <div class="form-group col-sm-12 col-md-4">
                                 <label for="multimedia">Multimedia</label>
-                                <input required type="text" class="form-control" formControlName="multimedia" id="multimedia" name="multimedia" />
+                                <input required type="text" class="form-control" formControlName="multimedia" />
                             </div>
                         </div>
 
@@ -46,31 +46,30 @@
                             <div class="row" formGroupName="address">
                                 <div class="form-group col-sm-12 col-md-4">
                                     <label for="city">Miasto</label>
-                                    <input type="text" class="form-control" formControlName="city" id="city" name="city" />
+                                    <input type="text" class="form-control" formControlName="city" />
                                 </div>
                                 <div class="form-group col-sm-12 col-md-4">
                                     <label for="street">Ulica</label>
-                                    <input type="text" class="form-control" formControlName="street" id="street" name="street" />
+                                    <input type="text" class="form-control" formControlName="street" />
                                 </div>
                                 <div class="form-group col-sm-12 col-md-2">
                                     <label for="houseNumber">Nr domu</label>
-                                    <input type="number" class="form-control" formControlName="houseNumber" id="houseNumber" name="houseNumber" />
+                                    <input type="number" class="form-control" formControlName="houseNumber" />
                                 </div>
                                 <div class="form-group col-sm-12 col-md-2">
                                     <label for="postCode">Kod pocztowy</label>
-                                    <input type="text" class="form-control" formControlName="postCode" id="postCode" name="postCode" />
+                                    <input type="text" class="form-control" formControlName="postCode" />
                                 </div>
                             </div>
                         </fieldset>
-
                         <div class="row">
                             <div class="form-group col-sm-12 col-md-8">
                                 <label for="description">Opis</label>
-                                <textarea class="form-control" id="description" name="description" placeholder="Opis" rows="3"></textarea>
+                                <textarea class="form-control" formControlName="description" placeholder="Opis" rows="3"></textarea>
                             </div>
                             <div class="form-group col-sm-12 col-md-2">
-                                <label for="announcementType">Typ</label>
-                                <input type="text" class="form-control" value="{{AnnouncementType[this.id_type]}}" formControlName="announcementType" id="announcementType" name="announcementType" disabled />
+                                <label for="announcementType">Typ: </label>
+                                <input type="text" class="form-control" [value]="AnnouncementType[this.id_type]" id="announcementType" name="announcementType" disabled />
                             </div>
                         </div>
                         <div class="row">

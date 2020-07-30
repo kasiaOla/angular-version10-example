@@ -1,5 +1,4 @@
 [{
-  "_id":{"$oid":"5e4cf105c9ba1a21143d04a2"},
   "id": 1,
   "title": "Mieszkanie",
   "price": "700000",

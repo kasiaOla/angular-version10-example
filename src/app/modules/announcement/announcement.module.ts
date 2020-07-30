@@ -6,6 +6,7 @@ import { AddAnnouncementComponent } from './add-announcement/add-announcement.co
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AddCategoryAnnouncementComponent } from './add-category-announcement/add-category-announcement.component';
+import { AnnouncementService } from '../../shared-services/announcement.service';
 
 
 @NgModule({
@@ -25,5 +26,6 @@ import { AddCategoryAnnouncementComponent } from './add-category-announcement/ad
     AddAnnouncementComponent,
     AddCategoryAnnouncementComponent
   ],
+  providers: [AnnouncementService]
 })
 export class AnnouncementModule { }

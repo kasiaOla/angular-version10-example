@@ -9,14 +9,14 @@ export interface Announcement {
   announcementsCategories?: AnnouncementsCategories;
   announcementType?: AnnouncementType;
   multimedia?: string;
-  description: string;
-  floor: number;
+  description?: string;
+  floor?: number;
 }
 export interface Address {
-  street: string;
-  houseNumber: number;
-  postCode: string;
-  city: string;
+  street?: string;
+  houseNumber?: number;
+  postCode?: string;
+  city?: string;
 }
 export enum AnnouncementsCategories {
   Mieszkania = 0,
