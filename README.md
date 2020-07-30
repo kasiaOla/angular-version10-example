@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
 
+## Installation of the environment
+
+- npm install
+
 ## Run
 Run `npm run build:ssr && npm run serve:ssr`. Navigate to `http://localhost:4000/`. The app will automatically reload if you change any of the source files.
 

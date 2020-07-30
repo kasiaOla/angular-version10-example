@@ -10,6 +10,9 @@ import { CoreModule } from './modules/core/core.module';
 import { AuthGuardService } from './modules/auth-guard.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './modules/auth.service';
+import { LoggerService } from './shared-services/logger.service';
+import { envServiceLogger } from '../environments/environment.prod';
+
 
 
 @NgModule({
@@ -33,7 +36,7 @@ import { AuthService } from './modules/auth.service';
     AppComponent,
     HomeComponent
   ],
-  providers: [AuthGuardService, AuthService],
+  providers: [AuthGuardService, AuthService,  {provide: LoggerService, useClass: envServiceLogger} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

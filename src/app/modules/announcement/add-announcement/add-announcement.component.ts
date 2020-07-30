@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Address, AnnouncementsCategories, AnnouncementType, Market, Announcement } from '../announcement';
+import { AnnouncementsCategories, AnnouncementType, Announcement } from '../announcement';
 import { AnnouncementService } from 'src/app/shared-services/announcement.service';
+import { LoggerService } from '../../../shared-services/logger.service';
 
 @Component({
   selector: 'app-add-announcement',
@@ -21,9 +22,10 @@ export class AddAnnouncementComponent implements OnInit {
   id_type: string;
 
   constructor(private fb: FormBuilder,
-              private announcementService: AnnouncementService,
-              private router: Router,
-              private route: ActivatedRoute) {
+    private logger: LoggerService,
+    private announcementService: AnnouncementService,
+    private router: Router,
+    private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -85,11 +87,22 @@ export class AddAnnouncementComponent implements OnInit {
 
     this.announcementService.addAnnouncement(setAnnouncement)
       .subscribe(data => {
-        if (data.success === false) {
-          if (data.errcode) {
+        Syntax:
+        switch (data.success) {
+          case false: {
+            this.logger.error(`Error code ${data.errcode}`);
+            break;
+          }
+          case true: {
+            this.logger.info('The advertisement has been correctly added');
+            this.announcementForm.reset();
+            break;
+          }
+          default: {
+            this.announcementForm.reset();
+            break;
           }
         }
-        this.announcementForm.reset();
       });
   }
 }
