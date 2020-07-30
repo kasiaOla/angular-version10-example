@@ -28,3 +28,16 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## MongoDB database
+
+In the cmd console go to the directory: `Program Files\MongoDB\Server\3.6\bin` in this directory run the command:
+
+`mongod.exe --logpath D:\mongo\logs --logappend --bind_ip 127.0.0.1 --auth --port 27017 --dbpath D:\mongo\data\db`
+
+Run the second cmd console and go to the directory: `Program Files\MongoDB\Server\3.6\bin` in this directory run the command:
+
+`mongo --port 27017 -u admin -p password --authenticationDatabase admin`
+
+
+
