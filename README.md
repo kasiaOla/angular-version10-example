@@ -1,10 +1,13 @@
-# Angular10Example
+# Sample project implemented in Angular version 10
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
 
+## Run
+Run `npm run build:ssr && npm run serve:ssr`. Navigate to `http://localhost:4000/`. The app will automatically reload if you change any of the source files.
+
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `serve:ssr` for a dev server.
 
 ## Code scaffolding
 
@@ -25,3 +28,16 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## MongoDB database
+
+In the cmd console go to the directory: `Program Files\MongoDB\Server\3.6\bin` in this directory run the command:
+
+`mongod.exe --logpath D:\mongo\logs --logappend --bind_ip 127.0.0.1 --auth --port 27017 --dbpath D:\mongo\data\db`
+
+Run the second cmd console and go to the directory: `Program Files\MongoDB\Server\3.6\bin` in this directory run the command:
+
+`mongo --port 27017 -u admin -p password --authenticationDatabase admin`
+
+
+
