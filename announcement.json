@@ -1,19 +1,18 @@
-[{
-  "id": 1,
-  "title": "Mieszkanie",
+[{ 
+  "title": "Mieszkanie", 
   "price": "700000",
-  "surface": "65",
-  "pricePerM": 11,
-  "numberOfRooms": 3,
-   "address": {
-    "street": "Postępu",
-    "houseNumber": "2",
-	"postCode": "32-908",
-    "city": "Warszawa"
-  },
-  "announcementsCategories": ["Mieszkania"],
-  "announcementType": ["Sprzedam"],
-  "multimedia": "TV, AGD",
-  "description" "Kontakt tel: 560 898 777",
-  "floor" 3
+  "surface": "65", 
+  "pricePerM": 11, 
+  "numberOfRooms": 3, 
+  "address": { 
+    "street": "Postępu", 
+    "houseNumber": "2", 
+    "postCode": "32-908", 
+    "city": "Warszawa" 
+  }, 
+  "announcementsCategories": ["Mieszkania"], 
+  "announcementType": ["Sprzedam"], 
+  "multimedia": "TV, AGD", 
+  "description": "Kontakt tel: 560 898 777", 
+  "floor": 3
 }]
