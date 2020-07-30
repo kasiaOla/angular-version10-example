@@ -39,5 +39,20 @@ Run the second cmd console and go to the directory: `Program Files\MongoDB\Serve
 
 `mongo --port 27017 -u admin -p password --authenticationDatabase admin`
 
+In the database, you need to create a user with permissions. Please find below a description of the steps to add such a user:
+
+1. `use mean`
+
+2. `db.createUser({ user: "admin", pwd: "password", roles: [{ role: "root", db: "admin" }]});`
+
+
+Example data from the database are in files:
+
+1. announcement.json
+2. users.json
+
+
+
+
 
 
