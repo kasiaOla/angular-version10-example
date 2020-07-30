@@ -1,11 +1,5 @@
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
 /**
- * Bazowy Logger
- * Interfejs Loggera
+ * Głowny Interfejs Logger
  */
 export abstract class LoggerService {
 
@@ -40,23 +34,14 @@ const noop = () => {
  */
 export class LoggerDebugService extends LoggerService {
 
-  /**
-   * @inheritDoc
-   */
   debug(msg: any): void {
     console.log(`[DEBUG] ${msg}`);
   }
 
-  /**
-   * @inheritDoc
-   */
   error(msg: any): void {
     console.error(msg);
   }
 
-  /**
-   * @inheritDoc
-   */
   info(msg: any): void {
     console.log(msg);
   }
@@ -68,22 +53,12 @@ export class LoggerDebugService extends LoggerService {
  */
 export class LoggerInfoService extends LoggerService {
 
-  /**
-   * Ta implementacja nic nie robi
-   * @inheritDoc
-   */
   debug = noop;
 
-  /**
-   * @inheritDoc
-   */
   error(msg: any): void {
     console.error(msg);
   }
 
-  /**
-   * @inheritDoc
-   */
   info(msg: any): void {
     console.log(msg);
   }
@@ -95,21 +70,9 @@ export class LoggerInfoService extends LoggerService {
  */
 export class LoggerErrorService extends LoggerService {
 
-  /**
-   * Ta implementacja nic nie robi
-   * @inheritDoc
-   */
   debug = noop;
-
-  /**
-   * Ta implementacja nic nie robi
-   * @inheritDoc
-   */
   info = noop;
 
-  /**
-   * @inheritDoc
-   */
   error(msg: any): void {
     console.error(msg);
   }
