@@ -8,12 +8,12 @@ import { Announcement } from '../modules/announcement/announcement';
 export class AnnouncementService {
 
   constructor(private httpClient: HttpClient) { }
-  public addAnnouncement(newAnnouncement: Announcement): any {
+  public addAnnouncement(newAnnouncement: Announcement, idCategory: string, idType: string): any {
 
     let headers = new HttpHeaders();
     headers = headers.set('content-type', 'application/json');
 
     // tslint:disable-next-line:max-line-length
-    return this.httpClient.post(`/category/${newAnnouncement.announcementsCategories}/type/${newAnnouncement.announcementType}`, JSON.stringify(newAnnouncement), { headers });
+    return this.httpClient.post(`/category/${idCategory}/type/${idType}`, JSON.stringify(newAnnouncement), { headers });
   }
 }

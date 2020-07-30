@@ -7,26 +7,25 @@ export abstract class LoggerService {
    * Logowanie komunikatu na poziomie ERROR
    * @param msg treść komunikatu
    */
-  abstract error(msg: any): void;
+  abstract error(msg: string): void;
 
   /**
    * Logowanie komunikatu na poziomie INFO
    * @param msg treść komunikatu
    */
-  abstract info(msg: any): void;
+  abstract info(msg: string): void;
 
   /**
    * Logowanie komunikatu na poziomie DEBUG
    * @param msg treść komunikatu
    */
-  abstract debug(msg: any): void;
+  abstract debug(msg: string): void;
 }
 
 /**
  * Implementacja funkcji Loggera, które nic nie robią
  */
-const noop = () => {
-};
+const doesNothing = () => {};
 
 /**
  * Implementacja Loggera
@@ -34,15 +33,15 @@ const noop = () => {
  */
 export class LoggerDebugService extends LoggerService {
 
-  debug(msg: any): void {
+  debug(msg: string): void {
     console.log(`[DEBUG] ${msg}`);
   }
 
-  error(msg: any): void {
+  error(msg: string): void {
     console.error(msg);
   }
 
-  info(msg: any): void {
+  info(msg: string): void {
     console.log(msg);
   }
 }
@@ -53,13 +52,13 @@ export class LoggerDebugService extends LoggerService {
  */
 export class LoggerInfoService extends LoggerService {
 
-  debug = noop;
+  debug = doesNothing;
 
-  error(msg: any): void {
+  error(msg: string): void {
     console.error(msg);
   }
 
-  info(msg: any): void {
+  info(msg: string): void {
     console.log(msg);
   }
 }
@@ -70,10 +69,10 @@ export class LoggerInfoService extends LoggerService {
  */
 export class LoggerErrorService extends LoggerService {
 
-  debug = noop;
-  info = noop;
+  debug = doesNothing;
+  info = doesNothing;
 
-  error(msg: any): void {
+  error(msg: string): void {
     console.error(msg);
   }
 }

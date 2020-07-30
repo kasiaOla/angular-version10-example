@@ -52,8 +52,8 @@ In the database, you need to create a user with permissions. Please find below a
 
 Example data from the database are in files:
 
-1. announcement.json
-2. users.json
+1. database-mongoDB\example-data\announcement.json
+2. database-mongoDB\example-data\users.json
 
 
 

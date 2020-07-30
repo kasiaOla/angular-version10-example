@@ -84,8 +84,10 @@ export class AddAnnouncementComponent implements OnInit {
       description: this.announcementForm.value.title,
       floor: this.announcementForm.value.title,
     };
+    console.log('AnnouncementsCategories[this.id_category]', AnnouncementsCategories[this.id_category]);
+    console.log('AnnouncementType[this.id_type]', AnnouncementType[this.id_type]);
 
-    this.announcementService.addAnnouncement(setAnnouncement)
+    this.announcementService.addAnnouncement(setAnnouncement, this.id_category, this.id_type)
       .subscribe(data => {
         Syntax:
         switch (data.success) {
