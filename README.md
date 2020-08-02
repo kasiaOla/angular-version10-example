@@ -4,10 +4,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Installation of the environment
 
-- npm install
+- npm install or npm i
 
 ## Run
-Run `npm run build:ssr && npm run serve:ssr`. Navigate to `http://localhost:4000/`. The app will automatically reload if you change any of the source files.
+Run local `ng build && ng serve`. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
 
 ## Development server
 
