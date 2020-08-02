@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'announcement',
-    loadChildren: () => import('./modules/announcement/announcement.module').then(m => m.AnnouncementModule)
+    loadChildren: () => import('./modules/announcements/announcement.module').then(m => m.AnnouncementModule)
   }
 ];
 

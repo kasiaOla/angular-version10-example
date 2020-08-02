@@ -1,0 +1,5 @@
+@import "../shared-scss/grid.scss";
+@import "../shared-scss/variables.scss";
+::ng-deep .ag-header-viewport {
+    border-bottom: $border;
+}

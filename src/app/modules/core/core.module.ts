@@ -6,7 +6,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
 import { UsersModule } from '../users/users.module';
-import { AnnouncementModule } from '../announcement/announcement.module';
+import { AnnouncementModule } from '../announcements/announcement.module';
 
 
 @NgModule({

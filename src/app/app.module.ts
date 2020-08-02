@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from './modules/auth.service';
 import { LoggerService } from './shared-services/logger.service';
 import { envServiceLogger } from '../environments/environment.prod';
-
+import { AgGridModule } from 'ag-grid-angular';
 
 
 @NgModule({
@@ -25,6 +25,8 @@ import { envServiceLogger } from '../environments/environment.prod';
     BrowserModule.withServerTransition({
       appId: 'serverApp'
     }),
+    BrowserModule,
+    AgGridModule.withComponents([]),
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
