@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GridOptions } from '@ag-grid-community/all-modules';
+import { ColDef } from 'ag-grid-community';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,23 @@ import { GridOptions } from '@ag-grid-community/all-modules';
 })
 export class HomeComponent implements OnInit {
 
-  public gridOptions: GridOptions;
   public rowData: any[];
   public columnDefs: any[];
+  public gridOptions: GridOptions = {
+    suppressRowClickSelection: false,
+    rowMultiSelectWithClick: false,
+  };
+
+  defaultColumn: ColDef = {
+    sortable: true,
+    filter: 'agTextColumnFilter',
+    filterParams: {
+      clearButton: true
+    },
+    width: 150,
+    resizable: true,
+    headerCheckboxSelectionFilteredOnly: true,
+  };
 
   constructor() { }
 
