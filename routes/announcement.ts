@@ -19,7 +19,22 @@ export class AnnouncementRoute {
         }
       });
     });
-
+    app.route('/get-announcements').get((req: Request, res: Response, next: NextFunction) => {
+      Announcement.find((error, data) => {
+        if (Error) {
+          return res.status(400).json({
+            success: false,
+            message: 'Error processing request ' + Error
+          });
+        } else {
+          return res.status(200).json({
+            success: true,
+            message: 'Announcement list successful get.',
+            respons: data
+          });
+        }
+      });
+  });
 
   }
 }
