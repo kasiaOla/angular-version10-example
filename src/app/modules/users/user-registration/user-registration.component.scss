@@ -1,5 +1,6 @@
+@import "../../../shared-scss/variables.scss";
 .content {
     width: 80%;
     margin: 10%;
-    background-color: #57B3F1;
+    box-shadow: $boxShadow
 }
