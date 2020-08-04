@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AddCategoryAnnouncementComponent } from './add-category-announcement.component';
 
 describe('AddCategoryAnnouncementComponent', () => {

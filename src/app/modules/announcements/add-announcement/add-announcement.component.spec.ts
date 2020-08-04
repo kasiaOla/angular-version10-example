@@ -7,7 +7,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AnnouncementService } from '../../../shared-services/announcement.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { LoggerService } from '../../../shared-services/logger.service';
-import { HttpClient } from '@angular/common/http';
+
 
 const mockAnnouncementService = {
   getObservable: () => ({ subscribe: () => { } }),
