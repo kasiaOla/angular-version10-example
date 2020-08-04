@@ -80,12 +80,10 @@ export class AddAnnouncementComponent implements OnInit {
       },
       announcementsCategories: AnnouncementsCategories[this.id_category],
       announcementType: AnnouncementType[this.id_type],
-      multimedia: this.announcementForm.value.title,
-      description: this.announcementForm.value.title,
-      floor: this.announcementForm.value.title,
+      multimedia: this.announcementForm.value.multimedia,
+      description: this.announcementForm.value.description,
+      floor: this.announcementForm.value.floor,
     };
-    console.log('AnnouncementsCategories[this.id_category]', AnnouncementsCategories[this.id_category]);
-    console.log('AnnouncementType[this.id_type]', AnnouncementType[this.id_type]);
 
     this.announcementService.addAnnouncement(setAnnouncement, this.id_category, this.id_type)
       .subscribe(data => {

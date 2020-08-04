@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GridOptions } from '@ag-grid-community/all-modules';
 import { ColDef } from 'ag-grid-community';
+import { AnnouncementService } from 'src/app/shared-services/announcement.service';
 
 @Component({
   selector: 'app-home',
@@ -27,9 +28,12 @@ export class HomeComponent implements OnInit {
     headerCheckboxSelectionFilteredOnly: true,
   };
 
-  constructor() { }
+  constructor(public announcementService: AnnouncementService) { }
 
   ngOnInit(): void {
+    this.announcementService.getAnnouncement().subscribe(req => {
+      console.log('AnnouncementService', req);
+    });
     this.columnDefs = [
       { headerName: 'Miasto', field: 'miasto', sortable: true, filter: true },
       { headerName: 'Cena', field: 'cena', sortable: true, filter: true },

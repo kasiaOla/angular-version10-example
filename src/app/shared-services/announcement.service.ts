@@ -10,6 +10,7 @@ import { catchError, tap } from 'rxjs/operators';
 export class AnnouncementService {
 
   constructor(private httpClient: HttpClient) { }
+
   public addAnnouncement(newAnnouncement: Announcement, idCategory: string, idType: string): any {
 
     let headers = new HttpHeaders();
@@ -19,12 +20,10 @@ export class AnnouncementService {
     return this.httpClient.post(`/category/${idCategory}/type/${idType}`, JSON.stringify(newAnnouncement), { headers });
   }
   // get-announcements
-  public getAnnouncement() {
+  public getAnnouncement()  {
 
-
-    // tslint:disable-next-line:max-line-length
-    return this.httpClient.get(`/get-announcements`).pipe(
-      tap(songs => console.log('Songs retrieved!'))
+    return this.httpClient.get<Announcement[]>(`/api/get-announcements`).pipe(
+      tap(announcements => console.log('Announcements retrieved!'))
     );
   }
 }

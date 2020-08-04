@@ -1,9 +1,7 @@
 // Work around for https://github.com/angular/angular-cli/issues/7200
-
+//import { path } from 'path';
 const path = require('path');
 const webpack = require('webpack');
-var AgGrid = require('ag-grid-community');
-
 
 module.exports = {
     mode: 'none',

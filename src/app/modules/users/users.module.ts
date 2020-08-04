@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
 import { ContactComponent } from './contact/contact.component';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { AuthService } from '../auth.service';
 
 
 @NgModule({

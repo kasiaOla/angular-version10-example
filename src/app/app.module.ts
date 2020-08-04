@@ -11,8 +11,9 @@ import { AuthGuardService } from './modules/auth-guard.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './modules/auth.service';
 import { LoggerService } from './shared-services/logger.service';
-import { envServiceLogger } from '../environments/environment.prod';
+import { envProdServiceLogger, envProdAnnouncementService } from '../environments/environment.prod';
 import { AgGridModule } from 'ag-grid-angular';
+import { AnnouncementService } from './shared-services/announcement.service';
 
 
 @NgModule({
@@ -38,7 +39,15 @@ import { AgGridModule } from 'ag-grid-angular';
     AppComponent,
     HomeComponent
   ],
-  providers: [AuthGuardService, AuthService,  {provide: LoggerService, useClass: envServiceLogger} ],
+  providers: [
+    AuthGuardService,
+    AnnouncementService,
+    AuthService,
+    {
+      provide: LoggerService,
+      useClass: envProdServiceLogger
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
