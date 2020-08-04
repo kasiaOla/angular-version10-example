@@ -13,28 +13,24 @@ describe('NavbarComponent', () => {
       declarations: [NavbarComponent],
       imports: [
         BrowserModule,
-        RouterTestingModule, HttpClientTestingModule
-
+        RouterTestingModule,
+        HttpClientTestingModule
       ],
     })
       .compileComponents();
   }));
 
-  beforeEach(() => {
+
+  it('home link tests', async(() => {
     fixture = TestBed.createComponent(NavbarComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-
-  // it('home link tests', async(() => {
-  //   fixture = TestBed.createComponent(NavbarComponent);
-  //   const compiled = fixture.debugElement;
-  //   const routerLink = compiled.query(By.css('a[name=home]')).nativeElement.getAttribute('routerLink');
-  //   expect(routerLink).toEqual('/home');
-  // }));
+    const compiled = fixture.debugElement;
+    const routerLink = compiled.query(By.css('a[name=home]')).nativeElement.getAttribute('routerLinkActive');
+    expect(routerLink).toEqual('active');
+  }));
 
   it('should create', () => {
+    fixture = TestBed.createComponent(NavbarComponent);
+    component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });
