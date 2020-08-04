@@ -12,8 +12,7 @@ import { Response } from 'express';
 export class AuthService {
 
   isLogged = false;
-  constructor(private router: Router,
-              private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
 
   public registration(newUser: User): any {

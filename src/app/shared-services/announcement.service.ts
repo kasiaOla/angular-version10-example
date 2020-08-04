@@ -19,8 +19,8 @@ export class AnnouncementService {
     // tslint:disable-next-line:max-line-length
     return this.httpClient.post(`/category/${idCategory}/type/${idType}`, JSON.stringify(newAnnouncement), { headers });
   }
-  // get-announcements
-  public getAnnouncement()  {
+
+  public getAnnouncement(): Observable<Announcement[]>  {
 
     return this.httpClient.get<Announcement[]>(`/api/get-announcements`).pipe(
       tap(announcements => console.log('Announcements retrieved!'))

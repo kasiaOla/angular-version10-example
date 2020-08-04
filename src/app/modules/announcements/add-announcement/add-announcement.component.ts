@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AnnouncementsCategories, AnnouncementType, Announcement } from '../announcement';
 import { AnnouncementService } from 'src/app/shared-services/announcement.service';
 import { LoggerService } from '../../../shared-services/logger.service';
@@ -24,7 +24,6 @@ export class AddAnnouncementComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private logger: LoggerService,
     private announcementService: AnnouncementService,
-    private router: Router,
     private route: ActivatedRoute) {
   }
 

@@ -36,12 +36,9 @@ export class UserLoginComponent implements OnInit {
     if (this.loginForm.dirty && this.loginForm.valid) {
       this.authService.login(this.loginForm.value)
         .subscribe(data => {
-          console.log('aaaaaaa', data)
           if (data.success === false) {
-         //   this.messageService.error(`Nie poprawne dane logowania`);
           } else {
             this.router.navigate(['/']);
-         //   this.messageService.success(`Jestes zalogowany`);
           }
           this.loginForm.reset();
         });
