@@ -41,17 +41,25 @@ describe('UserLoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('display text in h4', () => {
+  it('Unit test displaying the h4 name', () => {
     fixture = TestBed.createComponent(UserLoginComponent);
     const testElementHtmlH2 = fixture.debugElement.query(By.css('h4'));
     const elH2 = testElementHtmlH2.nativeElement;
     expect(elH2.textContent).toContain('Logowanie użytkownika');
   });
 
-  it('display text in button', () => {
+  it('Unit test displaying the button name', () => {
     fixture = TestBed.createComponent(UserLoginComponent);
     testElementHtmlButton = fixture.debugElement.query(By.css('button'));
     elButton = testElementHtmlButton.nativeElement;
     expect(elButton.textContent).toContain('Login');
   });
+
+  it('Unit test of the input type', async(() => {
+    fixture = TestBed.createComponent(UserLoginComponent);
+    const compiled = fixture.debugElement;
+    const routerLink = compiled.query(By.css('input[name=password]')).nativeElement.getAttribute('type');
+    expect(routerLink).toEqual('password');
+  }));
+
 });

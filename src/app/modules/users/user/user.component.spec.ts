@@ -22,4 +22,10 @@ describe('UserComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Unit test whether scss class exists', () => {
+    fixture = TestBed.createComponent(UserComponent);
+    const component = fixture.componentInstance;
+    expect(fixture.debugElement.children[0].attributes.class).toEqual('outlet-container');
+  });
 });

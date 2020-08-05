@@ -6,18 +6,14 @@
         <div class="panel-body">
             <form id="login-form" class="example-form" [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="form-group">
-                    <label for="username">Nazwa klienta
-            <sup>*</sup>
-          </label>
+                    <label for="username">Nazwa klienta<sup>*</sup></label>
                     <input required type="text" class="form-control" formControlName="username" name="username">
                     <div *ngIf="isFieldInvalid('username')">
                         Wprowadź nazwę klienta
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="password">Hasło
-            <sup>*</sup>
-          </label>
+                    <label for="password">Hasło<sup>*</sup></label>
                     <input required type="password" class="form-control" formControlName="password" name="password">
                     <div *ngIf="isFieldInvalid('password')">
                         Wprowadź hasło
