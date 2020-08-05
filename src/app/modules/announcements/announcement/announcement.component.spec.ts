@@ -21,4 +21,10 @@ describe('AnnouncementComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Is the css class called outlet-container ', () => {
+    fixture = TestBed.createComponent(AnnouncementComponent);
+    const component = fixture.componentInstance;
+    expect(fixture.debugElement.children[0].attributes.class).toEqual('outlet-container');
+  });
 });
