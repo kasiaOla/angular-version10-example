@@ -35,7 +35,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _modules_home_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/home/home.component */ "./src/app/modules/home/home.component.ts");
 
 
 
@@ -49,7 +49,7 @@ const routes = [
     },
     {
         path: 'home',
-        component: _home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"]
+        component: _modules_home_home_component__WEBPACK_IMPORTED_MODULE_2__["HomeComponent"]
     },
     {
         path: 'user',
@@ -133,7 +133,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
+/* harmony import */ var _modules_home_home_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/home/home.component */ "./src/app/modules/home/home.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 /* harmony import */ var _modules_core_core_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/core/core.module */ "./src/app/modules/core/core.module.ts");
@@ -189,19 +189,19 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjector
             _modules_core_core_module__WEBPACK_IMPORTED_MODULE_8__["CoreModule"],
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
-        _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_10__["CommonModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], ag_grid_angular__WEBPACK_IMPORTED_MODULE_14__["AgGridModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
+        _modules_home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_10__["CommonModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], ag_grid_angular__WEBPACK_IMPORTED_MODULE_14__["AgGridModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_6__["ReactiveFormsModule"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormsModule"],
         _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClientModule"],
         _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_0__["BrowserAnimationsModule"],
         _modules_core_core_module__WEBPACK_IMPORTED_MODULE_8__["CoreModule"]], exports: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
-        _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]] }); })();
+        _modules_home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵsetClassMetadata"](AppModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"],
         args: [{
                 declarations: [
                     _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
-                    _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]
+                    _modules_home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]
                 ],
                 imports: [
                     _angular_common__WEBPACK_IMPORTED_MODULE_10__["CommonModule"],
@@ -219,7 +219,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjector
                 ],
                 exports: [
                     _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
-                    _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]
+                    _modules_home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"]
                 ],
                 providers: [
                     _modules_auth_guard_service__WEBPACK_IMPORTED_MODULE_9__["AuthGuardService"],
@@ -233,75 +233,6 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjector
                 bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
             }]
     }], null, null); })();
-
-
-/***/ }),
-
-/***/ "./src/app/home/home.component.ts":
-/*!****************************************!*\
-  !*** ./src/app/home/home.component.ts ***!
-  \****************************************/
-/*! exports provided: HomeComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var src_app_shared_shared_services_announcement_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
-/* harmony import */ var ag_grid_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/__ivy_ngcc__/fesm2015/ag-grid-angular.js");
-
-
-
-
-class HomeComponent {
-    constructor(announcementService) {
-        this.announcementService = announcementService;
-        this.gridOptions = {
-            suppressRowClickSelection: false,
-            rowMultiSelectWithClick: false,
-        };
-        this.defaultColumn = {
-            sortable: true,
-            filter: 'agTextColumnFilter',
-            filterParams: {
-                clearButton: true
-            },
-            width: 150,
-            resizable: true,
-            headerCheckboxSelectionFilteredOnly: true,
-        };
-    }
-    ngOnInit() {
-        this.announcementService.getAnnouncement().subscribe(req => {
-            console.log('AnnouncementService', req);
-        });
-        this.columnDefs = [
-            { headerName: 'Miasto', field: 'miasto', sortable: true, filter: true },
-            { headerName: 'Cena', field: 'cena', sortable: true, filter: true },
-            { headerName: 'Powierzchnia', field: 'powierzchnia', sortable: true, filter: true }
-        ];
-        this.rowData = [
-            { miasto: 'Toyota', cena: 'Celica', powierzchnia: 35000 },
-            { miasto: 'Ford', cena: 'Mondeo', powierzchnia: 32000 },
-            { miasto: 'Porsche', cena: 'Boxter', powierzchnia: 72000 }
-        ];
-    }
-}
-HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_shared_services_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"])); };
-HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], decls: 1, vars: 3, consts: [[1, "ag-theme-material", "ag-grid__tab", 3, "rowData", "columnDefs", "defaultColDef"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ag-grid-angular", 0);
-    } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("rowData", ctx.rowData)("columnDefs", ctx.columnDefs)("defaultColDef", ctx.defaultColumn);
-    } }, directives: [ag_grid_angular__WEBPACK_IMPORTED_MODULE_2__["AgGridAngular"]], styles: [".ag-grid__tab[_ngcontent-%COMP%] {\n  margin: 5% 5% 5% 15%;\n  width: 70%;\n  height: 70vh;\n  border: 1px #222 solid;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n\n  .ag-header-viewport {\n  border-bottom: 1px #222 solid;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL2dyaWQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIiwic3JjL2FwcC9ob21lL2hvbWUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSxvQkFBQTtFQUNBLFVBQUE7RUFDQSxZQUFBO0VBQ0Esc0JDRks7RURHTCwyRkNOUTtBQ01aOztBQUpBO0VBQ0ksNkJBQUE7QUFPSiIsImZpbGUiOiJzcmMvYXBwL2hvbWUvaG9tZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuL3ZhcmlhYmxlcy5zY3NzXCI7XG4uYWctZ3JpZF9fdGFiIHtcbiAgICBtYXJnaW46IDUlIDUlIDUlIDE1JTtcbiAgICB3aWR0aDogNzAlO1xuICAgIGhlaWdodDogNzB2aDtcbiAgICBib3JkZXI6ICRib3JkZXI7XG4gICAgYm94LXNoYWRvdzogJGJveFNoYWRvdztcbn0iLCIkYm94U2hhZG93OiBpbnNldCAtMTBweCAtMTBweCAxMDBweCAjYzhjZWQ1LFxuMTBweCAxMHB4IDIwcHggI2M4Y2VkNSxcbmluc2V0IDAgMCAxMHB4ICNjOGNlZDU7XG4kYm9yZGVyOiAxcHggIzIyMiBzb2xpZDsiLCIuYWctZ3JpZF9fdGFiIHtcbiAgbWFyZ2luOiA1JSA1JSA1JSAxNSU7XG4gIHdpZHRoOiA3MCU7XG4gIGhlaWdodDogNzB2aDtcbiAgYm9yZGVyOiAxcHggIzIyMiBzb2xpZDtcbiAgYm94LXNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSwgMTBweCAxMHB4IDIwcHggI2M4Y2VkNSwgaW5zZXQgMCAwIDEwcHggI2M4Y2VkNTtcbn1cblxuOjpuZy1kZWVwIC5hZy1oZWFkZXItdmlld3BvcnQge1xuICBib3JkZXItYm90dG9tOiAxcHggIzIyMiBzb2xpZDtcbn0iXX0= */"] });
-/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](HomeComponent, [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
-        args: [{
-                selector: 'app-home',
-                templateUrl: './home.component.html',
-                styleUrls: ['./home.component.scss']
-            }]
-    }], function () { return [{ type: src_app_shared_shared_services_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"] }]; }, null); })();
 
 
 /***/ }),
@@ -1210,6 +1141,75 @@ NavbarComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCo
                 styleUrls: ['./navbar.component.scss']
             }]
     }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] }, { type: _auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"] }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/modules/home/home.component.ts":
+/*!************************************************!*\
+  !*** ./src/app/modules/home/home.component.ts ***!
+  \************************************************/
+/*! exports provided: HomeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var src_app_shared_shared_services_announcement_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
+/* harmony import */ var ag_grid_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/__ivy_ngcc__/fesm2015/ag-grid-angular.js");
+
+
+
+
+class HomeComponent {
+    constructor(announcementService) {
+        this.announcementService = announcementService;
+        this.gridOptions = {
+            suppressRowClickSelection: false,
+            rowMultiSelectWithClick: false,
+        };
+        this.defaultColumn = {
+            sortable: true,
+            filter: 'agTextColumnFilter',
+            filterParams: {
+                clearButton: true
+            },
+            width: 150,
+            resizable: true,
+            headerCheckboxSelectionFilteredOnly: true,
+        };
+    }
+    ngOnInit() {
+        this.announcementService.getAnnouncement().subscribe(req => {
+            console.log('AnnouncementService', req);
+        });
+        this.columnDefs = [
+            { headerName: 'Miasto', field: 'miasto', sortable: true, filter: true },
+            { headerName: 'Cena', field: 'cena', sortable: true, filter: true },
+            { headerName: 'Powierzchnia', field: 'powierzchnia', sortable: true, filter: true }
+        ];
+        this.rowData = [
+            { miasto: 'Toyota', cena: 'Celica', powierzchnia: 35000 },
+            { miasto: 'Ford', cena: 'Mondeo', powierzchnia: 32000 },
+            { miasto: 'Porsche', cena: 'Boxter', powierzchnia: 72000 }
+        ];
+    }
+}
+HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](src_app_shared_shared_services_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"])); };
+HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], decls: 1, vars: 3, consts: [[1, "ag-theme-material", "ag-grid__tab", 3, "rowData", "columnDefs", "defaultColDef"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "ag-grid-angular", 0);
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("rowData", ctx.rowData)("columnDefs", ctx.columnDefs)("defaultColDef", ctx.defaultColumn);
+    } }, directives: [ag_grid_angular__WEBPACK_IMPORTED_MODULE_2__["AgGridAngular"]], styles: [".ag-grid__tab[_ngcontent-%COMP%] {\n  margin: 5% 5% 5% 15%;\n  width: 70%;\n  height: 70vh;\n  border: 1px #222 solid;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n\n  .ag-header-viewport {\n  border-bottom: 1px #222 solid;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL2dyaWQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIiwic3JjL2FwcC9tb2R1bGVzL2hvbWUvaG9tZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLG9CQUFBO0VBQ0EsVUFBQTtFQUNBLFlBQUE7RUFDQSxzQkNGSztFREdMLDJGQ05RO0FDTVo7O0FBSkE7RUFDSSw2QkFBQTtBQU9KIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9ob21lL2hvbWUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0IFwiLi92YXJpYWJsZXMuc2Nzc1wiO1xuLmFnLWdyaWRfX3RhYiB7XG4gICAgbWFyZ2luOiA1JSA1JSA1JSAxNSU7XG4gICAgd2lkdGg6IDcwJTtcbiAgICBoZWlnaHQ6IDcwdmg7XG4gICAgYm9yZGVyOiAkYm9yZGVyO1xuICAgIGJveC1zaGFkb3c6ICRib3hTaGFkb3c7XG59IiwiJGJveFNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSxcbjEwcHggMTBweCAyMHB4ICNjOGNlZDUsXG5pbnNldCAwIDAgMTBweCAjYzhjZWQ1O1xuJGJvcmRlcjogMXB4ICMyMjIgc29saWQ7IiwiLmFnLWdyaWRfX3RhYiB7XG4gIG1hcmdpbjogNSUgNSUgNSUgMTUlO1xuICB3aWR0aDogNzAlO1xuICBoZWlnaHQ6IDcwdmg7XG4gIGJvcmRlcjogMXB4ICMyMjIgc29saWQ7XG4gIGJveC1zaGFkb3c6IGluc2V0IC0xMHB4IC0xMHB4IDEwMHB4ICNjOGNlZDUsIDEwcHggMTBweCAyMHB4ICNjOGNlZDUsIGluc2V0IDAgMCAxMHB4ICNjOGNlZDU7XG59XG5cbjo6bmctZGVlcCAuYWctaGVhZGVyLXZpZXdwb3J0IHtcbiAgYm9yZGVyLWJvdHRvbTogMXB4ICMyMjIgc29saWQ7XG59Il19 */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](HomeComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-home',
+                templateUrl: './home.component.html',
+                styleUrls: ['./home.component.scss']
+            }]
+    }], function () { return [{ type: src_app_shared_shared_services_announcement_service__WEBPACK_IMPORTED_MODULE_1__["AnnouncementService"] }]; }, null); })();
 
 
 /***/ }),
