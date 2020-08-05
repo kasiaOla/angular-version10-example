@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GridOptions } from '@ag-grid-community/all-modules';
 import { ColDef } from 'ag-grid-community';
-import { AnnouncementService } from 'src/app/shared-services/announcement.service';
+import { AnnouncementService } from 'src/app/shared/shared-services/announcement.service';
 
 @Component({
   selector: 'app-home',

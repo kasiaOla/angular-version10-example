@@ -10,10 +10,10 @@ import { CoreModule } from './modules/core/core.module';
 import { AuthGuardService } from './modules/auth-guard.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './modules/auth.service';
-import { LoggerService } from './shared-services/logger.service';
-import { envProdServiceLogger, envProdAnnouncementService } from '../environments/environment.prod';
+import { LoggerService } from './shared/shared-services/logger.service';
+import { envProdServiceLogger } from '../environments/environment.prod';
 import { AgGridModule } from 'ag-grid-angular';
-import { AnnouncementService } from './shared-services/announcement.service';
+import { AnnouncementService } from './shared/shared-services/announcement.service';
 
 
 @NgModule({
