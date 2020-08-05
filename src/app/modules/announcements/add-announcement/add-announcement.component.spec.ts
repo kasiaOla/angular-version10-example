@@ -1,11 +1,10 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-
 import { AddAnnouncementComponent } from './add-announcement.component';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AnnouncementService } from '../../../shared-services/announcement.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { LoggerService } from '../../../shared-services/logger.service';
 
 
@@ -44,6 +43,5 @@ describe('AddAnnouncementComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
 
 });

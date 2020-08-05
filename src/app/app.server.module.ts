@@ -11,7 +11,6 @@ import { AgGridModule } from 'ag-grid-angular';
     ServerModule,
     ModuleMapLoaderModule,
     AgGridModule.withComponents([]),
-
   ],
   bootstrap: [AppComponent],
 })
