@@ -1,7 +1,7 @@
 <div class="jumbotron content">
     <div class="panel panel-default">
         <div class="panel-heading text-center">
-            <h2> Rejestracja użytkownika</h2>
+            <h2>Rejestracja użytkownika</h2>
         </div>
         <div class="panel-body">
             <form [formGroup]="registrationForm" (ngSubmit)="registration()">
@@ -10,15 +10,15 @@
                     <input required type="text" class="form-control" formControlName="username" id="username" name="username" />
                 </div>
                 <div class="form-group">
-                    <label for="password">Hasło  <sup>*</sup></label>
+                    <label for="password">Hasło<sup>*</sup></label>
                     <input required type="text" class="form-control" formControlName="password" id="password" name="password" />
                 </div>
                 <div class="form-group">
-                    <label for="email">Email  <sup>*</sup></label>
+                    <label for="email">Email<sup>*</sup></label>
                     <input required type="text" class="form-control" formControlName="email" id="email" name="email" />
                 </div>
                 <div class="form-group">
-                    <label for="type">Typ  <sup>*</sup></label>
+                    <label for="type">Typ<sup>*</sup></label>
                     <select required class="form-control" formControlName="type" name="type">
                       <option [value]="CustomerType.Standard">Standard</option>
                       <option [value]="CustomerType.Premium">Premium</option>

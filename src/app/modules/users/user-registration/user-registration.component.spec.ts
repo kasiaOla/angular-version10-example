@@ -4,12 +4,16 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from '../../auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
 
 class MockAuthService extends AuthService {}
 
 describe('UserRegistrationComponent', () => {
   let component: UserRegistrationComponent;
   let fixture: ComponentFixture<UserRegistrationComponent>;
+  let testElementHtmlButton: DebugElement;
+  let elButton: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -33,5 +37,26 @@ describe('UserRegistrationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('display text in h2', () => {
+    fixture = TestBed.createComponent(UserRegistrationComponent);
+    const testElementHtmlH2 = fixture.debugElement.query(By.css('h2'));
+    const elH2 = testElementHtmlH2.nativeElement;
+    expect(elH2.textContent).toContain('Rejestracja użytkownika');
+  });
+
+  it('Unit test displaying the button name', () => {
+    fixture = TestBed.createComponent(UserRegistrationComponent);
+    testElementHtmlButton = fixture.debugElement.query(By.css('.btn-default'));
+    elButton = testElementHtmlButton.nativeElement;
+    expect(elButton.textContent).toContain('Resetuj');
+  });
+
+  it('Unit test displaying the button name', () => {
+    fixture = TestBed.createComponent(UserRegistrationComponent);
+    testElementHtmlButton = fixture.debugElement.query(By.css('.btn-success'));
+    elButton = testElementHtmlButton.nativeElement;
+    expect(elButton.textContent).toContain('Rejestracja');
   });
 });
