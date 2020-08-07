@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User, CustomerType } from '../user';
-import { AuthService } from '../../auth.service';
+import { AuthService } from '../../core/authentication/auth.service';
 
 
 @Component({
@@ -11,7 +11,6 @@ import { AuthService } from '../../auth.service';
   styleUrls: ['./user-registration.component.scss']
 })
 export class UserRegistrationComponent implements OnInit {
-
 
   userName: string;
   password: string;

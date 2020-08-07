@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserLoginComponent } from './user-login.component';
 import { FormBuilder } from '@angular/forms';
-import { AuthService } from '../../auth.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { AuthService } from '../../core/authentication/auth.service';
 
 
 class MockAuthService extends AuthService {}

@@ -28,9 +28,12 @@ export class HomeComponent implements OnInit {
     headerCheckboxSelectionFilteredOnly: true,
   };
 
-  constructor(public announcementService: AnnouncementService) { }
+  constructor(public announcementService: AnnouncementService) {
+
+   }
 
   ngOnInit(): void {
+
     this.announcementService.getAnnouncement().subscribe(req => {
       console.log('AnnouncementService', req);
     });

@@ -1,5 +1,5 @@
 // Work around for https://github.com/angular/angular-cli/issues/7200
-//import { path } from 'path';
+
 const path = require('path');
 const webpack = require('webpack');
 
@@ -10,7 +10,7 @@ module.exports = {
         server: './server.ts'
     },
     externals: {
-        './dist/server/main': 'require("./server/main")'
+        './dist/angular10-example/server/main': 'require("./angular10-example/server/main")'
     },
     target: 'node',
     resolve: { extensions: ['.ts', '.js'] },

@@ -2,22 +2,11 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./out-tsc/app",
+    "outDir": "./out-tsc/app-server",
+    "module": "commonjs",
     "types": [
       "jest",
       "node"
     ]
-  },
-  "files": [
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts",
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "src/test.ts",
-    "src/**/*.spec.ts",
-    "src/environments/*.ts"
-  ]
+  }
 }

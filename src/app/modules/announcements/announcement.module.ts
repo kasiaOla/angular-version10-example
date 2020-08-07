@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AnnouncementRoutingModule } from './announcement-routing.module';
 import { AddAnnouncementComponent } from './add-announcement/add-announcement.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AddCategoryAnnouncementComponent } from './add-category-announcement/add-category-announcement.component';
 import { AnnouncementService } from '../../shared/shared-services/announcement.service';

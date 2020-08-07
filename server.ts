@@ -33,10 +33,10 @@ const announcementRoute: AnnouncementRoute = new AnnouncementRoute();
 const app = express();
 
 const PORT =  process.env.PORT || 4200;
-const DIST_FOLDER = join(process.cwd(), 'dist/browser');
+const DIST_FOLDER = join(process.cwd(), 'dist/angular10-example/browser');
 
 // * NOTE :: leave this as require() since this file is built Dynamically from webpack
-const { AppServerModuleNgFactory, LAZY_MODULE_MAP, ngExpressEngine, provideModuleMap } = require('./dist/server/main');
+const { AppServerModuleNgFactory, LAZY_MODULE_MAP, ngExpressEngine, provideModuleMap } = require('./dist/angular10-example/server/main');
 
 // MongoDB database settings
 mongoose.connect('mongodb://admin:password@localhost:27017/mean?authSource=admin', {
