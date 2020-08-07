@@ -138,9 +138,8 @@
                     "builder": "@angular-devkit/build-angular:server",
                     "options": {
                         "outputPath": "dist/angular10-example/server",
-                        "main": "src/main.server.ts",
+                        "main": "server.ts",
                         "tsConfig": "tsconfig.server.json"
-
                     },
                     "configurations": {
                         "production": {
@@ -173,5 +172,8 @@
             }
         }
     },
-    "defaultProject": "angular10-example"
+    "defaultProject": "angular10-example",
+    "cli": {
+        "analytics": "23d7cfd7-fbd8-457c-9bb1-2f5fb02dcd80"
+    }
 }

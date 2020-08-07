@@ -21,7 +21,7 @@ export class UserRoute {
     });
 
     app.route('/login').post((req: Request, res: Response, next: NextFunction) => {
-
+      console.log(' req.body', req.body);
       User.findOne({
         username: req.body.username, password: req.body.password
       }, (err, user) => {

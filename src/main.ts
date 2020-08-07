@@ -6,6 +6,7 @@ import { environment } from './environments/environment';
 /**
  * bootstrapper dla aplikacji klienckiej
  */
+
 if (environment.production) {
   enableProdMode();
 }

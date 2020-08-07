@@ -27,9 +27,8 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {
     // enableTracing: true, // debuggowanie routing
     useHash: true,
-    // errorHandler: () => {},
-    // initialNavigation: true
-  })],
+    initialNavigation: 'enabled'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
