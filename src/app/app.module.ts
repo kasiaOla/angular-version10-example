@@ -14,12 +14,14 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AnnouncementService } from './shared/shared-services/announcement.service';
 import { AuthGuardService } from './modules/core/authentication/auth-guard.service';
 import { AuthService } from './modules/core/authentication/auth.service';
+import { AgGridHeaderComponent } from './shared/ag-grid-header/ag-grid-header.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    AgGridHeaderComponent
   ],
   imports: [
     CommonModule, // moduł w ktorym zawartę są deryktywy *ngIf, *ngFor
@@ -37,7 +39,8 @@ import { AuthService } from './modules/core/authentication/auth.service';
   ],
   exports: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    AgGridHeaderComponent
   ],
   providers: [
     AuthGuardService,
@@ -47,6 +50,9 @@ import { AuthService } from './modules/core/authentication/auth.service';
       provide: LoggerService,
       useClass: envProdServiceLogger
     }
+  ],
+  entryComponents: [
+    AgGridHeaderComponent
   ],
   bootstrap: [AppComponent]
 })

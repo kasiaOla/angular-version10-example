@@ -1,0 +1,33 @@
+:host {
+    height: 100%;
+    width: 100%;
+}
+
+.header__text {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.header__icon {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-left: 15px;
+}
+
+.header__menu__icon:before {
+    content: url('../../../assets/icons/caret-square-down-regular.svg');
+}
+
+.header__sortDown_icon:before {
+    content: url('../../../assets/icons/sort-amount-down-solid.svg');
+}
+
+.header__sortUp__icon:before {
+    content: url('../../../assets/icons/sort-amount-up-alt-solid.svg');
+}
+
+.header__filter__icon:before {
+    content: url('../../../assets/icons/filter.svg');
+}

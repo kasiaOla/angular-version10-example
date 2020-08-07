@@ -1,0 +1,7 @@
+<div class="header__text" (click)="onColumnSortRequested($event)">
+    <div>{{params.displayName}}</div>
+    <div *ngIf="params.enableMenu" #menuButton (click)="onMenuClicked($event)"><i class="header__icon header__menu__icon"></i></div>
+    <div *ngIf="params.column.isFilterActive()"><i class="header__icon header__filter__icon"></i></div>
+    <div *ngIf="params.column.isSortAscending() && isSortVisible" [ngClass]="ascSort"><i class="header__icon header__sortUp__icon"></i></div>
+    <div *ngIf="params.column.isSortDescending() && isSortVisible" [ngClass]="descSort"><i class="header__icon header__sortDown_icon"></i></div>
+</div>

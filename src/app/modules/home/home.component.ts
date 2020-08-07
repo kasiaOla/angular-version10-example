@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { GridOptions } from '@ag-grid-community/all-modules';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, GridApi, ColumnApi } from 'ag-grid-community';
 import { AnnouncementService } from 'src/app/shared/shared-services/announcement.service';
 import { Announcement } from '../announcements/announcement';
 import { LoggerService } from '../../shared/shared-services/logger.service';
+import { AgGridHeaderComponent } from '../../shared/ag-grid-header/ag-grid-header.component';
 
 @Component({
   selector: 'app-home',
@@ -12,9 +13,9 @@ import { LoggerService } from '../../shared/shared-services/logger.service';
 })
 export class HomeComponent implements OnInit {
 
-  public rowData: any[];
   public rowDatatAnnouncement: Announcement[] = [];
-
+  gridApi: GridApi | undefined;
+  columnApi!: ColumnApi;
   public columnDefs = [
     { headerName: 'Miasto', field: 'title', colId: 'title', sortable: true, filter: true },
     { headerName: 'Cena', field: 'price', colId: 'price', sortable: true, filter: true },
@@ -24,20 +25,21 @@ export class HomeComponent implements OnInit {
     suppressRowClickSelection: false,
     rowMultiSelectWithClick: false,
   };
-
-  defaultColumn: ColDef = {
-    sortable: true,
-    filter: 'agTextColumnFilter',
-    filterParams: {
-      clearButton: true
-    },
-    width: 150,
+  public defaultColumn: ColDef = {
+    filter: true,
+      sortable: true,
+      headerCheckboxSelectionFilteredOnly: true,
+      filterParams: {
+        clearButton: true
+      },
+    width: 250,
     resizable: true,
-    headerCheckboxSelectionFilteredOnly: true,
+  };
+  public frameworkComponents = {
+   agColumnHeader: AgGridHeaderComponent,
   };
 
-  constructor(public announcementService: AnnouncementService, private logger: LoggerService,) {
-
+  constructor(public announcementService: AnnouncementService, private logger: LoggerService) {
     this.announcementService.getAnnouncement().subscribe({
       next: Res => {
           this.rowDatatAnnouncement = Res['respons'];
@@ -45,10 +47,14 @@ export class HomeComponent implements OnInit {
       error: Err => {
         this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
       },
-      complete( ): void { }
+      complete(): void {}
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
+  onGridReady(params: { api: GridApi; columnApi: ColumnApi }) {
+    this.gridApi = params.api;
+    this.columnApi = params.columnApi;
+  }
 
 }

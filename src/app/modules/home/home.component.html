@@ -1,4 +1,2 @@
-<div *ngIf='rowDatatAnnouncement.length > 0'>
-    <ag-grid-angular class="ag-theme-material ag-grid__tab" [rowData]="rowDatatAnnouncement" [columnDefs]="columnDefs" [defaultColDef]="defaultColumn">
-    </ag-grid-angular>
-</div>
+<ag-grid-angular *ngIf='rowDatatAnnouncement.length > 0' class="ag-theme-material ag-grid__tab" [rowData]="rowDatatAnnouncement" [frameworkComponents]="frameworkComponents" (gridReady)="onGridReady($event)" [columnDefs]="columnDefs" [defaultColDef]="defaultColumn">
+</ag-grid-angular>

@@ -145,6 +145,7 @@ const ag_grid_angular_1 = __webpack_require__(/*! ag-grid-angular */ "./node_mod
 const announcement_service_1 = __webpack_require__(/*! ./shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
 const auth_guard_service_1 = __webpack_require__(/*! ./modules/core/authentication/auth-guard.service */ "./src/app/modules/core/authentication/auth-guard.service.ts");
 const auth_service_1 = __webpack_require__(/*! ./modules/core/authentication/auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
+const ag_grid_header_component_1 = __webpack_require__(/*! ./shared/ag-grid-header/ag-grid-header.component */ "./src/app/shared/ag-grid-header/ag-grid-header.component.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
 const i2 = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/__ivy_ngcc__/fesm2015/ag-grid-angular.js");
@@ -175,19 +176,22 @@ AppModule.ɵinj = i0.ɵɵdefineInjector({ factory: function AppModule_Factory(t)
             core_module_1.CoreModule,
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(AppModule, { declarations: [app_component_1.AppComponent,
-        home_component_1.HomeComponent], imports: [common_1.CommonModule, i1.BrowserModule, platform_browser_1.BrowserModule, i2.AgGridModule, app_routing_module_1.AppRoutingModule,
+        home_component_1.HomeComponent,
+        ag_grid_header_component_1.AgGridHeaderComponent], imports: [common_1.CommonModule, i1.BrowserModule, platform_browser_1.BrowserModule, i2.AgGridModule, app_routing_module_1.AppRoutingModule,
         forms_1.ReactiveFormsModule,
         forms_1.FormsModule,
         http_1.HttpClientModule,
         animations_1.BrowserAnimationsModule,
         core_module_1.CoreModule], exports: [app_component_1.AppComponent,
-        home_component_1.HomeComponent] }); })();
+        home_component_1.HomeComponent,
+        ag_grid_header_component_1.AgGridHeaderComponent] }); })();
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AppModule, [{
         type: core_1.NgModule,
         args: [{
                 declarations: [
                     app_component_1.AppComponent,
-                    home_component_1.HomeComponent
+                    home_component_1.HomeComponent,
+                    ag_grid_header_component_1.AgGridHeaderComponent
                 ],
                 imports: [
                     common_1.CommonModule,
@@ -205,7 +209,8 @@ AppModule.ɵinj = i0.ɵɵdefineInjector({ factory: function AppModule_Factory(t)
                 ],
                 exports: [
                     app_component_1.AppComponent,
-                    home_component_1.HomeComponent
+                    home_component_1.HomeComponent,
+                    ag_grid_header_component_1.AgGridHeaderComponent
                 ],
                 providers: [
                     auth_guard_service_1.AuthGuardService,
@@ -215,6 +220,9 @@ AppModule.ɵinj = i0.ɵɵdefineInjector({ factory: function AppModule_Factory(t)
                         provide: logger_service_1.LoggerService,
                         useClass: environment_prod_1.envProdServiceLogger
                     }
+                ],
+                entryComponents: [
+                    ag_grid_header_component_1.AgGridHeaderComponent
                 ],
                 bootstrap: [app_component_1.AppComponent]
             }]
@@ -1118,19 +1126,20 @@ NavbarComponent.ɵcmp = i0.ɵɵdefineComponent({ type: NavbarComponent, selector
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HomeComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const ag_grid_header_component_1 = __webpack_require__(/*! ../../shared/ag-grid-header/ag-grid-header.component */ "./src/app/shared/ag-grid-header/ag-grid-header.component.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! src/app/shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
 const i2 = __webpack_require__(/*! ../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
 const i3 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 const i4 = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/__ivy_ngcc__/fesm2015/ag-grid-angular.js");
-function HomeComponent_div_0_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵelement(1, "ag-grid-angular", 1);
+function HomeComponent_ag_grid_angular_0_Template(rf, ctx) { if (rf & 1) {
+    const _r2 = i0.ɵɵgetCurrentView();
+    i0.ɵɵelementStart(0, "ag-grid-angular", 1);
+    i0.ɵɵlistener("gridReady", function HomeComponent_ag_grid_angular_0_Template_ag_grid_angular_gridReady_0_listener($event) { i0.ɵɵrestoreView(_r2); const ctx_r1 = i0.ɵɵnextContext(); return ctx_r1.onGridReady($event); });
     i0.ɵɵelementEnd();
 } if (rf & 2) {
     const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵadvance(1);
-    i0.ɵɵproperty("rowData", ctx_r0.rowDatatAnnouncement)("columnDefs", ctx_r0.columnDefs)("defaultColDef", ctx_r0.defaultColumn);
+    i0.ɵɵproperty("rowData", ctx_r0.rowDatatAnnouncement)("frameworkComponents", ctx_r0.frameworkComponents)("columnDefs", ctx_r0.columnDefs)("defaultColDef", ctx_r0.defaultColumn);
 } }
 class HomeComponent {
     constructor(announcementService, logger) {
@@ -1147,14 +1156,17 @@ class HomeComponent {
             rowMultiSelectWithClick: false,
         };
         this.defaultColumn = {
+            filter: true,
             sortable: true,
-            filter: 'agTextColumnFilter',
+            headerCheckboxSelectionFilteredOnly: true,
             filterParams: {
                 clearButton: true
             },
-            width: 150,
+            width: 250,
             resizable: true,
-            headerCheckboxSelectionFilteredOnly: true,
+        };
+        this.frameworkComponents = {
+            agColumnHeader: ag_grid_header_component_1.AgGridHeaderComponent,
         };
         this.announcementService.getAnnouncement().subscribe({
             next: Res => {
@@ -1167,11 +1179,15 @@ class HomeComponent {
         });
     }
     ngOnInit() { }
+    onGridReady(params) {
+        this.gridApi = params.api;
+        this.columnApi = params.columnApi;
+    }
 }
 exports.HomeComponent = HomeComponent;
 HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(i0.ɵɵdirectiveInject(i1.AnnouncementService), i0.ɵɵdirectiveInject(i2.LoggerService)); };
-HomeComponent.ɵcmp = i0.ɵɵdefineComponent({ type: HomeComponent, selectors: [["app-home"]], decls: 1, vars: 1, consts: [[4, "ngIf"], [1, "ag-theme-material", "ag-grid__tab", 3, "rowData", "columnDefs", "defaultColDef"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
-        i0.ɵɵtemplate(0, HomeComponent_div_0_Template, 2, 3, "div", 0);
+HomeComponent.ɵcmp = i0.ɵɵdefineComponent({ type: HomeComponent, selectors: [["app-home"]], decls: 1, vars: 1, consts: [["class", "ag-theme-material ag-grid__tab", 3, "rowData", "frameworkComponents", "columnDefs", "defaultColDef", "gridReady", 4, "ngIf"], [1, "ag-theme-material", "ag-grid__tab", 3, "rowData", "frameworkComponents", "columnDefs", "defaultColDef", "gridReady"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
+        i0.ɵɵtemplate(0, HomeComponent_ag_grid_angular_0_Template, 1, 4, "ag-grid-angular", 0);
     } if (rf & 2) {
         i0.ɵɵproperty("ngIf", ctx.rowDatatAnnouncement.length > 0);
     } }, directives: [i3.NgIf, i4.AgGridAngular], styles: [".ag-grid__tab[_ngcontent-%COMP%] {\n  margin: 5% 5% 5% 15%;\n  width: 70%;\n  height: 70vh;\n  border: 1px #222 solid;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n\n  .ag-header-viewport {\n  border-bottom: 1px #222 solid;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL2dyaWQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIiwic3JjL2FwcC9tb2R1bGVzL2hvbWUvaG9tZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLG9CQUFBO0VBQ0EsVUFBQTtFQUNBLFlBQUE7RUFDQSxzQkNGSztFREdMLDJGQ05RO0FDTVo7O0FBSkE7RUFDSSw2QkFBQTtBQU9KIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9ob21lL2hvbWUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0IFwiLi92YXJpYWJsZXMuc2Nzc1wiO1xuLmFnLWdyaWRfX3RhYiB7XG4gICAgbWFyZ2luOiA1JSA1JSA1JSAxNSU7XG4gICAgd2lkdGg6IDcwJTtcbiAgICBoZWlnaHQ6IDcwdmg7XG4gICAgYm9yZGVyOiAkYm9yZGVyO1xuICAgIGJveC1zaGFkb3c6ICRib3hTaGFkb3c7XG59IiwiJGJveFNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSxcbjEwcHggMTBweCAyMHB4ICNjOGNlZDUsXG5pbnNldCAwIDAgMTBweCAjYzhjZWQ1O1xuJGJvcmRlcjogMXB4ICMyMjIgc29saWQ7IiwiLmFnLWdyaWRfX3RhYiB7XG4gIG1hcmdpbjogNSUgNSUgNSUgMTUlO1xuICB3aWR0aDogNzAlO1xuICBoZWlnaHQ6IDcwdmg7XG4gIGJvcmRlcjogMXB4ICMyMjIgc29saWQ7XG4gIGJveC1zaGFkb3c6IGluc2V0IC0xMHB4IC0xMHB4IDEwMHB4ICNjOGNlZDUsIDEwcHggMTBweCAyMHB4ICNjOGNlZDUsIGluc2V0IDAgMCAxMHB4ICNjOGNlZDU7XG59XG5cbjo6bmctZGVlcCAuYWctaGVhZGVyLXZpZXdwb3J0IHtcbiAgYm9yZGVyLWJvdHRvbTogMXB4ICMyMjIgc29saWQ7XG59Il19 */"] });
@@ -1695,6 +1711,137 @@ UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factor
                 providers: []
             }]
     }], null, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/shared/ag-grid-header/ag-grid-header.component.ts":
+/*!*******************************************************************!*\
+  !*** ./src/app/shared/ag-grid-header/ag-grid-header.component.ts ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AgGridHeaderComponent = void 0;
+const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i1 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+const _c0 = ["menuButton"];
+function AgGridHeaderComponent_div_3_Template(rf, ctx) { if (rf & 1) {
+    const _r6 = i0.ɵɵgetCurrentView();
+    i0.ɵɵelementStart(0, "div", 4, 5);
+    i0.ɵɵlistener("click", function AgGridHeaderComponent_div_3_Template_div_click_0_listener($event) { i0.ɵɵrestoreView(_r6); const ctx_r5 = i0.ɵɵnextContext(); return ctx_r5.onMenuClicked($event); });
+    i0.ɵɵelement(2, "i", 6);
+    i0.ɵɵelementEnd();
+} }
+function AgGridHeaderComponent_div_4_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div");
+    i0.ɵɵelement(1, "i", 7);
+    i0.ɵɵelementEnd();
+} }
+function AgGridHeaderComponent_div_5_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div", 8);
+    i0.ɵɵelement(1, "i", 9);
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    const ctx_r2 = i0.ɵɵnextContext();
+    i0.ɵɵproperty("ngClass", ctx_r2.ascSort);
+} }
+function AgGridHeaderComponent_div_6_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div", 8);
+    i0.ɵɵelement(1, "i", 10);
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    const ctx_r3 = i0.ɵɵnextContext();
+    i0.ɵɵproperty("ngClass", ctx_r3.descSort);
+} }
+class AgGridHeaderComponent {
+    constructor() {
+        this.ascSort = '';
+        this.descSort = '';
+        this.noSort = '';
+        this.isSortVisible = true;
+    }
+    agInit(params) {
+        this.params = params;
+        this.isSortVisible = !params.hideSort;
+        params.column.addEventListener('sortChanged', this.onSortChanged.bind(this));
+        this.onSortChanged();
+    }
+    onMenuClicked(event) {
+        this.params.showColumnMenu(this.menuButton.nativeElement);
+        event.stopPropagation();
+    }
+    onSortChanged() {
+        this.ascSort = this.descSort = this.noSort = 'inactive';
+        if (this.params.column.isSortAscending()) {
+            this.ascSort = 'active';
+        }
+        else if (this.params.column.isSortDescending()) {
+            this.descSort = 'active';
+        }
+        else {
+            this.noSort = 'active';
+        }
+    }
+    onColumnSortRequested(event) {
+        let order = '';
+        if (this.params.column.isSortAscending()) {
+            order = 'desc';
+        }
+        else if (this.params.column.isSortDescending()) {
+            order = '';
+        }
+        else {
+            order = 'asc';
+        }
+        this.params.setSort(order, event.shiftKey);
+    }
+}
+exports.AgGridHeaderComponent = AgGridHeaderComponent;
+AgGridHeaderComponent.ɵfac = function AgGridHeaderComponent_Factory(t) { return new (t || AgGridHeaderComponent)(); };
+AgGridHeaderComponent.ɵcmp = i0.ɵɵdefineComponent({ type: AgGridHeaderComponent, selectors: [["app-ag-grid-header"]], viewQuery: function AgGridHeaderComponent_Query(rf, ctx) { if (rf & 1) {
+        i0.ɵɵviewQuery(_c0, true);
+    } if (rf & 2) {
+        var _t;
+        i0.ɵɵqueryRefresh(_t = i0.ɵɵloadQuery()) && (ctx.menuButton = _t.first);
+    } }, decls: 7, vars: 5, consts: [[1, "header__text", 3, "click"], [3, "click", 4, "ngIf"], [4, "ngIf"], [3, "ngClass", 4, "ngIf"], [3, "click"], ["menuButton", ""], [1, "header__icon", "header__menu__icon"], [1, "header__icon", "header__filter__icon"], [3, "ngClass"], [1, "header__icon", "header__sortUp__icon"], [1, "header__icon", "header__sortDown_icon"]], template: function AgGridHeaderComponent_Template(rf, ctx) { if (rf & 1) {
+        i0.ɵɵelementStart(0, "div", 0);
+        i0.ɵɵlistener("click", function AgGridHeaderComponent_Template_div_click_0_listener($event) { return ctx.onColumnSortRequested($event); });
+        i0.ɵɵelementStart(1, "div");
+        i0.ɵɵtext(2);
+        i0.ɵɵelementEnd();
+        i0.ɵɵtemplate(3, AgGridHeaderComponent_div_3_Template, 3, 0, "div", 1);
+        i0.ɵɵtemplate(4, AgGridHeaderComponent_div_4_Template, 2, 0, "div", 2);
+        i0.ɵɵtemplate(5, AgGridHeaderComponent_div_5_Template, 2, 1, "div", 3);
+        i0.ɵɵtemplate(6, AgGridHeaderComponent_div_6_Template, 2, 1, "div", 3);
+        i0.ɵɵelementEnd();
+    } if (rf & 2) {
+        i0.ɵɵadvance(2);
+        i0.ɵɵtextInterpolate(ctx.params.displayName);
+        i0.ɵɵadvance(1);
+        i0.ɵɵproperty("ngIf", ctx.params.enableMenu);
+        i0.ɵɵadvance(1);
+        i0.ɵɵproperty("ngIf", ctx.params.column.isFilterActive());
+        i0.ɵɵadvance(1);
+        i0.ɵɵproperty("ngIf", ctx.params.column.isSortAscending() && ctx.isSortVisible);
+        i0.ɵɵadvance(1);
+        i0.ɵɵproperty("ngIf", ctx.params.column.isSortDescending() && ctx.isSortVisible);
+    } }, directives: [i1.NgIf, i1.NgClass], styles: ["[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n}\n\n.header__text[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  height: 100%;\n}\n\n.header__icon[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 15px;\n  height: 15px;\n  margin-left: 15px;\n}\n\n.header__menu__icon[_ngcontent-%COMP%]:before {\n  content: url('caret-square-down-regular.svg');\n}\n\n.header__sortDown_icon[_ngcontent-%COMP%]:before {\n  content: url('sort-amount-down-solid.svg');\n}\n\n.header__sortUp__icon[_ngcontent-%COMP%]:before {\n  content: url('sort-amount-up-alt-solid.svg');\n}\n\n.header__filter__icon[_ngcontent-%COMP%]:before {\n  content: url('filter.svg');\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL2FnLWdyaWQtaGVhZGVyL2FnLWdyaWQtaGVhZGVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBQTtFQUNBLFdBQUE7QUFDSjs7QUFFQTtFQUNJLGFBQUE7RUFDQSxtQkFBQTtFQUNBLFlBQUE7QUFDSjs7QUFFQTtFQUNJLHFCQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtBQUNKOztBQUVBO0VBQ0ksNkNBQUE7QUFDSjs7QUFFQTtFQUNJLDBDQUFBO0FBQ0o7O0FBRUE7RUFDSSw0Q0FBQTtBQUNKOztBQUVBO0VBQ0ksMEJBQUE7QUFDSiIsImZpbGUiOiJzcmMvYXBwL3NoYXJlZC9hZy1ncmlkLWhlYWRlci9hZy1ncmlkLWhlYWRlci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcclxuICAgIGhlaWdodDogMTAwJTtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG59XHJcblxyXG4uaGVhZGVyX190ZXh0IHtcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG59XHJcblxyXG4uaGVhZGVyX19pY29uIHtcclxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgIHdpZHRoOiAxNXB4O1xyXG4gICAgaGVpZ2h0OiAxNXB4O1xyXG4gICAgbWFyZ2luLWxlZnQ6IDE1cHg7XHJcbn1cclxuXHJcbi5oZWFkZXJfX21lbnVfX2ljb246YmVmb3JlIHtcclxuICAgIGNvbnRlbnQ6IHVybCgnLi4vLi4vLi4vYXNzZXRzL2ljb25zL2NhcmV0LXNxdWFyZS1kb3duLXJlZ3VsYXIuc3ZnJyk7XHJcbn1cclxuXHJcbi5oZWFkZXJfX3NvcnREb3duX2ljb246YmVmb3JlIHtcclxuICAgIGNvbnRlbnQ6IHVybCgnLi4vLi4vLi4vYXNzZXRzL2ljb25zL3NvcnQtYW1vdW50LWRvd24tc29saWQuc3ZnJyk7XHJcbn1cclxuXHJcbi5oZWFkZXJfX3NvcnRVcF9faWNvbjpiZWZvcmUge1xyXG4gICAgY29udGVudDogdXJsKCcuLi8uLi8uLi9hc3NldHMvaWNvbnMvc29ydC1hbW91bnQtdXAtYWx0LXNvbGlkLnN2ZycpO1xyXG59XHJcblxyXG4uaGVhZGVyX19maWx0ZXJfX2ljb246YmVmb3JlIHtcclxuICAgIGNvbnRlbnQ6IHVybCgnLi4vLi4vLi4vYXNzZXRzL2ljb25zL2ZpbHRlci5zdmcnKTtcclxufSJdfQ== */"] });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AgGridHeaderComponent, [{
+        type: core_1.Component,
+        args: [{
+                selector: 'app-ag-grid-header',
+                templateUrl: './ag-grid-header.component.html',
+                styleUrls: ['./ag-grid-header.component.scss']
+            }]
+    }], function () { return []; }, { menuButton: [{
+            type: core_1.ViewChild,
+            args: ['menuButton', { static: false }]
+        }] }); })();
 
 
 /***/ }),
