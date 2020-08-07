@@ -1147,9 +1147,9 @@ class HomeComponent {
         this.logger = logger;
         this.rowDatatAnnouncement = [];
         this.columnDefs = [
-            { headerName: 'Miasto', field: 'title', colId: 'title', sortable: true, filter: true },
-            { headerName: 'Cena', field: 'price', colId: 'price', sortable: true, filter: true },
-            { headerName: 'Powierzchnia', field: 'surface', colId: 'surface', sortable: true, filter: true }
+            { headerName: 'Miasto', field: 'title', colId: 'title' },
+            { headerName: 'Cena', field: 'price', colId: 'price' },
+            { headerName: 'Powierzchnia', field: 'surface', colId: 'surface' }
         ];
         this.gridOptions = {
             suppressRowClickSelection: false,
@@ -1162,7 +1162,7 @@ class HomeComponent {
             filterParams: {
                 clearButton: true
             },
-            width: 250,
+            width: 350,
             resizable: true,
         };
         this.frameworkComponents = {
@@ -1181,7 +1181,7 @@ class HomeComponent {
     ngOnInit() { }
     onGridReady(params) {
         this.gridApi = params.api;
-        this.columnApi = params.columnApi;
+        this.gridColumnApi = params.columnApi;
     }
 }
 exports.HomeComponent = HomeComponent;

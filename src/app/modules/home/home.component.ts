@@ -14,12 +14,12 @@ import { AgGridHeaderComponent } from '../../shared/ag-grid-header/ag-grid-heade
 export class HomeComponent implements OnInit {
 
   public rowDatatAnnouncement: Announcement[] = [];
-  gridApi: GridApi | undefined;
-  columnApi!: ColumnApi;
+  public gridApi: GridApi | undefined;
+  public gridColumnApi!: ColumnApi;
   public columnDefs = [
-    { headerName: 'Miasto', field: 'title', colId: 'title', sortable: true, filter: true },
-    { headerName: 'Cena', field: 'price', colId: 'price', sortable: true, filter: true },
-    { headerName: 'Powierzchnia', field: 'surface', colId: 'surface', sortable: true, filter: true }
+    { headerName: 'Miasto', field: 'title', colId: 'title' },
+    { headerName: 'Cena', field: 'price', colId: 'price' },
+    { headerName: 'Powierzchnia', field: 'surface', colId: 'surface' }
   ];
   public gridOptions: GridOptions = {
     suppressRowClickSelection: false,
@@ -27,34 +27,34 @@ export class HomeComponent implements OnInit {
   };
   public defaultColumn: ColDef = {
     filter: true,
-      sortable: true,
-      headerCheckboxSelectionFilteredOnly: true,
-      filterParams: {
-        clearButton: true
-      },
-    width: 250,
+    sortable: true,
+    headerCheckboxSelectionFilteredOnly: true,
+    filterParams: {
+      clearButton: true
+    },
+    width: 350,
     resizable: true,
   };
   public frameworkComponents = {
-   agColumnHeader: AgGridHeaderComponent,
+    agColumnHeader: AgGridHeaderComponent,
   };
 
   constructor(public announcementService: AnnouncementService, private logger: LoggerService) {
     this.announcementService.getAnnouncement().subscribe({
       next: Res => {
-          this.rowDatatAnnouncement = Res['respons'];
-       },
+        this.rowDatatAnnouncement = Res['respons'];
+      },
       error: Err => {
         this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
       },
-      complete(): void {}
+      complete(): void { }
     });
   }
 
-  ngOnInit(): void {}
-  onGridReady(params: { api: GridApi; columnApi: ColumnApi }) {
-    this.gridApi = params.api;
-    this.columnApi = params.columnApi;
-  }
+  ngOnInit(): void { }
 
+  onGridReady(params: { api: GridApi; columnApi: ColumnApi }): void {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+  }
 }
