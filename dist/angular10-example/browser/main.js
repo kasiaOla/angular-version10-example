@@ -1120,10 +1120,28 @@ exports.HomeComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! src/app/shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
-const i2 = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/__ivy_ngcc__/fesm2015/ag-grid-angular.js");
+const i2 = __webpack_require__(/*! ../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
+const i3 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+const i4 = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/__ivy_ngcc__/fesm2015/ag-grid-angular.js");
+function HomeComponent_div_0_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div");
+    i0.ɵɵelement(1, "ag-grid-angular", 1);
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    const ctx_r0 = i0.ɵɵnextContext();
+    i0.ɵɵadvance(1);
+    i0.ɵɵproperty("rowData", ctx_r0.rowDatatAnnouncement)("columnDefs", ctx_r0.columnDefs)("defaultColDef", ctx_r0.defaultColumn);
+} }
 class HomeComponent {
-    constructor(announcementService) {
+    constructor(announcementService, logger) {
         this.announcementService = announcementService;
+        this.logger = logger;
+        this.rowDatatAnnouncement = [];
+        this.columnDefs = [
+            { headerName: 'Miasto', field: 'title', colId: 'title', sortable: true, filter: true },
+            { headerName: 'Cena', field: 'price', colId: 'price', sortable: true, filter: true },
+            { headerName: 'Powierzchnia', field: 'surface', colId: 'surface', sortable: true, filter: true }
+        ];
         this.gridOptions = {
             suppressRowClickSelection: false,
             rowMultiSelectWithClick: false,
@@ -1138,30 +1156,25 @@ class HomeComponent {
             resizable: true,
             headerCheckboxSelectionFilteredOnly: true,
         };
-    }
-    ngOnInit() {
-        this.announcementService.getAnnouncement().subscribe(req => {
-            console.log('AnnouncementService', req);
+        this.announcementService.getAnnouncement().subscribe({
+            next: Res => {
+                this.rowDatatAnnouncement = Res['respons'];
+            },
+            error: Err => {
+                this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
+            },
+            complete() { }
         });
-        this.columnDefs = [
-            { headerName: 'Miasto', field: 'miasto', sortable: true, filter: true },
-            { headerName: 'Cena', field: 'cena', sortable: true, filter: true },
-            { headerName: 'Powierzchnia', field: 'powierzchnia', sortable: true, filter: true }
-        ];
-        this.rowData = [
-            { miasto: 'Toyota', cena: 'Celica', powierzchnia: 35000 },
-            { miasto: 'Ford', cena: 'Mondeo', powierzchnia: 32000 },
-            { miasto: 'Porsche', cena: 'Boxter', powierzchnia: 72000 }
-        ];
     }
+    ngOnInit() { }
 }
 exports.HomeComponent = HomeComponent;
-HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(i0.ɵɵdirectiveInject(i1.AnnouncementService)); };
-HomeComponent.ɵcmp = i0.ɵɵdefineComponent({ type: HomeComponent, selectors: [["app-home"]], decls: 1, vars: 3, consts: [[1, "ag-theme-material", "ag-grid__tab", 3, "rowData", "columnDefs", "defaultColDef"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
-        i0.ɵɵelement(0, "ag-grid-angular", 0);
+HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(i0.ɵɵdirectiveInject(i1.AnnouncementService), i0.ɵɵdirectiveInject(i2.LoggerService)); };
+HomeComponent.ɵcmp = i0.ɵɵdefineComponent({ type: HomeComponent, selectors: [["app-home"]], decls: 1, vars: 1, consts: [[4, "ngIf"], [1, "ag-theme-material", "ag-grid__tab", 3, "rowData", "columnDefs", "defaultColDef"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
+        i0.ɵɵtemplate(0, HomeComponent_div_0_Template, 2, 3, "div", 0);
     } if (rf & 2) {
-        i0.ɵɵproperty("rowData", ctx.rowData)("columnDefs", ctx.columnDefs)("defaultColDef", ctx.defaultColumn);
-    } }, directives: [i2.AgGridAngular], styles: [".ag-grid__tab[_ngcontent-%COMP%] {\n  margin: 5% 5% 5% 15%;\n  width: 70%;\n  height: 70vh;\n  border: 1px #222 solid;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n\n  .ag-header-viewport {\n  border-bottom: 1px #222 solid;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL2dyaWQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIiwic3JjL2FwcC9tb2R1bGVzL2hvbWUvaG9tZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLG9CQUFBO0VBQ0EsVUFBQTtFQUNBLFlBQUE7RUFDQSxzQkNGSztFREdMLDJGQ05RO0FDTVo7O0FBSkE7RUFDSSw2QkFBQTtBQU9KIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9ob21lL2hvbWUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0IFwiLi92YXJpYWJsZXMuc2Nzc1wiO1xuLmFnLWdyaWRfX3RhYiB7XG4gICAgbWFyZ2luOiA1JSA1JSA1JSAxNSU7XG4gICAgd2lkdGg6IDcwJTtcbiAgICBoZWlnaHQ6IDcwdmg7XG4gICAgYm9yZGVyOiAkYm9yZGVyO1xuICAgIGJveC1zaGFkb3c6ICRib3hTaGFkb3c7XG59IiwiJGJveFNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSxcbjEwcHggMTBweCAyMHB4ICNjOGNlZDUsXG5pbnNldCAwIDAgMTBweCAjYzhjZWQ1O1xuJGJvcmRlcjogMXB4ICMyMjIgc29saWQ7IiwiLmFnLWdyaWRfX3RhYiB7XG4gIG1hcmdpbjogNSUgNSUgNSUgMTUlO1xuICB3aWR0aDogNzAlO1xuICBoZWlnaHQ6IDcwdmg7XG4gIGJvcmRlcjogMXB4ICMyMjIgc29saWQ7XG4gIGJveC1zaGFkb3c6IGluc2V0IC0xMHB4IC0xMHB4IDEwMHB4ICNjOGNlZDUsIDEwcHggMTBweCAyMHB4ICNjOGNlZDUsIGluc2V0IDAgMCAxMHB4ICNjOGNlZDU7XG59XG5cbjo6bmctZGVlcCAuYWctaGVhZGVyLXZpZXdwb3J0IHtcbiAgYm9yZGVyLWJvdHRvbTogMXB4ICMyMjIgc29saWQ7XG59Il19 */"] });
+        i0.ɵɵproperty("ngIf", ctx.rowDatatAnnouncement.length > 0);
+    } }, directives: [i3.NgIf, i4.AgGridAngular], styles: [".ag-grid__tab[_ngcontent-%COMP%] {\n  margin: 5% 5% 5% 15%;\n  width: 70%;\n  height: 70vh;\n  border: 1px #222 solid;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n\n  .ag-header-viewport {\n  border-bottom: 1px #222 solid;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL2dyaWQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIiwic3JjL2FwcC9tb2R1bGVzL2hvbWUvaG9tZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLG9CQUFBO0VBQ0EsVUFBQTtFQUNBLFlBQUE7RUFDQSxzQkNGSztFREdMLDJGQ05RO0FDTVo7O0FBSkE7RUFDSSw2QkFBQTtBQU9KIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9ob21lL2hvbWUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0IFwiLi92YXJpYWJsZXMuc2Nzc1wiO1xuLmFnLWdyaWRfX3RhYiB7XG4gICAgbWFyZ2luOiA1JSA1JSA1JSAxNSU7XG4gICAgd2lkdGg6IDcwJTtcbiAgICBoZWlnaHQ6IDcwdmg7XG4gICAgYm9yZGVyOiAkYm9yZGVyO1xuICAgIGJveC1zaGFkb3c6ICRib3hTaGFkb3c7XG59IiwiJGJveFNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSxcbjEwcHggMTBweCAyMHB4ICNjOGNlZDUsXG5pbnNldCAwIDAgMTBweCAjYzhjZWQ1O1xuJGJvcmRlcjogMXB4ICMyMjIgc29saWQ7IiwiLmFnLWdyaWRfX3RhYiB7XG4gIG1hcmdpbjogNSUgNSUgNSUgMTUlO1xuICB3aWR0aDogNzAlO1xuICBoZWlnaHQ6IDcwdmg7XG4gIGJvcmRlcjogMXB4ICMyMjIgc29saWQ7XG4gIGJveC1zaGFkb3c6IGluc2V0IC0xMHB4IC0xMHB4IDEwMHB4ICNjOGNlZDUsIDEwcHggMTBweCAyMHB4ICNjOGNlZDUsIGluc2V0IDAgMCAxMHB4ICNjOGNlZDU7XG59XG5cbjo6bmctZGVlcCAuYWctaGVhZGVyLXZpZXdwb3J0IHtcbiAgYm9yZGVyLWJvdHRvbTogMXB4ICMyMjIgc29saWQ7XG59Il19 */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(HomeComponent, [{
         type: core_1.Component,
         args: [{
@@ -1169,7 +1182,7 @@ HomeComponent.ɵcmp = i0.ɵɵdefineComponent({ type: HomeComponent, selectors: [
                 templateUrl: './home.component.html',
                 styleUrls: ['./home.component.scss']
             }]
-    }], function () { return [{ type: i1.AnnouncementService }]; }, null); })();
+    }], function () { return [{ type: i1.AnnouncementService }, { type: i2.LoggerService }]; }, null); })();
 
 
 /***/ }),

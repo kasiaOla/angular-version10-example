@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { GridOptions } from '@ag-grid-community/all-modules';
 import { ColDef } from 'ag-grid-community';
 import { AnnouncementService } from 'src/app/shared/shared-services/announcement.service';
+import { Announcement } from '../announcements/announcement';
+import { LoggerService } from '../../shared/shared-services/logger.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +13,13 @@ import { AnnouncementService } from 'src/app/shared/shared-services/announcement
 export class HomeComponent implements OnInit {
 
   public rowData: any[];
-  public columnDefs: any[];
+  public rowDatatAnnouncement: Announcement[] = [];
+
+  public columnDefs = [
+    { headerName: 'Miasto', field: 'title', colId: 'title', sortable: true, filter: true },
+    { headerName: 'Cena', field: 'price', colId: 'price', sortable: true, filter: true },
+    { headerName: 'Powierzchnia', field: 'surface', colId: 'surface', sortable: true, filter: true }
+  ];
   public gridOptions: GridOptions = {
     suppressRowClickSelection: false,
     rowMultiSelectWithClick: false,
@@ -28,26 +36,19 @@ export class HomeComponent implements OnInit {
     headerCheckboxSelectionFilteredOnly: true,
   };
 
-  constructor(public announcementService: AnnouncementService) {
+  constructor(public announcementService: AnnouncementService, private logger: LoggerService,) {
 
-   }
-
-  ngOnInit(): void {
-
-    this.announcementService.getAnnouncement().subscribe(req => {
-      console.log('AnnouncementService', req);
+    this.announcementService.getAnnouncement().subscribe({
+      next: Res => {
+          this.rowDatatAnnouncement = Res['respons'];
+       },
+      error: Err => {
+        this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
+      },
+      complete( ): void { }
     });
-    this.columnDefs = [
-      { headerName: 'Miasto', field: 'miasto', sortable: true, filter: true },
-      { headerName: 'Cena', field: 'cena', sortable: true, filter: true },
-      { headerName: 'Powierzchnia', field: 'powierzchnia', sortable: true, filter: true }
-    ];
-    this.rowData = [
-      { miasto: 'Toyota', cena: 'Celica', powierzchnia: 35000 },
-      { miasto: 'Ford', cena: 'Mondeo', powierzchnia: 32000 },
-      { miasto: 'Porsche', cena: 'Boxter', powierzchnia: 72000 }
-    ];
   }
 
+  ngOnInit(): void { }
 
 }
