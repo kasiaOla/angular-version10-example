@@ -37,7 +37,7 @@ export class UserLoginComponent implements OnInit {
       this.authService.login(this.loginForm.value)
         .subscribe(data => {
           if (data.success === false) {
-          } else {
+          } else if (data.success === true) {
             this.router.navigate(['/']);
           }
           this.loginForm.reset();

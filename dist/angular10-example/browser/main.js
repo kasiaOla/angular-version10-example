@@ -822,17 +822,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+const operators_1 = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+const i2 = __webpack_require__(/*! ../../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
 class AuthService {
-    constructor(httpClient) {
+    constructor(httpClient, logger) {
         this.httpClient = httpClient;
+        this.logger = logger;
+        this.httpOptions = {
+            headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
+        };
         this.isLogged = false;
     }
     registration(newUser) {
-        let headers = new http_1.HttpHeaders();
-        headers = headers.set('content-type', 'application/json');
-        return this.httpClient.post('/register', JSON.stringify(newUser), { headers });
+        return this.httpClient.post(`/register`, newUser, this.httpOptions)
+            .pipe(operators_1.catchError(this.handleError('Add User')));
     }
     login(user) {
         let headers = new http_1.HttpHeaders();
@@ -843,16 +849,23 @@ class AuthService {
     loginOut() {
         this.isLogged = false;
     }
+    handleError(operation = 'operation', result) {
+        return (error) => {
+            this.logger.error(error);
+            this.logger.info(`${operation} failed: ${error.message}`);
+            return rxjs_1.of(result);
+        };
+    }
 }
 exports.AuthService = AuthService;
-AuthService.ɵfac = function AuthService_Factory(t) { return new (t || AuthService)(i0.ɵɵinject(i1.HttpClient)); };
+AuthService.ɵfac = function AuthService_Factory(t) { return new (t || AuthService)(i0.ɵɵinject(i1.HttpClient), i0.ɵɵinject(i2.LoggerService)); };
 AuthService.ɵprov = i0.ɵɵdefineInjectable({ token: AuthService, factory: AuthService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AuthService, [{
         type: core_1.Injectable,
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: i1.HttpClient }]; }, null); })();
+    }], function () { return [{ type: i1.HttpClient }, { type: i2.LoggerService }]; }, null); })();
 
 
 /***/ }),
@@ -1177,7 +1190,6 @@ class HomeComponent {
             },
             complete() { }
         });
-        // this.announcementService.getAnnouncement().pipe(tap((s) => console.log('sssss', s)))
     }
     ngOnInit() { }
     onGridReady(params) {
@@ -1317,7 +1329,7 @@ class UserLoginComponent {
                 .subscribe(data => {
                 if (data.success === false) {
                 }
-                else {
+                else if (data.success === true) {
                     this.router.navigate(['/']);
                 }
                 this.loginForm.reset();
@@ -1403,11 +1415,13 @@ const forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angul
 const user_1 = __webpack_require__(/*! ../user */ "./src/app/modules/users/user.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-const i2 = __webpack_require__(/*! ../../core/authentication/auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
-const i3 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+const i2 = __webpack_require__(/*! ../../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
+const i3 = __webpack_require__(/*! ../../core/authentication/auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
+const i4 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 class UserRegistrationComponent {
-    constructor(fb, authService, router) {
+    constructor(fb, logger, authService, router) {
         this.fb = fb;
+        this.logger = logger;
         this.authService = authService;
         this.router = router;
         this.CustomerType = user_1.CustomerType;
@@ -1427,18 +1441,28 @@ class UserRegistrationComponent {
     registration() {
         if (this.registrationForm.dirty && this.registrationForm.valid) {
             this.authService.registration(this.registrationForm.value).subscribe(data => {
-                if (data === false) {
+                switch (data.success) {
+                    case false: {
+                        this.logger.error(`Error code ${data.message}`);
+                        break;
+                    }
+                    case true: {
+                        this.logger.info('User created successfully, please login to access your account.');
+                        this.router.navigate(['user/login']);
+                        this.registrationForm.reset();
+                        break;
+                    }
+                    default: {
+                        this.registrationForm.reset();
+                        break;
+                    }
                 }
-                else {
-                    this.router.navigate(['']);
-                }
-                this.registrationForm.reset();
             });
         }
     }
 }
 exports.UserRegistrationComponent = UserRegistrationComponent;
-UserRegistrationComponent.ɵfac = function UserRegistrationComponent_Factory(t) { return new (t || UserRegistrationComponent)(i0.ɵɵdirectiveInject(i1.FormBuilder), i0.ɵɵdirectiveInject(i2.AuthService), i0.ɵɵdirectiveInject(i3.Router)); };
+UserRegistrationComponent.ɵfac = function UserRegistrationComponent_Factory(t) { return new (t || UserRegistrationComponent)(i0.ɵɵdirectiveInject(i1.FormBuilder), i0.ɵɵdirectiveInject(i2.LoggerService), i0.ɵɵdirectiveInject(i3.AuthService), i0.ɵɵdirectiveInject(i4.Router)); };
 UserRegistrationComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserRegistrationComponent, selectors: [["app-user-registration"]], decls: 41, vars: 4, consts: [[1, "jumbotron", "content"], [1, "panel", "panel-default"], [1, "panel-heading", "text-center"], [1, "panel-body"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "userName"], ["required", "", "type", "text", "formControlName", "username", "id", "username", "name", "username", 1, "form-control"], ["for", "password"], ["required", "", "type", "text", "formControlName", "password", "id", "password", "name", "password", 1, "form-control"], ["for", "email"], ["required", "", "type", "text", "formControlName", "email", "id", "email", "name", "email", 1, "form-control"], ["for", "type"], ["required", "", "formControlName", "type", "name", "type", 1, "form-control"], [3, "value"], ["type", "button", 1, "btn", "btn-default"], ["type", "submit", 1, "btn", "btn-success"]], template: function UserRegistrationComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "div", 0);
         i0.ɵɵelementStart(1, "div", 1);
@@ -1523,7 +1547,7 @@ UserRegistrationComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserRegistratio
                 templateUrl: './user-registration.component.html',
                 styleUrls: ['./user-registration.component.scss']
             }]
-    }], function () { return [{ type: i1.FormBuilder }, { type: i2.AuthService }, { type: i3.Router }]; }, null); })();
+    }], function () { return [{ type: i1.FormBuilder }, { type: i2.LoggerService }, { type: i3.AuthService }, { type: i4.Router }]; }, null); })();
 
 
 /***/ }),
@@ -1875,7 +1899,7 @@ class AnnouncementService {
     }
     addAnnouncement(newAnnouncement, idCategory, idType) {
         return this.httpClient.post(`/category/${idCategory}/type/${idType}`, newAnnouncement, this.httpOptions)
-            .pipe(operators_1.catchError(this.handleError('Add Song')));
+            .pipe(operators_1.catchError(this.handleError('Add Announcement')));
     }
     getAnnouncement() {
         return this.httpClient.get(`/api/get-announcements`).pipe(operators_1.tap(announcements => this.logger.info('Announcements retrieved!' + announcements)));

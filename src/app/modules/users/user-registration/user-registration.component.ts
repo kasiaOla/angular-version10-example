@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { User, CustomerType } from '../user';
 import { AuthService } from '../../core/authentication/auth.service';
+import { LoggerService } from '../../../shared/shared-services/logger.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class UserRegistrationComponent implements OnInit {
   user: User;
 
   constructor(private fb: FormBuilder,
+              private logger: LoggerService,
               private authService: AuthService,
               private router: Router) {
   }
@@ -44,12 +46,23 @@ export class UserRegistrationComponent implements OnInit {
     if (this.registrationForm.dirty && this.registrationForm.valid) {
 
       this.authService.registration(this.registrationForm.value).subscribe(data => {
-          if (data === false) {
-          } else {
-            this.router.navigate(['']);
+        switch (data.success) {
+          case false: {
+            this.logger.error(`Error code ${data.message}`);
+            break;
           }
-          this.registrationForm.reset();
-        });
+          case true: {
+            this.logger.info('User created successfully, please login to access your account.');
+            this.router.navigate(['user/login']);
+            this.registrationForm.reset();
+            break;
+          }
+          default: {
+            this.registrationForm.reset();
+            break;
+          }
+        }
+      });
     }
   }
 }

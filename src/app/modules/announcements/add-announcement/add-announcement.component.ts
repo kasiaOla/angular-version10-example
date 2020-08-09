@@ -86,7 +86,6 @@ export class AddAnnouncementComponent implements OnInit {
 
     this.announcementService.addAnnouncement(setAnnouncement, this.id_category, this.id_type)
       .subscribe(data => {
-
         Syntax:
         switch (data.success) {
           case false: {

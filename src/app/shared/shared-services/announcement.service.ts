@@ -18,7 +18,7 @@ export class AnnouncementService {
   public addAnnouncement(newAnnouncement: Announcement, idCategory: string, idType: string): any {
     return this.httpClient.post<Announcement>(`/category/${idCategory}/type/${idType}`, newAnnouncement, this.httpOptions)
       .pipe(
-        catchError(this.handleError<Announcement>('Add Song'))
+        catchError(this.handleError<Announcement>('Add Announcement'))
       );
   }
 
