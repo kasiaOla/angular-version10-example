@@ -4,20 +4,20 @@ import { Request, Response, NextFunction } from 'express';
 export class UserRoute {
   userRoute(app: any): void {
     app.route('/register').post((req: Request, res: Response, next: NextFunction) => {
-      User.create(req.body, (Error: any, data: any) => {
-        if (Error) {
-          return res.status(400).json({
-            success: false,
-            message: 'Error processing request ' + Error
-          });
-        } else {
-          return res.status(200).json({
-            success: true,
-            message: 'Register was successful.',
-            respons: data
-          });
-        }
-      });
+      // User.create(req.body, (Error: any, data: any) => {
+      //   if (Error) {
+      //     return res.status(400).json({
+      //       success: false,
+      //       message: 'Error processing request ' + Error
+      //     });
+      //   } else {
+      //     return res.status(200).json({
+      //       success: true,
+      //       message: 'Register was successful.',
+      //       respons: data
+      //     });
+      //   }
+      // });
     });
 
     app.route('/login').post((req: Request, res: Response, next: NextFunction) => {

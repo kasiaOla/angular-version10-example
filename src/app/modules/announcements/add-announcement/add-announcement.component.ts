@@ -86,6 +86,7 @@ export class AddAnnouncementComponent implements OnInit {
 
     this.announcementService.addAnnouncement(setAnnouncement, this.id_category, this.id_type)
       .subscribe(data => {
+
         Syntax:
         switch (data.success) {
           case false: {
@@ -93,7 +94,7 @@ export class AddAnnouncementComponent implements OnInit {
             break;
           }
           case true: {
-            this.logger.info('The advertisement has been correctly added');
+            this.logger.info('The advertisement has been correctly added' + data.respons );
             this.announcementForm.reset();
             break;
           }

@@ -318,7 +318,7 @@ class AddAnnouncementComponent {
                     break;
                 }
                 case true: {
-                    this.logger.info('The advertisement has been correctly added');
+                    this.logger.info('The advertisement has been correctly added' + data.respons);
                     this.announcementForm.reset();
                     break;
                 }
@@ -1177,6 +1177,7 @@ class HomeComponent {
             },
             complete() { }
         });
+        // this.announcementService.getAnnouncement().pipe(tap((s) => console.log('sssss', s)))
     }
     ngOnInit() { }
     onGridReady(params) {
@@ -1859,32 +1860,43 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AnnouncementService = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 const operators_1 = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+const i2 = __webpack_require__(/*! ./logger.service */ "./src/app/shared/shared-services/logger.service.ts");
 class AnnouncementService {
-    constructor(httpClient) {
+    constructor(httpClient, logger) {
         this.httpClient = httpClient;
+        this.logger = logger;
+        this.httpOptions = {
+            headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
+        };
     }
     addAnnouncement(newAnnouncement, idCategory, idType) {
-        let headers = new http_1.HttpHeaders();
-        headers = headers.set('content-type', 'application/json');
-        // tslint:disable-next-line:max-line-length
-        return this.httpClient.post(`/category/${idCategory}/type/${idType}`, JSON.stringify(newAnnouncement), { headers });
+        return this.httpClient.post(`/category/${idCategory}/type/${idType}`, newAnnouncement, this.httpOptions)
+            .pipe(operators_1.catchError(this.handleError('Add Song')));
     }
     getAnnouncement() {
-        return this.httpClient.get(`/api/get-announcements`).pipe(operators_1.tap(announcements => console.log('Announcements retrieved!')));
+        return this.httpClient.get(`/api/get-announcements`).pipe(operators_1.tap(announcements => this.logger.info('Announcements retrieved!' + announcements)));
+    }
+    handleError(operation = 'operation', result) {
+        return (error) => {
+            this.logger.error(error);
+            this.logger.info(`${operation} failed: ${error.message}`);
+            return rxjs_1.of(result);
+        };
     }
 }
 exports.AnnouncementService = AnnouncementService;
-AnnouncementService.ɵfac = function AnnouncementService_Factory(t) { return new (t || AnnouncementService)(i0.ɵɵinject(i1.HttpClient)); };
+AnnouncementService.ɵfac = function AnnouncementService_Factory(t) { return new (t || AnnouncementService)(i0.ɵɵinject(i1.HttpClient), i0.ɵɵinject(i2.LoggerService)); };
 AnnouncementService.ɵprov = i0.ɵɵdefineInjectable({ token: AnnouncementService, factory: AnnouncementService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AnnouncementService, [{
         type: core_1.Injectable,
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: i1.HttpClient }]; }, null); })();
+    }], function () { return [{ type: i1.HttpClient }, { type: i2.LoggerService }]; }, null); })();
 
 
 /***/ }),

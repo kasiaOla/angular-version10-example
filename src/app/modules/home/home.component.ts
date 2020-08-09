@@ -5,6 +5,7 @@ import { AnnouncementService } from 'src/app/shared/shared-services/announcement
 import { Announcement } from '../announcements/announcement';
 import { LoggerService } from '../../shared/shared-services/logger.service';
 import { AgGridHeaderComponent } from '../../shared/ag-grid-header/ag-grid-header.component';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -49,7 +50,7 @@ export class HomeComponent implements OnInit {
       },
       complete(): void { }
     });
-  }
+}
 
   ngOnInit(): void { }
 

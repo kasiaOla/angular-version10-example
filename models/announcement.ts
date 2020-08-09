@@ -1,8 +1,7 @@
 import * as mongoose from 'mongoose';
-import { Schema } from 'mongoose';
-import * as bcrypt from 'bcrypt-nodejs';
+import { Schema, Document } from 'mongoose';
 
-const AnnouncementSchema = new Schema({
+const AnnouncementSchema: Schema = new Schema({
 
   id: Number,
   title: String,

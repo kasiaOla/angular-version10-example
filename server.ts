@@ -3,13 +3,13 @@ import 'zone.js/dist/zone-node';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
 import { join } from 'path';
-
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import * as mongoose from 'mongoose';
 import { UserRoute } from './routes/user';
 import { AnnouncementRoute } from './routes/announcement';
+const bodyParser = require('body-parser');
 const userRoute: UserRoute = new UserRoute();
 const announcementRoute: AnnouncementRoute = new AnnouncementRoute();
 
@@ -34,6 +34,16 @@ export function app(): express.Express {
   server.set('view engine', 'html');
   server.set('views', distFolder);
 
+  server.use(bodyParser.urlencoded({ extended: false }));
+  server.use(bodyParser.json());
+
+  server.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+  });
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser
