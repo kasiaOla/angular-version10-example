@@ -6,7 +6,7 @@
     "module": "commonjs",
     "types": [
       "jest",
-      "node"
+      "node",
     ]
   },
   "include": [
@@ -15,5 +15,6 @@
   "exclude": [
     "src/test.ts",
     "src/**/*.spec.ts"
-  ]
+  ],
+  "typeRoots": ["./node_modules/@types"],
 }

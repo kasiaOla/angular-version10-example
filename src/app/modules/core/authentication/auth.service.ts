@@ -34,6 +34,7 @@ export class AuthService {
   public loginOut(): void {
     this.isLogged = false;
   }
+
   private handleError<T>(operation = 'operation', result?: T): any {
     return (error: any): Observable<T> => {
       this.logger.error(error);

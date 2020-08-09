@@ -1231,8 +1231,7 @@ const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 class ContactComponent {
     constructor() { }
-    ngOnInit() {
-    }
+    ngOnInit() { }
 }
 exports.ContactComponent = ContactComponent;
 ContactComponent.ɵfac = function ContactComponent_Factory(t) { return new (t || ContactComponent)(); };

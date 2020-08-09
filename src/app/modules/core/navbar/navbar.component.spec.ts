@@ -3,6 +3,8 @@ import { NavbarComponent } from './navbar.component';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AuthService } from '../authentication/auth.service';
+import { LoggerService } from '../../../shared/shared-services/logger.service';
 
 
 describe('NavbarComponent', () => {
@@ -13,10 +15,11 @@ describe('NavbarComponent', () => {
     TestBed.configureTestingModule({
       declarations: [NavbarComponent],
       imports: [
-        BrowserModule,
         RouterTestingModule,
         HttpClientTestingModule
       ],
+      providers: [AuthService, LoggerService ],
+
     })
       .compileComponents();
   }));

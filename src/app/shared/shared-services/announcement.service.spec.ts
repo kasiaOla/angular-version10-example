@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AnnouncementService } from './announcement.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { LoggerService } from './logger.service';
 
 describe('AnnouncementService', () => {
   let service: AnnouncementService;
@@ -8,7 +9,8 @@ describe('AnnouncementService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule ]
+        HttpClientTestingModule ],
+        providers: [LoggerService]
     });
     service = TestBed.inject(AnnouncementService);
   });

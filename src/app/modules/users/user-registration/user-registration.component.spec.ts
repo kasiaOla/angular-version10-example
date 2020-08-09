@@ -6,6 +6,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { AuthService } from '../../core/authentication/auth.service';
+import { LoggerService } from '../../../shared/shared-services/logger.service';
 
 class MockAuthService extends AuthService {}
 
@@ -24,7 +25,7 @@ describe('UserRegistrationComponent', () => {
       providers: [FormBuilder, {
         provide: AuthService,
         useClass: MockAuthService
-      }]
+      }, LoggerService]
     })
     .compileComponents();
   }));

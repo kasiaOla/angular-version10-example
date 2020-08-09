@@ -3,6 +3,8 @@ import { HomeComponent } from './home.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AnnouncementService } from 'src/app/shared/shared-services/announcement.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { By } from '@angular/platform-browser';
+import { LoggerService } from '../../shared/shared-services/logger.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -15,7 +17,7 @@ describe('HomeComponent', () => {
         RouterTestingModule,
         HttpClientTestingModule
       ],
-      providers: [AnnouncementService]
+      providers: [AnnouncementService, LoggerService]
     })
       .compileComponents();
   }));
