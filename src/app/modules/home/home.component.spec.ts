@@ -5,6 +5,8 @@ import { AnnouncementService } from 'src/app/shared/shared-services/announcement
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 import { LoggerService } from '../../shared/shared-services/logger.service';
+import { AgGridModule } from 'ag-grid-angular';
+import { AgGridHeaderComponent } from '../../shared/ag-grid-header/ag-grid-header.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -15,7 +17,8 @@ describe('HomeComponent', () => {
       declarations: [HomeComponent],
       imports: [
         RouterTestingModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        AgGridModule.withComponents([AgGridHeaderComponent])
       ],
       providers: [AnnouncementService, LoggerService]
     })
@@ -31,4 +34,14 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('grid API is not available until  `detectChanges`', () => {
+    expect(component.gridOptions.api).not.toBeTruthy();
+  });
+
+  it('Test component app-home. The test value `rowDatatAnnouncement` is equal true ', async(() => {
+    fixture = TestBed.createComponent(HomeComponent);
+    const component = fixture.debugElement.componentInstance;
+    expect(component.rowDatatAnnouncement).toBeTruthy();
+  }));
 });

@@ -1034,8 +1034,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.NavbarComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-const i1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-const i2 = __webpack_require__(/*! ../authentication/auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
+const i1 = __webpack_require__(/*! ../authentication/auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
+const i2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const i3 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 function NavbarComponent_a_6_Template(rf, ctx) { if (rf & 1) {
     i0.ɵɵelementStart(0, "a", 9);
@@ -1059,18 +1059,16 @@ function NavbarComponent_a_10_Template(rf, ctx) { if (rf & 1) {
     i0.ɵɵelementEnd();
 } }
 class NavbarComponent {
-    constructor(router, authService) {
-        this.router = router;
+    constructor(authService) {
         this.authService = authService;
     }
-    ngOnInit() {
-    }
+    ngOnInit() { }
     loginOut() {
         this.authService.loginOut();
     }
 }
 exports.NavbarComponent = NavbarComponent;
-NavbarComponent.ɵfac = function NavbarComponent_Factory(t) { return new (t || NavbarComponent)(i0.ɵɵdirectiveInject(i1.Router), i0.ɵɵdirectiveInject(i2.AuthService)); };
+NavbarComponent.ɵfac = function NavbarComponent_Factory(t) { return new (t || NavbarComponent)(i0.ɵɵdirectiveInject(i1.AuthService)); };
 NavbarComponent.ɵcmp = i0.ɵɵdefineComponent({ type: NavbarComponent, selectors: [["app-navbar"]], decls: 18, vars: 6, consts: [[1, "card-body"], [1, "navbar", "navbar-light", "bg-light"], ["routerLinkActive", "active", "name", "home", 1, "navbar-brand", 3, "routerLink"], ["class", "navbar-brand", "routerLinkActive", "active", "name", "registration", 3, "routerLink", 4, "ngIf"], ["class", "navbar-brand", "routerLinkActive", "active", "name", "login", 3, "routerLink", 4, "ngIf"], ["class", "navbar-brand", "name", "loginOut", 3, "click", 4, "ngIf"], ["routerLinkActive", "active", "name", "contact", 1, "navbar-brand", 3, "routerLink"], ["routerLinkActive", "active", 1, "btn", "btn-default", "link-button--save", 3, "routerLink"], [1, "card-text"], ["routerLinkActive", "active", "name", "registration", 1, "navbar-brand", 3, "routerLink"], ["routerLinkActive", "active", "name", "login", 1, "navbar-brand", 3, "routerLink"], ["name", "loginOut", 1, "navbar-brand", 3, "click"]], template: function NavbarComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "div", 0);
         i0.ɵɵelementStart(1, "nav", 1);
@@ -1114,7 +1112,7 @@ NavbarComponent.ɵcmp = i0.ɵɵdefineComponent({ type: NavbarComponent, selector
         i0.ɵɵproperty("routerLink", "/user/contact");
         i0.ɵɵadvance(2);
         i0.ɵɵproperty("routerLink", "/announcement/category");
-    } }, directives: [i1.RouterLinkWithHref, i1.RouterLinkActive, i3.NgIf, i1.RouterLink, i1.RouterOutlet], styles: [".navbar[_ngcontent-%COMP%] {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n\n.navbar-brand[_ngcontent-%COMP%] {\n  opacity: 0.6;\n  margin-right: 3rem;\n  font: 400 24px Roboto, \"Helvetica Neue\", sans-serif;\n}\n\n.bg-light[_ngcontent-%COMP%] {\n  background-color: white !important;\n  justify-content: flex-end !important;\n}\n\n.navbar[_ngcontent-%COMP%]   .navbar-expand-lg[_ngcontent-%COMP%]   .navbar-light[_ngcontent-%COMP%]   .bg-light[_ngcontent-%COMP%] {\n  justify-content: flex-end !important;\n}\n\n.card[_ngcontent-%COMP%] {\n  justify-content: flex-end;\n}\n\n.card-body[_ngcontent-%COMP%] {\n  padding: 0;\n}\n\nbutton[_ngcontent-%COMP%] {\n  padding: 10px;\n  margin: 10px 5px 0px 15px;\n}\n\n.link-button--save[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0px;\n  left: 5%;\n  margin: 0px;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n  border: 1px #222 solid;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL25hdi5zY3NzIiwic3JjL2FwcC9tb2R1bGVzL2NvcmUvbmF2YmFyL25hdmJhci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksNENBQUE7QUNDSjs7QURFQTtFQUNJLFlBQUE7RUFDQSxrQkFBQTtFQUNBLG1EQUFBO0FDQ0o7O0FERUE7RUFDSSxrQ0FBQTtFQUNBLG9DQUFBO0FDQ0o7O0FERUE7RUFDSSxvQ0FBQTtBQ0NKOztBQWZBO0VBQ0kseUJBQUE7QUFrQko7O0FBZkE7RUFDSSxVQUFBO0FBa0JKOztBQWZBO0VBQ0ksYUFBQTtFQUNBLHlCQUFBO0FBa0JKOztBQWZBO0VBQ0ksa0JBQUE7RUFDQSxRQUFBO0VBQ0EsUUFBQTtFQUNBLFdBQUE7RUFDQSwyRkFBQTtFQUNBLHNCQ2xCSztBRG9DVCIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvY29yZS9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm5hdmJhciB7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHJnYmEoMCwgMCwgMCwgLjEyKTtcbn1cblxuLm5hdmJhci1icmFuZCB7XG4gICAgb3BhY2l0eTogLjY7XG4gICAgbWFyZ2luLXJpZ2h0OiAzcmVtO1xuICAgIGZvbnQ6IDQwMCAyNHB4IFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmO1xufVxuXG4uYmctbGlnaHQge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlICFpbXBvcnRhbnQ7XG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZCAhaW1wb3J0YW50O1xufVxuXG4ubmF2YmFyIC5uYXZiYXItZXhwYW5kLWxnIC5uYXZiYXItbGlnaHQgLmJnLWxpZ2h0IHtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59IiwiLm5hdmJhciB7XG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCByZ2JhKDAsIDAsIDAsIDAuMTIpO1xufVxuXG4ubmF2YmFyLWJyYW5kIHtcbiAgb3BhY2l0eTogMC42O1xuICBtYXJnaW4tcmlnaHQ6IDNyZW07XG4gIGZvbnQ6IDQwMCAyNHB4IFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmO1xufVxuXG4uYmctbGlnaHQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5uYXZiYXIgLm5hdmJhci1leHBhbmQtbGcgLm5hdmJhci1saWdodCAuYmctbGlnaHQge1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5jYXJkIHtcbiAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbn1cblxuLmNhcmQtYm9keSB7XG4gIHBhZGRpbmc6IDA7XG59XG5cbmJ1dHRvbiB7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIG1hcmdpbjogMTBweCA1cHggMHB4IDE1cHg7XG59XG5cbi5saW5rLWJ1dHRvbi0tc2F2ZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwcHg7XG4gIGxlZnQ6IDUlO1xuICBtYXJnaW46IDBweDtcbiAgYm94LXNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSwgMTBweCAxMHB4IDIwcHggI2M4Y2VkNSwgaW5zZXQgMCAwIDEwcHggI2M4Y2VkNTtcbiAgYm9yZGVyOiAxcHggIzIyMiBzb2xpZDtcbn0iLCIkYm94U2hhZG93OiBpbnNldCAtMTBweCAtMTBweCAxMDBweCAjYzhjZWQ1LFxuMTBweCAxMHB4IDIwcHggI2M4Y2VkNSxcbmluc2V0IDAgMCAxMHB4ICNjOGNlZDU7XG4kYm9yZGVyOiAxcHggIzIyMiBzb2xpZDsiXX0= */"] });
+    } }, directives: [i2.RouterLinkWithHref, i2.RouterLinkActive, i3.NgIf, i2.RouterLink, i2.RouterOutlet], styles: [".navbar[_ngcontent-%COMP%] {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n\n.navbar-brand[_ngcontent-%COMP%] {\n  opacity: 0.6;\n  margin-right: 3rem;\n  font: 400 24px Roboto, \"Helvetica Neue\", sans-serif;\n}\n\n.bg-light[_ngcontent-%COMP%] {\n  background-color: white !important;\n  justify-content: flex-end !important;\n}\n\n.navbar[_ngcontent-%COMP%]   .navbar-expand-lg[_ngcontent-%COMP%]   .navbar-light[_ngcontent-%COMP%]   .bg-light[_ngcontent-%COMP%] {\n  justify-content: flex-end !important;\n}\n\n.card[_ngcontent-%COMP%] {\n  justify-content: flex-end;\n}\n\n.card-body[_ngcontent-%COMP%] {\n  padding: 0;\n}\n\nbutton[_ngcontent-%COMP%] {\n  padding: 10px;\n  margin: 10px 5px 0px 15px;\n}\n\n.link-button--save[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0px;\n  left: 5%;\n  margin: 0px;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n  border: 1px #222 solid;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL25hdi5zY3NzIiwic3JjL2FwcC9tb2R1bGVzL2NvcmUvbmF2YmFyL25hdmJhci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksNENBQUE7QUNDSjs7QURFQTtFQUNJLFlBQUE7RUFDQSxrQkFBQTtFQUNBLG1EQUFBO0FDQ0o7O0FERUE7RUFDSSxrQ0FBQTtFQUNBLG9DQUFBO0FDQ0o7O0FERUE7RUFDSSxvQ0FBQTtBQ0NKOztBQWZBO0VBQ0kseUJBQUE7QUFrQko7O0FBZkE7RUFDSSxVQUFBO0FBa0JKOztBQWZBO0VBQ0ksYUFBQTtFQUNBLHlCQUFBO0FBa0JKOztBQWZBO0VBQ0ksa0JBQUE7RUFDQSxRQUFBO0VBQ0EsUUFBQTtFQUNBLFdBQUE7RUFDQSwyRkFBQTtFQUNBLHNCQ2xCSztBRG9DVCIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvY29yZS9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm5hdmJhciB7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHJnYmEoMCwgMCwgMCwgLjEyKTtcbn1cblxuLm5hdmJhci1icmFuZCB7XG4gICAgb3BhY2l0eTogLjY7XG4gICAgbWFyZ2luLXJpZ2h0OiAzcmVtO1xuICAgIGZvbnQ6IDQwMCAyNHB4IFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmO1xufVxuXG4uYmctbGlnaHQge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlICFpbXBvcnRhbnQ7XG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZCAhaW1wb3J0YW50O1xufVxuXG4ubmF2YmFyIC5uYXZiYXItZXhwYW5kLWxnIC5uYXZiYXItbGlnaHQgLmJnLWxpZ2h0IHtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59IiwiLm5hdmJhciB7XG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCByZ2JhKDAsIDAsIDAsIDAuMTIpO1xufVxuXG4ubmF2YmFyLWJyYW5kIHtcbiAgb3BhY2l0eTogMC42O1xuICBtYXJnaW4tcmlnaHQ6IDNyZW07XG4gIGZvbnQ6IDQwMCAyNHB4IFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmO1xufVxuXG4uYmctbGlnaHQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5uYXZiYXIgLm5hdmJhci1leHBhbmQtbGcgLm5hdmJhci1saWdodCAuYmctbGlnaHQge1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5jYXJkIHtcbiAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbn1cblxuLmNhcmQtYm9keSB7XG4gIHBhZGRpbmc6IDA7XG59XG5cbmJ1dHRvbiB7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIG1hcmdpbjogMTBweCA1cHggMHB4IDE1cHg7XG59XG5cbi5saW5rLWJ1dHRvbi0tc2F2ZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwcHg7XG4gIGxlZnQ6IDUlO1xuICBtYXJnaW46IDBweDtcbiAgYm94LXNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSwgMTBweCAxMHB4IDIwcHggI2M4Y2VkNSwgaW5zZXQgMCAwIDEwcHggI2M4Y2VkNTtcbiAgYm9yZGVyOiAxcHggIzIyMiBzb2xpZDtcbn0iLCIkYm94U2hhZG93OiBpbnNldCAtMTBweCAtMTBweCAxMDBweCAjYzhjZWQ1LFxuMTBweCAxMHB4IDIwcHggI2M4Y2VkNSxcbmluc2V0IDAgMCAxMHB4ICNjOGNlZDU7XG4kYm9yZGVyOiAxcHggIzIyMiBzb2xpZDsiXX0= */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NavbarComponent, [{
         type: core_1.Component,
         args: [{
@@ -1122,7 +1120,7 @@ NavbarComponent.ɵcmp = i0.ɵɵdefineComponent({ type: NavbarComponent, selector
                 templateUrl: './navbar.component.html',
                 styleUrls: ['./navbar.component.scss']
             }]
-    }], function () { return [{ type: i1.Router }, { type: i2.AuthService }]; }, null); })();
+    }], function () { return [{ type: i1.AuthService }]; }, null); })();
 
 
 /***/ }),
@@ -1152,7 +1150,7 @@ function HomeComponent_ag_grid_angular_0_Template(rf, ctx) { if (rf & 1) {
     i0.ɵɵelementEnd();
 } if (rf & 2) {
     const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵproperty("rowData", ctx_r0.rowDatatAnnouncement)("frameworkComponents", ctx_r0.frameworkComponents)("columnDefs", ctx_r0.columnDefs)("defaultColDef", ctx_r0.defaultColumn);
+    i0.ɵɵproperty("rowData", ctx_r0.rowDatatAnnouncement)("frameworkComponents", ctx_r0.frameworkComponents)("columnDefs", ctx_r0.columnDefs)("gridOptions", ctx_r0.gridOptions)("defaultColDef", ctx_r0.defaultColumn);
 } }
 class HomeComponent {
     constructor(announcementService, logger) {
@@ -1160,7 +1158,7 @@ class HomeComponent {
         this.logger = logger;
         this.rowDatatAnnouncement = [];
         this.columnDefs = [
-            { headerName: 'Miasto', field: 'title', colId: 'title' },
+            { headerName: 'Miasto', field: 'title', colId: 'title', editable: true },
             { headerName: 'Cena', field: 'price', colId: 'price' },
             { headerName: 'Powierzchnia', field: 'surface', colId: 'surface' }
         ];
@@ -1199,8 +1197,8 @@ class HomeComponent {
 }
 exports.HomeComponent = HomeComponent;
 HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(i0.ɵɵdirectiveInject(i1.AnnouncementService), i0.ɵɵdirectiveInject(i2.LoggerService)); };
-HomeComponent.ɵcmp = i0.ɵɵdefineComponent({ type: HomeComponent, selectors: [["app-home"]], decls: 1, vars: 1, consts: [["class", "ag-theme-material ag-grid__tab", 3, "rowData", "frameworkComponents", "columnDefs", "defaultColDef", "gridReady", 4, "ngIf"], [1, "ag-theme-material", "ag-grid__tab", 3, "rowData", "frameworkComponents", "columnDefs", "defaultColDef", "gridReady"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
-        i0.ɵɵtemplate(0, HomeComponent_ag_grid_angular_0_Template, 1, 4, "ag-grid-angular", 0);
+HomeComponent.ɵcmp = i0.ɵɵdefineComponent({ type: HomeComponent, selectors: [["app-home"]], decls: 1, vars: 1, consts: [["class", "ag-theme-material ag-grid__tab", 3, "rowData", "frameworkComponents", "columnDefs", "gridOptions", "defaultColDef", "gridReady", 4, "ngIf"], [1, "ag-theme-material", "ag-grid__tab", 3, "rowData", "frameworkComponents", "columnDefs", "gridOptions", "defaultColDef", "gridReady"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
+        i0.ɵɵtemplate(0, HomeComponent_ag_grid_angular_0_Template, 1, 5, "ag-grid-angular", 0);
     } if (rf & 2) {
         i0.ɵɵproperty("ngIf", ctx.rowDatatAnnouncement.length > 0);
     } }, directives: [i3.NgIf, i4.AgGridAngular], styles: [".ag-grid__tab[_ngcontent-%COMP%] {\n  margin: 5% 5% 5% 15%;\n  width: 70%;\n  height: 70vh;\n  border: 1px #222 solid;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n\n  .ag-header-viewport {\n  border-bottom: 1px #222 solid;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL2dyaWQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIiwic3JjL2FwcC9tb2R1bGVzL2hvbWUvaG9tZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLG9CQUFBO0VBQ0EsVUFBQTtFQUNBLFlBQUE7RUFDQSxzQkNGSztFREdMLDJGQ05RO0FDTVo7O0FBSkE7RUFDSSw2QkFBQTtBQU9KIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy9ob21lL2hvbWUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAaW1wb3J0IFwiLi92YXJpYWJsZXMuc2Nzc1wiO1xuLmFnLWdyaWRfX3RhYiB7XG4gICAgbWFyZ2luOiA1JSA1JSA1JSAxNSU7XG4gICAgd2lkdGg6IDcwJTtcbiAgICBoZWlnaHQ6IDcwdmg7XG4gICAgYm9yZGVyOiAkYm9yZGVyO1xuICAgIGJveC1zaGFkb3c6ICRib3hTaGFkb3c7XG59IiwiJGJveFNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSxcbjEwcHggMTBweCAyMHB4ICNjOGNlZDUsXG5pbnNldCAwIDAgMTBweCAjYzhjZWQ1O1xuJGJvcmRlcjogMXB4ICMyMjIgc29saWQ7IiwiLmFnLWdyaWRfX3RhYiB7XG4gIG1hcmdpbjogNSUgNSUgNSUgMTUlO1xuICB3aWR0aDogNzAlO1xuICBoZWlnaHQ6IDcwdmg7XG4gIGJvcmRlcjogMXB4ICMyMjIgc29saWQ7XG4gIGJveC1zaGFkb3c6IGluc2V0IC0xMHB4IC0xMHB4IDEwMHB4ICNjOGNlZDUsIDEwcHggMTBweCAyMHB4ICNjOGNlZDUsIGluc2V0IDAgMCAxMHB4ICNjOGNlZDU7XG59XG5cbjo6bmctZGVlcCAuYWctaGVhZGVyLXZpZXdwb3J0IHtcbiAgYm9yZGVyLWJvdHRvbTogMXB4ICMyMjIgc29saWQ7XG59Il19 */"] });

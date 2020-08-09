@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   public gridApi: GridApi | undefined;
   public gridColumnApi!: ColumnApi;
   public columnDefs = [
-    { headerName: 'Miasto', field: 'title', colId: 'title' },
+    { headerName: 'Miasto', field: 'title', colId: 'title', editable: true },
     { headerName: 'Cena', field: 'price', colId: 'price' },
     { headerName: 'Powierzchnia', field: 'surface', colId: 'surface' }
   ];
