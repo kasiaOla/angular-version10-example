@@ -39,10 +39,15 @@ export class HomeComponent implements OnInit {
   public frameworkComponents = {
     agColumnHeader: AgGridHeaderComponent,
   };
+  public getDataAnnouncement$;
 
   constructor(public announcementService: AnnouncementService, private logger: LoggerService) {
-    this.announcementService.getAnnouncement().subscribe({
-      next: Res => {
+    this.getDataAnnouncement$ =  this.announcementService.getAnnouncement();
+  }
+
+  ngOnInit(): void {
+    this.getDataAnnouncement$.subscribe({
+      next: (Res: { [x: string]: Announcement[]; }) => {
         this.rowDatatAnnouncement = Res['respons'];
       },
       error: Err => {
@@ -50,9 +55,16 @@ export class HomeComponent implements OnInit {
       },
       complete(): void { }
     });
-}
-
-  ngOnInit(): void { }
+    this.getDataAnnouncement$.subscribe({
+      next: (Res: { [x: string]: Announcement[]; }) => {
+        this.rowDatatAnnouncement = Res['respons'];
+      },
+      error: (Err: string) => {
+        this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
+      },
+      complete(): void { }
+    });
+   }
 
   onGridReady(params: { api: GridApi; columnApi: ColumnApi }): void {
     this.gridApi = params.api;

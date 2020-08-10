@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Announcement } from '../../modules/announcements/announcement';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, share } from 'rxjs/operators';
 import { LoggerService } from './logger.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnnouncementService {
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -24,7 +25,7 @@ export class AnnouncementService {
 
   public getAnnouncement(): Observable<Announcement[]> {
     return this.httpClient.get<Announcement[]>(`/api/get-announcements`).pipe(
-      tap(announcements => this.logger.info('Announcements retrieved!' + announcements))
+      tap(announcements => this.logger.info('Announcements retrieved!' + announcements)), share()
     );
   }
 

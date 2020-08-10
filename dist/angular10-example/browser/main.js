@@ -1179,8 +1179,11 @@ class HomeComponent {
         this.frameworkComponents = {
             agColumnHeader: ag_grid_header_component_1.AgGridHeaderComponent,
         };
-        this.announcementService.getAnnouncement().subscribe({
-            next: Res => {
+        this.getDataAnnouncement$ = this.announcementService.getAnnouncement();
+    }
+    ngOnInit() {
+        this.getDataAnnouncement$.subscribe({
+            next: (Res) => {
                 this.rowDatatAnnouncement = Res['respons'];
             },
             error: Err => {
@@ -1188,8 +1191,16 @@ class HomeComponent {
             },
             complete() { }
         });
+        this.getDataAnnouncement$.subscribe({
+            next: (Res) => {
+                this.rowDatatAnnouncement = Res['respons'];
+            },
+            error: (Err) => {
+                this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
+            },
+            complete() { }
+        });
     }
-    ngOnInit() { }
     onGridReady(params) {
         this.gridApi = params.api;
         this.gridColumnApi = params.columnApi;
@@ -1899,7 +1910,7 @@ class AnnouncementService {
             .pipe(operators_1.catchError(this.handleError('Add Announcement')));
     }
     getAnnouncement() {
-        return this.httpClient.get(`/api/get-announcements`).pipe(operators_1.tap(announcements => this.logger.info('Announcements retrieved!' + announcements)));
+        return this.httpClient.get(`/api/get-announcements`).pipe(operators_1.tap(announcements => this.logger.info('Announcements retrieved!' + announcements)), operators_1.share());
     }
     handleError(operation = 'operation', result) {
         return (error) => {
