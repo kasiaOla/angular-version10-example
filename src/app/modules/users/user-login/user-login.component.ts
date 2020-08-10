@@ -3,6 +3,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/authentication/auth.service';
 import { UserSharedService } from '../../../shared/shared-services/user-shared.service';
+import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { Session } from '../../users/user';
+import { User } from '../user';
+import { error } from 'console';
+import { HttpErrorResponse } from '@angular/common/http';
+import { LoggerService } from '../../../shared/shared-services/logger.service';
 
 
 @Component({
@@ -15,8 +22,10 @@ export class UserLoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
+
   constructor(private fb: FormBuilder,
               private router: Router,
+              private logger: LoggerService,
               private userSharedService: UserSharedService,
               private authService: AuthService) {}
 
@@ -40,11 +49,17 @@ export class UserLoginComponent implements OnInit {
         .subscribe(data => {
           if (data.success === false) {
           } else if (data.success === true) {
-            console.log('data.respons ', data.respons);
+
             this.userSharedService.shareUser(data.respons);
             this.router.navigate(['/']);
           }
           this.loginForm.reset();
+        }, (Error: any) => {
+          if (Error instanceof HttpErrorResponse){
+            this.logger.error('name error ' + Error.error);
+            this.logger.error('text status error ' + Error.statusText);
+            this.logger.error('status error ' + Error.status);
+          }
         });
     }
   }
