@@ -1186,15 +1186,6 @@ class HomeComponent {
             next: (Res) => {
                 this.rowDatatAnnouncement = Res['respons'];
             },
-            error: Err => {
-                this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
-            },
-            complete() { }
-        });
-        this.getDataAnnouncement$.subscribe({
-            next: (Res) => {
-                this.rowDatatAnnouncement = Res['respons'];
-            },
             error: (Err) => {
                 this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
             },

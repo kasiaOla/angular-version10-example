@@ -50,16 +50,7 @@ export class HomeComponent implements OnInit {
       next: (Res: { [x: string]: Announcement[]; }) => {
         this.rowDatatAnnouncement = Res['respons'];
       },
-      error: Err => {
-        this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
-      },
-      complete(): void { }
-    });
-    this.getDataAnnouncement$.subscribe({
-      next: (Res: { [x: string]: Announcement[]; }) => {
-        this.rowDatatAnnouncement = Res['respons'];
-      },
-      error: (Err: string) => {
+      error: (Err: Error) => {
         this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
       },
       complete(): void { }
