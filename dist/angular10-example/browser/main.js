@@ -1182,7 +1182,7 @@ class HomeComponent {
         this.getDataAnnouncement$ = this.announcementService.getAnnouncement();
     }
     ngOnInit() {
-        this.getDataAnnouncement$.subscribe({
+        this.resutDataAnnouncement = this.getDataAnnouncement$.subscribe({
             next: (Res) => {
                 this.rowDatatAnnouncement = Res['respons'];
             },
@@ -1191,6 +1191,9 @@ class HomeComponent {
             },
             complete() { }
         });
+    }
+    ngOnDestroy() {
+        this.resutDataAnnouncement.unsubscribe();
     }
     onGridReady(params) {
         this.gridApi = params.api;
