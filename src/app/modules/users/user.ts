@@ -23,7 +23,7 @@ export enum CustomerType {
   VIP
 }
 
-interface Session {
+export interface Session {
   token: string;
   user: User;
 }

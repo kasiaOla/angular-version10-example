@@ -21,14 +21,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.userSharedService.userContent$.subscribe((user) => {
       this.userName = user.name;
-      console.log('0 this.userName ',user)
     });
    }
 
   ngOnDestroy(): void {
-    console.log('1 this.userName unsubscribe', this.userName)
-
-   // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   loginOut(): void {

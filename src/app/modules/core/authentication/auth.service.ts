@@ -10,6 +10,7 @@ import { LoggerService } from '../../../shared/shared-services/logger.service';
   providedIn: 'root'
 })
 export class AuthService {
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -24,10 +25,12 @@ export class AuthService {
       );
   }
 
+
   public login(user: User): Observable<any> {
     let headers = new HttpHeaders();
     headers = headers.set('content-type', 'application/json');
     this.isLogged = true;
+
     return this.httpClient.post('/login', JSON.stringify(user), { headers });
   }
 
