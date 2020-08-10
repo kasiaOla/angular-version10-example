@@ -1,5 +1,6 @@
-import User from '../models/user';
+import Users from '../models/user';
 import { Request, Response, NextFunction } from 'express';
+import * as jwt from 'jsonwebtoken';
 
 export class UserRoute {
   userRoute(app: any): void {
@@ -16,7 +17,7 @@ export class UserRoute {
           message: 'Posted data is not correct or incomplete.'
         });
       }
-      User.findOne({
+      Users.findOne({
         username: userName
       }, (err, existingUser) => {
         if (err) {
@@ -31,7 +32,7 @@ export class UserRoute {
           });
 
         } else {
-          let newUser = new User({
+          let newUser = new Users({
             username: userName,
             password: password,
             description: '',
@@ -44,7 +45,7 @@ export class UserRoute {
             }
           });
 
-          const data = new User(newUser);
+          const data = new Users(newUser);
           data.save();
           res.status(201).json({
             success: true,
@@ -55,7 +56,7 @@ export class UserRoute {
     });
 
     app.route('/login').post((req: Request, res: Response, next: NextFunction) => {
-      User.findOne({
+      Users.findOne({
         username: req.body.username, password: req.body.password
       }, (err, user) => {
         if (err) {
@@ -65,9 +66,8 @@ export class UserRoute {
             respons: req.body
           });
         }
-
         if (!user) {
-          return res.status(201).json({
+          return res.status(401).json({
             success: false,
             message: 'Incorrect login credentials.',
             respons: req.body
@@ -76,6 +76,9 @@ export class UserRoute {
           return res.status(200).json({
             success: true,
             message: 'Login was successful.',
+            token: jwt.sign(user.toObject(), 'secret-key', {
+              expiresIn: 60 * 60
+            }),
             respons: req.body
           });
         }

@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
 import { Schema } from 'mongoose';
 import * as bcrypt from 'bcrypt-nodejs';
+import { User } from '../src/app/modules/users/user';
 
 const UserSchema = new Schema({
 
@@ -17,4 +18,4 @@ const UserSchema = new Schema({
 });
 
 
-export default mongoose.model('users', UserSchema, 'users');
+export default mongoose.model<User & mongoose.Document>('users', UserSchema, 'users');

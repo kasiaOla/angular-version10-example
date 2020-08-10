@@ -14,7 +14,6 @@ const routes: Routes = [
       {
         path: 'registration',
         data: { title: 'Rejestracja' },
-        canActivate: [false],
         component: UserRegistrationComponent,
       },
       {

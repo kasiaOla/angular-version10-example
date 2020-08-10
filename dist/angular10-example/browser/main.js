@@ -1076,12 +1076,10 @@ class NavbarComponent {
     ngOnInit() {
         this.subscription = this.userSharedService.userContent$.subscribe((user) => {
             this.userName = user.name;
-            console.log('0 this.userName ', user);
         });
     }
     ngOnDestroy() {
-        console.log('1 this.userName unsubscribe', this.userName);
-        // this.subscription.unsubscribe();
+        this.subscription.unsubscribe();
     }
     loginOut() {
         this.authService.loginOut();
@@ -1321,12 +1319,14 @@ exports.UserLoginComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 const user_shared_service_1 = __webpack_require__(/*! ../../../shared/shared-services/user-shared.service */ "./src/app/shared/shared-services/user-shared.service.ts");
+const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 const i2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-const i3 = __webpack_require__(/*! ../../../shared/shared-services/user-shared.service */ "./src/app/shared/shared-services/user-shared.service.ts");
-const i4 = __webpack_require__(/*! ../../core/authentication/auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
-const i5 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+const i3 = __webpack_require__(/*! ../../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
+const i4 = __webpack_require__(/*! ../../../shared/shared-services/user-shared.service */ "./src/app/shared/shared-services/user-shared.service.ts");
+const i5 = __webpack_require__(/*! ../../core/authentication/auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
+const i6 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 function UserLoginComponent_div_13_Template(rf, ctx) { if (rf & 1) {
     i0.ɵɵelementStart(0, "div");
     i0.ɵɵtext(1, " Wprowad\u017A nazw\u0119 klienta ");
@@ -1338,9 +1338,10 @@ function UserLoginComponent_div_20_Template(rf, ctx) { if (rf & 1) {
     i0.ɵɵelementEnd();
 } }
 class UserLoginComponent {
-    constructor(fb, router, userSharedService, authService) {
+    constructor(fb, router, logger, userSharedService, authService) {
         this.fb = fb;
         this.router = router;
+        this.logger = logger;
         this.userSharedService = userSharedService;
         this.authService = authService;
     }
@@ -1360,17 +1361,22 @@ class UserLoginComponent {
                 if (data.success === false) {
                 }
                 else if (data.success === true) {
-                    console.log('data.respons ', data.respons);
                     this.userSharedService.shareUser(data.respons);
                     this.router.navigate(['/']);
                 }
                 this.loginForm.reset();
+            }, (Error) => {
+                if (Error instanceof http_1.HttpErrorResponse) {
+                    this.logger.error('Error name: ' + Error.error);
+                    this.logger.error('Error status text: ' + Error.statusText);
+                    this.logger.error('Error status: ' + Error.status);
+                }
             });
         }
     }
 }
 exports.UserLoginComponent = UserLoginComponent;
-UserLoginComponent.ɵfac = function UserLoginComponent_Factory(t) { return new (t || UserLoginComponent)(i0.ɵɵdirectiveInject(i1.FormBuilder), i0.ɵɵdirectiveInject(i2.Router), i0.ɵɵdirectiveInject(i3.UserSharedService), i0.ɵɵdirectiveInject(i4.AuthService)); };
+UserLoginComponent.ɵfac = function UserLoginComponent_Factory(t) { return new (t || UserLoginComponent)(i0.ɵɵdirectiveInject(i1.FormBuilder), i0.ɵɵdirectiveInject(i2.Router), i0.ɵɵdirectiveInject(i3.LoggerService), i0.ɵɵdirectiveInject(i4.UserSharedService), i0.ɵɵdirectiveInject(i5.AuthService)); };
 UserLoginComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserLoginComponent, selectors: [["app-user-login"]], features: [i0.ɵɵProvidersFeature([user_shared_service_1.UserSharedService])], decls: 24, vars: 3, consts: [[1, "jumbotron", "content"], [1, "panel", "panel-default"], [1, "panel-heading", "text-center"], [1, "panel-body"], ["id", "login-form", 1, "example-form", 3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "username"], ["required", "", "type", "text", "formControlName", "username", "name", "username", 1, "form-control"], [4, "ngIf"], ["for", "password"], ["required", "", "type", "password", "formControlName", "password", "name", "password", 1, "form-control"], ["type", "submit", "id", "Login", "title", "Login", 1, "btn", "btn-success"]], template: function UserLoginComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "div", 0);
         i0.ɵɵelementStart(1, "div", 1);
@@ -1418,7 +1424,7 @@ UserLoginComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserLoginComponent, se
         i0.ɵɵproperty("ngIf", ctx.isFieldInvalid("username"));
         i0.ɵɵadvance(7);
         i0.ɵɵproperty("ngIf", ctx.isFieldInvalid("password"));
-    } }, directives: [i1.ɵangular_packages_forms_forms_y, i1.NgControlStatusGroup, i1.FormGroupDirective, i1.DefaultValueAccessor, i1.RequiredValidator, i1.NgControlStatus, i1.FormControlName, i5.NgIf], styles: [".content[_ngcontent-%COMP%] {\n  width: 80%;\n  margin: 10%;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy91c2Vycy91c2VyLWxvZ2luL3VzZXItbG9naW4uY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLFVBQUE7RUFDQSxXQUFBO0VBQ0EsMkZDSlE7QURJWiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvdXNlcnMvdXNlci1sb2dpbi91c2VyLWxvZ2luLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uLy4uLy4uL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2Nzc1wiO1xyXG4uY29udGVudCB7XHJcbiAgICB3aWR0aDogODAlO1xyXG4gICAgbWFyZ2luOiAxMCU7XHJcbiAgICBib3gtc2hhZG93OiAkYm94U2hhZG93XHJcbn1cclxuIiwiJGJveFNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSxcbjEwcHggMTBweCAyMHB4ICNjOGNlZDUsXG5pbnNldCAwIDAgMTBweCAjYzhjZWQ1O1xuJGJvcmRlcjogMXB4ICMyMjIgc29saWQ7Il19 */"] });
+    } }, directives: [i1.ɵangular_packages_forms_forms_y, i1.NgControlStatusGroup, i1.FormGroupDirective, i1.DefaultValueAccessor, i1.RequiredValidator, i1.NgControlStatus, i1.FormControlName, i6.NgIf], styles: [".content[_ngcontent-%COMP%] {\n  width: 80%;\n  margin: 10%;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy91c2Vycy91c2VyLWxvZ2luL3VzZXItbG9naW4uY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLFVBQUE7RUFDQSxXQUFBO0VBQ0EsMkZDSlE7QURJWiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvdXNlcnMvdXNlci1sb2dpbi91c2VyLWxvZ2luLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uLy4uLy4uL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2Nzc1wiO1xyXG4uY29udGVudCB7XHJcbiAgICB3aWR0aDogODAlO1xyXG4gICAgbWFyZ2luOiAxMCU7XHJcbiAgICBib3gtc2hhZG93OiAkYm94U2hhZG93XHJcbn1cclxuIiwiJGJveFNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSxcbjEwcHggMTBweCAyMHB4ICNjOGNlZDUsXG5pbnNldCAwIDAgMTBweCAjYzhjZWQ1O1xuJGJvcmRlcjogMXB4ICMyMjIgc29saWQ7Il19 */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(UserLoginComponent, [{
         type: core_1.Component,
         args: [{
@@ -1427,7 +1433,7 @@ UserLoginComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserLoginComponent, se
                 styleUrls: ['./user-login.component.scss'],
                 providers: [user_shared_service_1.UserSharedService]
             }]
-    }], function () { return [{ type: i1.FormBuilder }, { type: i2.Router }, { type: i3.UserSharedService }, { type: i4.AuthService }]; }, null); })();
+    }], function () { return [{ type: i1.FormBuilder }, { type: i2.Router }, { type: i3.LoggerService }, { type: i4.UserSharedService }, { type: i5.AuthService }]; }, null); })();
 
 
 /***/ }),
@@ -1672,7 +1678,6 @@ const routes = [
             {
                 path: 'registration',
                 data: { title: 'Rejestracja' },
-                canActivate: [false],
                 component: user_registration_component_1.UserRegistrationComponent,
             },
             {
