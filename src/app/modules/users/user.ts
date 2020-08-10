@@ -22,3 +22,8 @@ export enum CustomerType {
   Premium,
   VIP
 }
+
+interface Session {
+  token: string;
+  user: User;
+}
