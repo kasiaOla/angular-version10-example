@@ -44,6 +44,7 @@ export class UserRegistrationComponent implements OnInit {
     if (this.registrationForm.dirty && this.registrationForm.valid) {
 
       this.authService.registration(this.registrationForm.value).subscribe(data => {
+        // data - jest Observerem
         switch (data.success) {
           case false: {
             this.logger.error(`Error code ${data.message}`);

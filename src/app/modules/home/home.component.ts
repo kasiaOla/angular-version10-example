@@ -43,7 +43,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   public getDataAnnouncement$;
   public resutDataAnnouncement = new Subscription();
 
-  constructor(public announcementService: AnnouncementService, private logger: LoggerService) {
+  constructor(public announcementService: AnnouncementService,
+              private logger: LoggerService) {
     this.getDataAnnouncement$ = this.announcementService.getAnnouncement();
   }
 
