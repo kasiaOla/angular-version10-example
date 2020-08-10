@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - npm install or npm i
 
 ## Run
-Run local `ng build && ng serve`. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run production `ng run angular10-example:serve-ssr` in the terminal or dev:ssr in npm script. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Development server
 
@@ -23,7 +23,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng test` (Jasmine) to execute the unit tests via [Karma](https://karma-runner.github.io).
+Components include unit tests. Run `ng test` (Jasmine) to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Running end-to-end tests
 
