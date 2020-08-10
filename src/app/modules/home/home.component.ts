@@ -41,14 +41,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     agColumnHeader: AgGridHeaderComponent,
   };
   public getDataAnnouncement$;
-  public resutDataAnnouncement: Subscription;
+  public resutDataAnnouncement = new Subscription();
 
   constructor(public announcementService: AnnouncementService, private logger: LoggerService) {
     this.getDataAnnouncement$ = this.announcementService.getAnnouncement();
   }
 
   ngOnInit(): void {
-    this.resutDataAnnouncement = this.getDataAnnouncement$.subscribe({
+    this.resutDataAnnouncement.add(this.getDataAnnouncement$.subscribe({
       next: (Res: { [x: string]: Announcement[]; }) => {
         this.rowDatatAnnouncement = Res['respons'];
       },
@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
       },
       complete(): void { }
-    });
+    }));
   }
 
   ngOnDestroy(): void {

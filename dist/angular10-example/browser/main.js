@@ -1138,6 +1138,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HomeComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const ag_grid_header_component_1 = __webpack_require__(/*! ../../shared/ag-grid-header/ag-grid-header.component */ "./src/app/shared/ag-grid-header/ag-grid-header.component.ts");
+const Subscription_1 = __webpack_require__(/*! rxjs/internal/Subscription */ "./node_modules/rxjs/internal/Subscription.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! src/app/shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
 const i2 = __webpack_require__(/*! ../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
@@ -1179,10 +1180,11 @@ class HomeComponent {
         this.frameworkComponents = {
             agColumnHeader: ag_grid_header_component_1.AgGridHeaderComponent,
         };
+        this.resutDataAnnouncement = new Subscription_1.Subscription();
         this.getDataAnnouncement$ = this.announcementService.getAnnouncement();
     }
     ngOnInit() {
-        this.resutDataAnnouncement = this.getDataAnnouncement$.subscribe({
+        this.resutDataAnnouncement.add(this.getDataAnnouncement$.subscribe({
             next: (Res) => {
                 this.rowDatatAnnouncement = Res['respons'];
             },
@@ -1190,7 +1192,7 @@ class HomeComponent {
                 this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
             },
             complete() { }
-        });
+        }));
     }
     ngOnDestroy() {
         this.resutDataAnnouncement.unsubscribe();
