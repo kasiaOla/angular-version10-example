@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User, Session } from '../../users/user';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { catchError, map, tap, share, shareReplay } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { LoggerService } from '../../../shared/shared-services/logger.service';
 
 
@@ -23,7 +23,6 @@ export class AuthService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private httpClient: HttpClient, private logger: LoggerService) { }
 
   public registration(newUser: User): Observable<any> {
     return this.httpClient.post<User>(`/register`, newUser, this.httpOptions)
@@ -35,15 +34,15 @@ export class AuthService {
   public login(user: User): Observable<Session> {
     return this.httpClient.post<Session>('/login', user, this.httpOptions).pipe(
       tap(state => {
-        console.log('state ', state)
         this.userSession.next(state); this.isAuthenticated = true;
-      }), shareReplay(),
+      }),
       catchError(this.handleError<User>('Login user'))
     );
   }
 
   public loginOut(): void {
     this.isAuthenticated = false;
+    this.userSession.next(null);
   }
 
   private handleError<T>(operation = 'operation', result?: T): any {
@@ -62,6 +61,8 @@ export class AuthService {
 
   getCurrentUser(): Session | string {
     const session = this.userSession.getValue();
-    return session && session !== null ? session.respons.username : session;
+    return session && session !== null && session.respons !== null ? session.respons.username : session;
   }
+  constructor(private httpClient: HttpClient, private logger: LoggerService) { }
+
 }

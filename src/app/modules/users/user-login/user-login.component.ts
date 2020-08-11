@@ -45,7 +45,7 @@ export class UserLoginComponent implements OnInit {
           if (data.success === false) {
           } else if (data.success === true) {
             this.userSharedService.shareUser(data.respons);
-            this.router.navigate(['/']);
+         //   this.router.navigate(['user/profile']);
           }
           this.loginForm.reset();
         }, (Error: any) => {
