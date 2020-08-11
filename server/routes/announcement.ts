@@ -1,4 +1,4 @@
-import Announcement from '../models/announcement';
+import Announcement from '../../server/models/announcement';
 import { Request, Response, NextFunction } from 'express';
 
 

@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { Schema } from 'mongoose';
 import * as bcrypt from 'bcrypt-nodejs';
-import { User } from '../src/app/modules/users/user';
+import { User } from '../../src/app/modules/users/user';
 
 const UserSchema = new Schema({
 
