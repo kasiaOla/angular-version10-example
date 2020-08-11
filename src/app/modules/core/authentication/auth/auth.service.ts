@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, Session } from '../../users/user';
+import { User, Session } from '../../../users/user';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { LoggerService } from '../../../shared/shared-services/logger.service';
+import { LoggerService } from '../../../../shared/shared-services/logger.service';
 
 
 @Injectable({

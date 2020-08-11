@@ -4,7 +4,7 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 import { UserComponent } from './user/user.component';
 import { ContactComponent } from './contact/contact.component';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { AuthGuardService } from '../core/authentication/auth-guard.service';
+import { AuthGuardService } from '../core/authentication/auth-guard/auth-guard.service';
 import { ProfileComponent } from './profile/profile.component';
 
 

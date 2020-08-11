@@ -56,7 +56,7 @@ const routes = [
     {
         path: 'announcement',
         loadChildren: () => Promise.resolve().then(() => __webpack_require__(/*! ./modules/announcements/announcement.module */ "./src/app/modules/announcements/announcement.module.ts")).then(m => m.AnnouncementModule)
-    }
+    },
 ];
 class AppRoutingModule {
 }
@@ -96,16 +96,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-const i1 = __webpack_require__(/*! ./modules/core/navbar/navbar.component */ "./src/app/modules/core/navbar/navbar.component.ts");
-const i2 = __webpack_require__(/*! ./modules/core/footer/footer.component */ "./src/app/modules/core/footer/footer.component.ts");
+const i1 = __webpack_require__(/*! ./modules/core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
+const i2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+const i3 = __webpack_require__(/*! ./modules/core/navbar/navbar.component */ "./src/app/modules/core/navbar/navbar.component.ts");
+const i4 = __webpack_require__(/*! ./modules/core/footer/footer.component */ "./src/app/modules/core/footer/footer.component.ts");
 class AppComponent {
+    constructor(auth, router) {
+        this.auth = auth;
+        this.router = router;
+        this.auth.state.subscribe(authorized => {
+            authorized ? this.router.navigate(['user/profile']) : this.router.navigate(['/']);
+        });
+    }
 }
 exports.AppComponent = AppComponent;
-AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(); };
+AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(i0.ɵɵdirectiveInject(i1.AuthService), i0.ɵɵdirectiveInject(i2.Router)); };
 AppComponent.ɵcmp = i0.ɵɵdefineComponent({ type: AppComponent, selectors: [["app-root"]], decls: 2, vars: 0, template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelement(0, "app-navbar");
         i0.ɵɵelement(1, "app-footer");
-    } }, directives: [i1.NavbarComponent, i2.FooterComponent], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJ9 */"] });
+    } }, directives: [i3.NavbarComponent, i4.FooterComponent], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuc2NzcyJ9 */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AppComponent, [{
         type: core_1.Component,
         args: [{
@@ -113,7 +122,7 @@ AppComponent.ɵcmp = i0.ɵɵdefineComponent({ type: AppComponent, selectors: [["
                 templateUrl: './app.component.html',
                 styleUrls: ['./app.component.scss']
             }]
-    }], null, null); })();
+    }], function () { return [{ type: i1.AuthService }, { type: i2.Router }]; }, null); })();
 
 
 /***/ }),
@@ -143,9 +152,8 @@ const logger_service_1 = __webpack_require__(/*! ./shared/shared-services/logger
 const environment_prod_1 = __webpack_require__(/*! ../environments/environment.prod */ "./src/environments/environment.prod.ts");
 const ag_grid_angular_1 = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/__ivy_ngcc__/fesm2015/ag-grid-angular.js");
 const announcement_service_1 = __webpack_require__(/*! ./shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
-const auth_guard_service_1 = __webpack_require__(/*! ./modules/core/authentication/auth-guard.service */ "./src/app/modules/core/authentication/auth-guard.service.ts");
-const auth_service_1 = __webpack_require__(/*! ./modules/core/authentication/auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
 const ag_grid_header_component_1 = __webpack_require__(/*! ./shared/ag-grid-header/ag-grid-header.component */ "./src/app/shared/ag-grid-header/ag-grid-header.component.ts");
+const authentication_module_1 = __webpack_require__(/*! ./modules/core/authentication/authentication.module */ "./src/app/modules/core/authentication/authentication.module.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
 const i2 = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/__ivy_ngcc__/fesm2015/ag-grid-angular.js");
@@ -154,12 +162,10 @@ class AppModule {
 exports.AppModule = AppModule;
 AppModule.ɵmod = i0.ɵɵdefineNgModule({ type: AppModule, bootstrap: [app_component_1.AppComponent] });
 AppModule.ɵinj = i0.ɵɵdefineInjector({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [
-        auth_guard_service_1.AuthGuardService,
         announcement_service_1.AnnouncementService,
-        auth_service_1.AuthService,
         {
             provide: logger_service_1.LoggerService,
-            useClass: environment_prod_1.envProdServiceLogger
+            useClass: environment_prod_1.envProdServiceLogger,
         }
     ], imports: [[
             common_1.CommonModule,
@@ -174,6 +180,7 @@ AppModule.ɵinj = i0.ɵɵdefineInjector({ factory: function AppModule_Factory(t)
             http_1.HttpClientModule,
             animations_1.BrowserAnimationsModule,
             core_module_1.CoreModule,
+            authentication_module_1.AuthenticationModule
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(AppModule, { declarations: [app_component_1.AppComponent,
         home_component_1.HomeComponent,
@@ -182,7 +189,8 @@ AppModule.ɵinj = i0.ɵɵdefineInjector({ factory: function AppModule_Factory(t)
         forms_1.FormsModule,
         http_1.HttpClientModule,
         animations_1.BrowserAnimationsModule,
-        core_module_1.CoreModule], exports: [app_component_1.AppComponent,
+        core_module_1.CoreModule,
+        authentication_module_1.AuthenticationModule], exports: [app_component_1.AppComponent,
         home_component_1.HomeComponent,
         ag_grid_header_component_1.AgGridHeaderComponent] }); })();
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AppModule, [{
@@ -206,6 +214,7 @@ AppModule.ɵinj = i0.ɵɵdefineInjector({ factory: function AppModule_Factory(t)
                     http_1.HttpClientModule,
                     animations_1.BrowserAnimationsModule,
                     core_module_1.CoreModule,
+                    authentication_module_1.AuthenticationModule
                 ],
                 exports: [
                     app_component_1.AppComponent,
@@ -213,12 +222,10 @@ AppModule.ɵinj = i0.ɵɵdefineInjector({ factory: function AppModule_Factory(t)
                     ag_grid_header_component_1.AgGridHeaderComponent
                 ],
                 providers: [
-                    auth_guard_service_1.AuthGuardService,
                     announcement_service_1.AnnouncementService,
-                    auth_service_1.AuthService,
                     {
                         provide: logger_service_1.LoggerService,
-                        useClass: environment_prod_1.envProdServiceLogger
+                        useClass: environment_prod_1.envProdServiceLogger,
                     }
                 ],
                 entryComponents: [
@@ -774,10 +781,10 @@ AnnouncementComponent.ɵcmp = i0.ɵɵdefineComponent({ type: AnnouncementCompone
 
 /***/ }),
 
-/***/ "./src/app/modules/core/authentication/auth-guard.service.ts":
-/*!*******************************************************************!*\
-  !*** ./src/app/modules/core/authentication/auth-guard.service.ts ***!
-  \*******************************************************************/
+/***/ "./src/app/modules/core/authentication/auth-guard/auth-guard.service.ts":
+/*!******************************************************************************!*\
+  !*** ./src/app/modules/core/authentication/auth-guard/auth-guard.service.ts ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -787,7 +794,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthGuardService = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-const i1 = __webpack_require__(/*! ./auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
+const i1 = __webpack_require__(/*! ../auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
 class AuthGuardService {
     constructor(authService) {
         this.authService = authService;
@@ -809,10 +816,52 @@ AuthGuardService.ɵprov = i0.ɵɵdefineInjectable({ token: AuthGuardService, fac
 
 /***/ }),
 
-/***/ "./src/app/modules/core/authentication/auth.service.ts":
-/*!*************************************************************!*\
-  !*** ./src/app/modules/core/authentication/auth.service.ts ***!
-  \*************************************************************/
+/***/ "./src/app/modules/core/authentication/auth-interceptor/auth-interceptor.service.ts":
+/*!******************************************************************************************!*\
+  !*** ./src/app/modules/core/authentication/auth-interceptor/auth-interceptor.service.ts ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthInterceptorService = void 0;
+const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i1 = __webpack_require__(/*! ../auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
+class AuthInterceptorService {
+    constructor(auth) {
+        this.auth = auth;
+    }
+    intercept(req, next) {
+        return next.handle(this.getAuthorizedRequest(req));
+    }
+    getAuthorizedRequest(req) {
+        return req.clone({
+            setHeaders: {
+                'Authorization': 'Bearer ' + this.auth.getToken()
+            }
+        });
+    }
+}
+exports.AuthInterceptorService = AuthInterceptorService;
+AuthInterceptorService.ɵfac = function AuthInterceptorService_Factory(t) { return new (t || AuthInterceptorService)(i0.ɵɵinject(i1.AuthService)); };
+AuthInterceptorService.ɵprov = i0.ɵɵdefineInjectable({ token: AuthInterceptorService, factory: AuthInterceptorService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AuthInterceptorService, [{
+        type: core_1.Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: i1.AuthService }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/modules/core/authentication/auth/auth.service.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/modules/core/authentication/auth/auth.service.ts ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -826,7 +875,7 @@ const rxjs_1 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/ind
 const operators_1 = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
-const i2 = __webpack_require__(/*! ../../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
+const i2 = __webpack_require__(/*! ../../../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
 class AuthService {
     constructor(httpClient, logger) {
         this.httpClient = httpClient;
@@ -845,13 +894,13 @@ class AuthService {
     }
     login(user) {
         return this.httpClient.post('/login', user, this.httpOptions).pipe(operators_1.tap(state => {
-            console.log('state ', state);
             this.userSession.next(state);
             this.isAuthenticated = true;
-        }), operators_1.shareReplay(), operators_1.catchError(this.handleError('Login user')));
+        }), operators_1.catchError(this.handleError('Login user')));
     }
     loginOut() {
         this.isAuthenticated = false;
+        this.userSession.next(null);
     }
     handleError(operation = 'operation', result) {
         return (error) => {
@@ -867,7 +916,7 @@ class AuthService {
     }
     getCurrentUser() {
         const session = this.userSession.getValue();
-        return session && session !== null ? session.respons.username : session;
+        return session && session !== null && session.respons !== null ? session.respons.username : session;
     }
 }
 exports.AuthService = AuthService;
@@ -879,6 +928,62 @@ AuthService.ɵprov = i0.ɵɵdefineInjectable({ token: AuthService, factory: Auth
                 providedIn: 'root'
             }]
     }], function () { return [{ type: i1.HttpClient }, { type: i2.LoggerService }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/modules/core/authentication/authentication.module.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/modules/core/authentication/authentication.module.ts ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.AuthenticationModule = void 0;
+const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const common_1 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+const auth_interceptor_service_1 = __webpack_require__(/*! ./auth-interceptor/auth-interceptor.service */ "./src/app/modules/core/authentication/auth-interceptor/auth-interceptor.service.ts");
+const auth_service_1 = __webpack_require__(/*! ./auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
+const auth_guard_service_1 = __webpack_require__(/*! ./auth-guard/auth-guard.service */ "./src/app/modules/core/authentication/auth-guard/auth-guard.service.ts");
+const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+class AuthenticationModule {
+}
+exports.AuthenticationModule = AuthenticationModule;
+AuthenticationModule.ɵmod = i0.ɵɵdefineNgModule({ type: AuthenticationModule });
+AuthenticationModule.ɵinj = i0.ɵɵdefineInjector({ factory: function AuthenticationModule_Factory(t) { return new (t || AuthenticationModule)(); }, providers: [
+        auth_service_1.AuthService,
+        auth_guard_service_1.AuthGuardService,
+        {
+            provide: http_1.HTTP_INTERCEPTORS,
+            useClass: auth_interceptor_service_1.AuthInterceptorService,
+            multi: true
+        }
+    ], imports: [[
+            common_1.CommonModule,
+        ]] });
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(AuthenticationModule, { imports: [common_1.CommonModule] }); })();
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AuthenticationModule, [{
+        type: core_1.NgModule,
+        args: [{
+                declarations: [],
+                imports: [
+                    common_1.CommonModule,
+                ],
+                providers: [
+                    auth_service_1.AuthService,
+                    auth_guard_service_1.AuthGuardService,
+                    {
+                        provide: http_1.HTTP_INTERCEPTORS,
+                        useClass: auth_interceptor_service_1.AuthInterceptorService,
+                        multi: true
+                    }
+                ],
+            }]
+    }], null, null); })();
 
 
 /***/ }),
@@ -1047,7 +1152,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.NavbarComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-const i1 = __webpack_require__(/*! ../authentication/auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
+const i1 = __webpack_require__(/*! ../authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
 const i2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const i3 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 function NavbarComponent_a_6_Template(rf, ctx) { if (rf & 1) {
@@ -1337,14 +1442,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProfileComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i1 = __webpack_require__(/*! ../../core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
 class ProfileComponent {
-    constructor() { }
+    constructor(authService) {
+        this.authService = authService;
+    }
     ngOnInit() {
     }
 }
 exports.ProfileComponent = ProfileComponent;
-ProfileComponent.ɵfac = function ProfileComponent_Factory(t) { return new (t || ProfileComponent)(); };
-ProfileComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ProfileComponent, selectors: [["app-profile"]], decls: 13, vars: 0, consts: [[1, "row"], [1, "col-3"], [1, "col-9"]], template: function ProfileComponent_Template(rf, ctx) { if (rf & 1) {
+ProfileComponent.ɵfac = function ProfileComponent_Factory(t) { return new (t || ProfileComponent)(i0.ɵɵdirectiveInject(i1.AuthService)); };
+ProfileComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ProfileComponent, selectors: [["app-profile"]], decls: 15, vars: 0, consts: [[1, "row"], [1, "col-3"], [1, "col-9"], [3, "click"]], template: function ProfileComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "div");
         i0.ɵɵelementStart(1, "h3");
         i0.ɵɵtext(2, "Profil");
@@ -1363,6 +1471,10 @@ ProfileComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ProfileComponent, select
         i0.ɵɵelementEnd();
         i0.ɵɵelement(12, "dd", 2);
         i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(13, "button", 3);
+        i0.ɵɵlistener("click", function ProfileComponent_Template_button_click_13_listener() { return ctx.authService.loginOut(); });
+        i0.ɵɵtext(14, "Wyloguj si\u0119");
+        i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
     } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvdXNlcnMvcHJvZmlsZS9wcm9maWxlLmNvbXBvbmVudC5zY3NzIn0= */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(ProfileComponent, [{
@@ -1372,7 +1484,7 @@ ProfileComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ProfileComponent, select
                 templateUrl: './profile.component.html',
                 styleUrls: ['./profile.component.scss']
             }]
-    }], function () { return []; }, null); })();
+    }], function () { return [{ type: i1.AuthService }]; }, null); })();
 
 
 /***/ }),
@@ -1396,7 +1508,7 @@ const i1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/fo
 const i2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const i3 = __webpack_require__(/*! ../../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
 const i4 = __webpack_require__(/*! ../../../shared/shared-services/user-shared.service */ "./src/app/shared/shared-services/user-shared.service.ts");
-const i5 = __webpack_require__(/*! ../../core/authentication/auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
+const i5 = __webpack_require__(/*! ../../core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
 const i6 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 function UserLoginComponent_div_13_Template(rf, ctx) { if (rf & 1) {
     i0.ɵɵelementStart(0, "div");
@@ -1433,7 +1545,7 @@ class UserLoginComponent {
                 }
                 else if (data.success === true) {
                     this.userSharedService.shareUser(data.respons);
-                    this.router.navigate(['/']);
+                    //   this.router.navigate(['user/profile']);
                 }
                 this.loginForm.reset();
             }, (Error) => {
@@ -1526,7 +1638,7 @@ const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 const i2 = __webpack_require__(/*! ../../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
-const i3 = __webpack_require__(/*! ../../core/authentication/auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
+const i3 = __webpack_require__(/*! ../../core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
 const i4 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 class UserRegistrationComponent {
     constructor(fb, logger, authService, router) {
@@ -1745,7 +1857,7 @@ const user_registration_component_1 = __webpack_require__(/*! ./user-registratio
 const user_component_1 = __webpack_require__(/*! ./user/user.component */ "./src/app/modules/users/user/user.component.ts");
 const contact_component_1 = __webpack_require__(/*! ./contact/contact.component */ "./src/app/modules/users/contact/contact.component.ts");
 const user_login_component_1 = __webpack_require__(/*! ./user-login/user-login.component */ "./src/app/modules/users/user-login/user-login.component.ts");
-const auth_guard_service_1 = __webpack_require__(/*! ../core/authentication/auth-guard.service */ "./src/app/modules/core/authentication/auth-guard.service.ts");
+const auth_guard_service_1 = __webpack_require__(/*! ../core/authentication/auth-guard/auth-guard.service */ "./src/app/modules/core/authentication/auth-guard/auth-guard.service.ts");
 const profile_component_1 = __webpack_require__(/*! ./profile/profile.component */ "./src/app/modules/users/profile/profile.component.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
@@ -1816,12 +1928,20 @@ const user_component_1 = __webpack_require__(/*! ./user/user.component */ "./src
 const contact_component_1 = __webpack_require__(/*! ./contact/contact.component */ "./src/app/modules/users/contact/contact.component.ts");
 const user_login_component_1 = __webpack_require__(/*! ./user-login/user-login.component */ "./src/app/modules/users/user-login/user-login.component.ts");
 const profile_component_1 = __webpack_require__(/*! ./profile/profile.component */ "./src/app/modules/users/profile/profile.component.ts");
+const auth_interceptor_service_1 = __webpack_require__(/*! ../core/authentication/auth-interceptor/auth-interceptor.service */ "./src/app/modules/core/authentication/auth-interceptor/auth-interceptor.service.ts");
+const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 class UsersModule {
 }
 exports.UsersModule = UsersModule;
 UsersModule.ɵmod = i0.ɵɵdefineNgModule({ type: UsersModule });
-UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factory(t) { return new (t || UsersModule)(); }, imports: [[
+UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factory(t) { return new (t || UsersModule)(); }, providers: [
+        {
+            provide: http_1.HTTP_INTERCEPTORS,
+            useClass: auth_interceptor_service_1.AuthInterceptorService,
+            multi: true // przekazanie wszystkich np serviców do tablicy HTTP_INTERCEPTORS
+        }
+    ], imports: [[
             common_1.CommonModule,
             users_routing_module_1.UsersRoutingModule,
             router_1.RouterModule,
@@ -1861,6 +1981,13 @@ UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factor
                     contact_component_1.ContactComponent,
                     user_login_component_1.UserLoginComponent,
                     profile_component_1.ProfileComponent
+                ],
+                providers: [
+                    {
+                        provide: http_1.HTTP_INTERCEPTORS,
+                        useClass: auth_interceptor_service_1.AuthInterceptorService,
+                        multi: true // przekazanie wszystkich np serviców do tablicy HTTP_INTERCEPTORS
+                    }
                 ]
             }]
     }], null, null); })();

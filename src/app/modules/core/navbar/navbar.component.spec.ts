@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavbarComponent } from './navbar.component';
-import { BrowserModule, By } from '@angular/platform-browser';
+import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { AuthService } from '../authentication/auth.service';
+import { AuthService } from '../authentication/auth/auth.service';
 import { LoggerService } from '../../../shared/shared-services/logger.service';
 
 

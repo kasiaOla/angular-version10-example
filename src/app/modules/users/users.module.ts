@@ -7,9 +7,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
 import { ContactComponent } from './contact/contact.component';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { AuthGuardService } from '../core/authentication/auth-guard.service';
 import { ProfileComponent } from './profile/profile.component';
-import { AuthInterceptorService } from '../core/authentication/auth-interceptor.service';
+import { AuthInterceptorService } from '../core/authentication/auth-interceptor/auth-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 

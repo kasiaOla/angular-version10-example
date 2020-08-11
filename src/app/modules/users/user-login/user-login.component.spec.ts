@@ -5,7 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { AuthService } from '../../core/authentication/auth.service';
+import { AuthService } from '../../core/authentication/auth/auth.service';
 import { LoggerService } from '../../../shared/shared-services/logger.service';
 
 
