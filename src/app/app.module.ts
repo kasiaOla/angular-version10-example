@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './modules/home/home.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './modules/core/core.module';
 import { CommonModule } from '@angular/common';
 import { LoggerService } from './shared/shared-services/logger.service';
@@ -15,6 +15,7 @@ import { AnnouncementService } from './shared/shared-services/announcement.servi
 import { AuthGuardService } from './modules/core/authentication/auth-guard.service';
 import { AuthService } from './modules/core/authentication/auth.service';
 import { AgGridHeaderComponent } from './shared/ag-grid-header/ag-grid-header.component';
+import { AuthInterceptorService } from './modules/core/authentication/auth-interceptor.service';
 
 
 @NgModule({
@@ -48,7 +49,13 @@ import { AgGridHeaderComponent } from './shared/ag-grid-header/ag-grid-header.co
     AuthService,
     {
       provide: LoggerService,
-      useClass: envProdServiceLogger
+      useClass: envProdServiceLogger,
+
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
     }
   ],
   entryComponents: [
