@@ -152,7 +152,7 @@ const logger_service_1 = __webpack_require__(/*! ./shared/shared-services/logger
 const environment_prod_1 = __webpack_require__(/*! ../environments/environment.prod */ "./src/environments/environment.prod.ts");
 const ag_grid_angular_1 = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/__ivy_ngcc__/fesm2015/ag-grid-angular.js");
 const announcement_service_1 = __webpack_require__(/*! ./shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
-const ag_grid_header_component_1 = __webpack_require__(/*! ./shared/ag-grid-header/ag-grid-header.component */ "./src/app/shared/ag-grid-header/ag-grid-header.component.ts");
+const ag_grid_header_component_1 = __webpack_require__(/*! ./shared/shared-ag-grid-header/ag-grid-header.component */ "./src/app/shared/shared-ag-grid-header/ag-grid-header.component.ts");
 const authentication_module_1 = __webpack_require__(/*! ./modules/core/authentication/authentication.module */ "./src/app/modules/core/authentication/authentication.module.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
@@ -1282,7 +1282,7 @@ NavbarComponent.ɵcmp = i0.ɵɵdefineComponent({ type: NavbarComponent, selector
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HomeComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-const ag_grid_header_component_1 = __webpack_require__(/*! ../../shared/ag-grid-header/ag-grid-header.component */ "./src/app/shared/ag-grid-header/ag-grid-header.component.ts");
+const ag_grid_header_component_1 = __webpack_require__(/*! ../../shared/shared-ag-grid-header/ag-grid-header.component */ "./src/app/shared/shared-ag-grid-header/ag-grid-header.component.ts");
 const Subscription_1 = __webpack_require__(/*! rxjs/internal/Subscription */ "./node_modules/rxjs/internal/Subscription.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! src/app/shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
@@ -1995,10 +1995,10 @@ UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factor
 
 /***/ }),
 
-/***/ "./src/app/shared/ag-grid-header/ag-grid-header.component.ts":
-/*!*******************************************************************!*\
-  !*** ./src/app/shared/ag-grid-header/ag-grid-header.component.ts ***!
-  \*******************************************************************/
+/***/ "./src/app/shared/shared-ag-grid-header/ag-grid-header.component.ts":
+/*!**************************************************************************!*\
+  !*** ./src/app/shared/shared-ag-grid-header/ag-grid-header.component.ts ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2110,7 +2110,7 @@ AgGridHeaderComponent.ɵcmp = i0.ɵɵdefineComponent({ type: AgGridHeaderCompone
         i0.ɵɵproperty("ngIf", ctx.params.column.isSortAscending() && ctx.isSortVisible);
         i0.ɵɵadvance(1);
         i0.ɵɵproperty("ngIf", ctx.params.column.isSortDescending() && ctx.isSortVisible);
-    } }, directives: [i1.NgIf, i1.NgClass], styles: ["[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n}\n\n.header__text[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  height: 100%;\n}\n\n.header__icon[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 15px;\n  height: 15px;\n  margin-left: 15px;\n}\n\n.header__menu__icon[_ngcontent-%COMP%]:before {\n  content: url('caret-square-down-regular.svg');\n}\n\n.header__sortDown_icon[_ngcontent-%COMP%]:before {\n  content: url('sort-amount-down-solid.svg');\n}\n\n.header__sortUp__icon[_ngcontent-%COMP%]:before {\n  content: url('sort-amount-up-alt-solid.svg');\n}\n\n.header__filter__icon[_ngcontent-%COMP%]:before {\n  content: url('filter.svg');\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL2FnLWdyaWQtaGVhZGVyL2FnLWdyaWQtaGVhZGVyLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksWUFBQTtFQUNBLFdBQUE7QUFDSjs7QUFFQTtFQUNJLGFBQUE7RUFDQSxtQkFBQTtFQUNBLFlBQUE7QUFDSjs7QUFFQTtFQUNJLHFCQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7RUFDQSxpQkFBQTtBQUNKOztBQUVBO0VBQ0ksNkNBQUE7QUFDSjs7QUFFQTtFQUNJLDBDQUFBO0FBQ0o7O0FBRUE7RUFDSSw0Q0FBQTtBQUNKOztBQUVBO0VBQ0ksMEJBQUE7QUFDSiIsImZpbGUiOiJzcmMvYXBwL3NoYXJlZC9hZy1ncmlkLWhlYWRlci9hZy1ncmlkLWhlYWRlci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcclxuICAgIGhlaWdodDogMTAwJTtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG59XHJcblxyXG4uaGVhZGVyX190ZXh0IHtcclxuICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG59XHJcblxyXG4uaGVhZGVyX19pY29uIHtcclxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgIHdpZHRoOiAxNXB4O1xyXG4gICAgaGVpZ2h0OiAxNXB4O1xyXG4gICAgbWFyZ2luLWxlZnQ6IDE1cHg7XHJcbn1cclxuXHJcbi5oZWFkZXJfX21lbnVfX2ljb246YmVmb3JlIHtcclxuICAgIGNvbnRlbnQ6IHVybCgnLi4vLi4vLi4vYXNzZXRzL2ljb25zL2NhcmV0LXNxdWFyZS1kb3duLXJlZ3VsYXIuc3ZnJyk7XHJcbn1cclxuXHJcbi5oZWFkZXJfX3NvcnREb3duX2ljb246YmVmb3JlIHtcclxuICAgIGNvbnRlbnQ6IHVybCgnLi4vLi4vLi4vYXNzZXRzL2ljb25zL3NvcnQtYW1vdW50LWRvd24tc29saWQuc3ZnJyk7XHJcbn1cclxuXHJcbi5oZWFkZXJfX3NvcnRVcF9faWNvbjpiZWZvcmUge1xyXG4gICAgY29udGVudDogdXJsKCcuLi8uLi8uLi9hc3NldHMvaWNvbnMvc29ydC1hbW91bnQtdXAtYWx0LXNvbGlkLnN2ZycpO1xyXG59XHJcblxyXG4uaGVhZGVyX19maWx0ZXJfX2ljb246YmVmb3JlIHtcclxuICAgIGNvbnRlbnQ6IHVybCgnLi4vLi4vLi4vYXNzZXRzL2ljb25zL2ZpbHRlci5zdmcnKTtcclxufSJdfQ== */"] });
+    } }, directives: [i1.NgIf, i1.NgClass], styles: ["[_nghost-%COMP%] {\n  height: 100%;\n  width: 100%;\n}\n\n.header__text[_ngcontent-%COMP%] {\n  display: flex;\n  align-items: center;\n  height: 100%;\n}\n\n.header__icon[_ngcontent-%COMP%] {\n  display: inline-block;\n  width: 15px;\n  height: 15px;\n  margin-left: 15px;\n}\n\n.header__menu__icon[_ngcontent-%COMP%]:before {\n  content: url('caret-square-down-regular.svg');\n}\n\n.header__sortDown_icon[_ngcontent-%COMP%]:before {\n  content: url('sort-amount-down-solid.svg');\n}\n\n.header__sortUp__icon[_ngcontent-%COMP%]:before {\n  content: url('sort-amount-up-alt-solid.svg');\n}\n\n.header__filter__icon[_ngcontent-%COMP%]:before {\n  content: url('filter.svg');\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1hZy1ncmlkLWhlYWRlci9hZy1ncmlkLWhlYWRlci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLFlBQUE7RUFDQSxXQUFBO0FBQ0o7O0FBRUE7RUFDSSxhQUFBO0VBQ0EsbUJBQUE7RUFDQSxZQUFBO0FBQ0o7O0FBRUE7RUFDSSxxQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsaUJBQUE7QUFDSjs7QUFFQTtFQUNJLDZDQUFBO0FBQ0o7O0FBRUE7RUFDSSwwQ0FBQTtBQUNKOztBQUVBO0VBQ0ksNENBQUE7QUFDSjs7QUFFQTtFQUNJLDBCQUFBO0FBQ0oiLCJmaWxlIjoic3JjL2FwcC9zaGFyZWQvc2hhcmVkLWFnLWdyaWQtaGVhZGVyL2FnLWdyaWQtaGVhZGVyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbn1cclxuXHJcbi5oZWFkZXJfX3RleHQge1xyXG4gICAgZGlzcGxheTogZmxleDtcclxuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcbn1cclxuXHJcbi5oZWFkZXJfX2ljb24ge1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgd2lkdGg6IDE1cHg7XHJcbiAgICBoZWlnaHQ6IDE1cHg7XHJcbiAgICBtYXJnaW4tbGVmdDogMTVweDtcclxufVxyXG5cclxuLmhlYWRlcl9fbWVudV9faWNvbjpiZWZvcmUge1xyXG4gICAgY29udGVudDogdXJsKCcuLi8uLi8uLi9hc3NldHMvaWNvbnMvY2FyZXQtc3F1YXJlLWRvd24tcmVndWxhci5zdmcnKTtcclxufVxyXG5cclxuLmhlYWRlcl9fc29ydERvd25faWNvbjpiZWZvcmUge1xyXG4gICAgY29udGVudDogdXJsKCcuLi8uLi8uLi9hc3NldHMvaWNvbnMvc29ydC1hbW91bnQtZG93bi1zb2xpZC5zdmcnKTtcclxufVxyXG5cclxuLmhlYWRlcl9fc29ydFVwX19pY29uOmJlZm9yZSB7XHJcbiAgICBjb250ZW50OiB1cmwoJy4uLy4uLy4uL2Fzc2V0cy9pY29ucy9zb3J0LWFtb3VudC11cC1hbHQtc29saWQuc3ZnJyk7XHJcbn1cclxuXHJcbi5oZWFkZXJfX2ZpbHRlcl9faWNvbjpiZWZvcmUge1xyXG4gICAgY29udGVudDogdXJsKCcuLi8uLi8uLi9hc3NldHMvaWNvbnMvZmlsdGVyLnN2ZycpO1xyXG59Il19 */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AgGridHeaderComponent, [{
         type: core_1.Component,
         args: [{

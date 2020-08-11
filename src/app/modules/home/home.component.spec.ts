@@ -5,7 +5,7 @@ import { AnnouncementService } from 'src/app/shared/shared-services/announcement
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { LoggerService } from '../../shared/shared-services/logger.service';
 import { AgGridModule } from 'ag-grid-angular';
-import { AgGridHeaderComponent } from '../../shared/ag-grid-header/ag-grid-header.component';
+import { AgGridHeaderComponent } from '../../shared/shared-ag-grid-header/ag-grid-header.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
