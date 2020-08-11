@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User, CustomerType } from '../user';
 import { AuthService } from '../../core/authentication/auth.service';
 import { LoggerService } from '../../../shared/shared-services/logger.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -60,6 +61,12 @@ export class UserRegistrationComponent implements OnInit {
             this.registrationForm.reset();
             break;
           }
+        }
+      }, (Error: any) => {
+        if (Error instanceof HttpErrorResponse) {
+          this.logger.error('Error name: ' + Error.error);
+          this.logger.error('Error status text: ' + Error.statusText);
+          this.logger.error('Error status: ' + Error.status);
         }
       });
     }
