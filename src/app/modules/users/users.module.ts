@@ -8,6 +8,7 @@ import { UserComponent } from './user/user.component';
 import { ContactComponent } from './contact/contact.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { AuthGuardService } from '../core/authentication/auth-guard.service';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { AuthGuardService } from '../core/authentication/auth-guard.service';
     UserComponent,
     ContactComponent,
     UserLoginComponent,
-
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -28,7 +29,8 @@ import { AuthGuardService } from '../core/authentication/auth-guard.service';
     UserRegistrationComponent,
     UserComponent,
     ContactComponent,
-    UserLoginComponent
-  ],
+    UserLoginComponent,
+    ProfileComponent
+  ]
 })
 export class UsersModule { }

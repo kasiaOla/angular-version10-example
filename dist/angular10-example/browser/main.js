@@ -793,7 +793,7 @@ class AuthGuardService {
         this.authService = authService;
     }
     canActivate(route, state) {
-        return this.authService.isLogged;
+        return !this.authService.isAuthenticated;
     }
 }
 exports.AuthGuardService = AuthGuardService;
@@ -831,23 +831,27 @@ class AuthService {
     constructor(httpClient, logger) {
         this.httpClient = httpClient;
         this.logger = logger;
+        this.userSession = new rxjs_1.BehaviorSubject(null);
+        this.isAuthenticated = false;
+        // state - stan czy użytkownik jest zalogowany
+        this.state = this.userSession.pipe(operators_1.map(session => session && !!session.token), operators_1.tap(state => this.isAuthenticated = state));
         this.httpOptions = {
             headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
         };
-        this.isLogged = false;
     }
     registration(newUser) {
         return this.httpClient.post(`/register`, newUser, this.httpOptions)
             .pipe(operators_1.catchError(this.handleError('Add User')));
     }
     login(user) {
-        let headers = new http_1.HttpHeaders();
-        headers = headers.set('content-type', 'application/json');
-        this.isLogged = true;
-        return this.httpClient.post('/login', JSON.stringify(user), { headers });
+        return this.httpClient.post('/login', user, this.httpOptions).pipe(operators_1.tap(state => {
+            console.log('state ', state);
+            this.userSession.next(state);
+            this.isAuthenticated = true;
+        }), operators_1.shareReplay(), operators_1.catchError(this.handleError('Login user')));
     }
     loginOut() {
-        this.isLogged = false;
+        this.isAuthenticated = false;
     }
     handleError(operation = 'operation', result) {
         return (error) => {
@@ -855,6 +859,15 @@ class AuthService {
             this.logger.info(`${operation} failed: ${error.message}`);
             return rxjs_1.of(result);
         };
+    }
+    getToken() {
+        // getValue - zwraca ostatnią wartość w BehaviorSubject
+        const session = this.userSession.getValue();
+        return session && session.token;
+    }
+    getCurrentUser() {
+        const session = this.userSession.getValue();
+        return session && session !== null ? session.respons.username : session;
     }
 }
 exports.AuthService = AuthService;
@@ -1035,113 +1048,119 @@ exports.NavbarComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! ../authentication/auth.service */ "./src/app/modules/core/authentication/auth.service.ts");
-const i2 = __webpack_require__(/*! ../../../shared/shared-services/user-shared.service */ "./src/app/shared/shared-services/user-shared.service.ts");
+const i2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const i3 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-const i4 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-function NavbarComponent_div_2_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div");
-    i0.ɵɵtext(1);
-    i0.ɵɵelementEnd();
-} if (rf & 2) {
-    const ctx_r0 = i0.ɵɵnextContext();
-    i0.ɵɵadvance(1);
-    i0.ɵɵtextInterpolate(ctx_r0.userName);
-} }
-function NavbarComponent_a_7_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "a", 10);
+function NavbarComponent_a_6_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "a", 11);
     i0.ɵɵtext(1, "Rejestracja");
     i0.ɵɵelementEnd();
 } if (rf & 2) {
     i0.ɵɵproperty("routerLink", "/user/registration");
 } }
-function NavbarComponent_a_9_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "a", 11);
+function NavbarComponent_a_8_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "a", 12);
     i0.ɵɵtext(1, "Zaloguj");
     i0.ɵɵelementEnd();
 } if (rf & 2) {
     i0.ɵɵproperty("routerLink", "/user/login");
 } }
-function NavbarComponent_a_11_Template(rf, ctx) { if (rf & 1) {
-    const _r5 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "a", 12);
-    i0.ɵɵlistener("click", function NavbarComponent_a_11_Template_a_click_0_listener() { i0.ɵɵrestoreView(_r5); const ctx_r4 = i0.ɵɵnextContext(); return ctx_r4.loginOut(); });
+function NavbarComponent_a_10_Template(rf, ctx) { if (rf & 1) {
+    const _r6 = i0.ɵɵgetCurrentView();
+    i0.ɵɵelementStart(0, "a", 13);
+    i0.ɵɵlistener("click", function NavbarComponent_a_10_Template_a_click_0_listener() { i0.ɵɵrestoreView(_r6); const ctx_r5 = i0.ɵɵnextContext(); return ctx_r5.loginOut(); });
     i0.ɵɵtext(1, "Wyloguj");
     i0.ɵɵelementEnd();
 } }
+function NavbarComponent_a_15_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "a", 14);
+    i0.ɵɵtext(1, "Profil");
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    i0.ɵɵproperty("routerLink", "/user/profile");
+} }
+function NavbarComponent_div_16_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div");
+    i0.ɵɵelementStart(1, "strong");
+    i0.ɵɵtext(2);
+    i0.ɵɵelementEnd();
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    const ctx_r4 = i0.ɵɵnextContext();
+    i0.ɵɵadvance(2);
+    i0.ɵɵtextInterpolate1("Cze\u015B\u0107, ", ctx_r4.authService.getCurrentUser(), " ");
+} }
 class NavbarComponent {
-    constructor(authService, userSharedService) {
+    constructor(authService) {
         this.authService = authService;
-        this.userSharedService = userSharedService;
     }
-    ngOnInit() {
-        this.subscription = this.userSharedService.userContent$.subscribe((user) => {
-            this.userName = user.name;
-        });
-    }
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-    }
+    ngOnInit() { }
+    ngOnDestroy() { }
     loginOut() {
         this.authService.loginOut();
     }
 }
 exports.NavbarComponent = NavbarComponent;
-NavbarComponent.ɵfac = function NavbarComponent_Factory(t) { return new (t || NavbarComponent)(i0.ɵɵdirectiveInject(i1.AuthService), i0.ɵɵdirectiveInject(i2.UserSharedService)); };
-NavbarComponent.ɵcmp = i0.ɵɵdefineComponent({ type: NavbarComponent, selectors: [["app-navbar"]], decls: 19, vars: 7, consts: [[1, "card-body"], [1, "navbar", "navbar-light", "bg-light"], [4, "ngIf"], ["routerLinkActive", "active", "name", "home", 1, "navbar-brand", 3, "routerLink"], ["class", "navbar-brand", "routerLinkActive", "active", "name", "registration", 3, "routerLink", 4, "ngIf"], ["class", "navbar-brand", "routerLinkActive", "active", "name", "login", 3, "routerLink", 4, "ngIf"], ["class", "navbar-brand", "name", "loginOut", 3, "click", 4, "ngIf"], ["routerLinkActive", "active", "name", "contact", 1, "navbar-brand", 3, "routerLink"], ["routerLinkActive", "active", 1, "btn", "btn-default", "link-button--save", 3, "routerLink"], [1, "card-text"], ["routerLinkActive", "active", "name", "registration", 1, "navbar-brand", 3, "routerLink"], ["routerLinkActive", "active", "name", "login", 1, "navbar-brand", 3, "routerLink"], ["name", "loginOut", 1, "navbar-brand", 3, "click"]], template: function NavbarComponent_Template(rf, ctx) { if (rf & 1) {
+NavbarComponent.ɵfac = function NavbarComponent_Factory(t) { return new (t || NavbarComponent)(i0.ɵɵdirectiveInject(i1.AuthService)); };
+NavbarComponent.ɵcmp = i0.ɵɵdefineComponent({ type: NavbarComponent, selectors: [["app-navbar"]], decls: 21, vars: 8, consts: [[1, "card-body"], [1, "navbar", "navbar-light", "bg-light"], ["routerLinkActive", "active", "name", "home", 1, "navbar-brand", 3, "routerLink"], ["class", "navbar-brand", "routerLinkActive", "active", "name", "registration", 3, "routerLink", 4, "ngIf"], ["class", "navbar-brand", "routerLinkActive", "active", "name", "login", 3, "routerLink", 4, "ngIf"], ["class", "navbar-brand", "name", "loginOut", 3, "click", 4, "ngIf"], ["routerLinkActive", "active", "name", "contact", 1, "navbar-brand", 3, "routerLink"], ["class", "navbar-brand", "name", "profile", 3, "routerLink", 4, "ngIf"], [4, "ngIf"], ["routerLinkActive", "active", 1, "btn", "btn-default", "link-button--save", 3, "routerLink"], [1, "card-text"], ["routerLinkActive", "active", "name", "registration", 1, "navbar-brand", 3, "routerLink"], ["routerLinkActive", "active", "name", "login", 1, "navbar-brand", 3, "routerLink"], ["name", "loginOut", 1, "navbar-brand", 3, "click"], ["name", "profile", 1, "navbar-brand", 3, "routerLink"]], template: function NavbarComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "div", 0);
         i0.ɵɵelementStart(1, "nav", 1);
-        i0.ɵɵtemplate(2, NavbarComponent_div_2_Template, 2, 1, "div", 2);
-        i0.ɵɵelementStart(3, "div");
-        i0.ɵɵelementStart(4, "a", 3);
-        i0.ɵɵtext(5, "Strona g\u0142\u00F3wna");
+        i0.ɵɵelementStart(2, "div");
+        i0.ɵɵelementStart(3, "a", 2);
+        i0.ɵɵtext(4, "Strona g\u0142\u00F3wna");
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(6, "div");
-        i0.ɵɵtemplate(7, NavbarComponent_a_7_Template, 2, 1, "a", 4);
+        i0.ɵɵelementStart(5, "div");
+        i0.ɵɵtemplate(6, NavbarComponent_a_6_Template, 2, 1, "a", 3);
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(8, "div");
-        i0.ɵɵtemplate(9, NavbarComponent_a_9_Template, 2, 1, "a", 5);
+        i0.ɵɵelementStart(7, "div");
+        i0.ɵɵtemplate(8, NavbarComponent_a_8_Template, 2, 1, "a", 4);
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(10, "div");
-        i0.ɵɵtemplate(11, NavbarComponent_a_11_Template, 2, 0, "a", 6);
+        i0.ɵɵelementStart(9, "div");
+        i0.ɵɵtemplate(10, NavbarComponent_a_10_Template, 2, 0, "a", 5);
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(12, "div");
-        i0.ɵɵelementStart(13, "a", 7);
-        i0.ɵɵtext(14, "Kontakt");
+        i0.ɵɵelementStart(11, "div");
+        i0.ɵɵelementStart(12, "a", 6);
+        i0.ɵɵtext(13, "Kontakt");
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(14, "div");
+        i0.ɵɵtemplate(15, NavbarComponent_a_15_Template, 2, 1, "a", 7);
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(15, "button", 8);
-        i0.ɵɵtext(16, "Dodaj og\u0142oszenie");
+        i0.ɵɵtemplate(16, NavbarComponent_div_16_Template, 3, 1, "div", 8);
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(17, "p", 9);
-        i0.ɵɵelement(18, "router-outlet");
+        i0.ɵɵelementStart(17, "button", 9);
+        i0.ɵɵtext(18, "Dodaj og\u0142oszenie");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(19, "p", 10);
+        i0.ɵɵelement(20, "router-outlet");
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
     } if (rf & 2) {
-        i0.ɵɵadvance(2);
-        i0.ɵɵproperty("ngIf", ctx.userName);
-        i0.ɵɵadvance(2);
+        i0.ɵɵadvance(3);
         i0.ɵɵproperty("routerLink", "/home");
         i0.ɵɵadvance(3);
-        i0.ɵɵproperty("ngIf", !ctx.authService.isLogged);
+        i0.ɵɵproperty("ngIf", !ctx.authService.isAuthenticated);
         i0.ɵɵadvance(2);
-        i0.ɵɵproperty("ngIf", !ctx.authService.isLogged);
+        i0.ɵɵproperty("ngIf", !ctx.authService.isAuthenticated);
         i0.ɵɵadvance(2);
-        i0.ɵɵproperty("ngIf", ctx.authService.isLogged);
+        i0.ɵɵproperty("ngIf", ctx.authService.isAuthenticated);
         i0.ɵɵadvance(2);
         i0.ɵɵproperty("routerLink", "/user/contact");
-        i0.ɵɵadvance(2);
+        i0.ɵɵadvance(3);
+        i0.ɵɵproperty("ngIf", ctx.authService.isAuthenticated);
+        i0.ɵɵadvance(1);
+        i0.ɵɵproperty("ngIf", ctx.authService.isAuthenticated);
+        i0.ɵɵadvance(1);
         i0.ɵɵproperty("routerLink", "/announcement/category");
-    } }, directives: [i3.NgIf, i4.RouterLinkWithHref, i4.RouterLinkActive, i4.RouterLink, i4.RouterOutlet], styles: [".navbar[_ngcontent-%COMP%] {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n\n.navbar-brand[_ngcontent-%COMP%] {\n  opacity: 0.6;\n  margin-right: 3rem;\n  font: 400 24px Roboto, \"Helvetica Neue\", sans-serif;\n}\n\n.bg-light[_ngcontent-%COMP%] {\n  background-color: white !important;\n  justify-content: flex-end !important;\n}\n\n.navbar[_ngcontent-%COMP%]   .navbar-expand-lg[_ngcontent-%COMP%]   .navbar-light[_ngcontent-%COMP%]   .bg-light[_ngcontent-%COMP%] {\n  justify-content: flex-end !important;\n}\n\n.card[_ngcontent-%COMP%] {\n  justify-content: flex-end;\n}\n\n.card-body[_ngcontent-%COMP%] {\n  padding: 0;\n}\n\nbutton[_ngcontent-%COMP%] {\n  padding: 10px;\n  margin: 10px 5px 0px 15px;\n}\n\n.link-button--save[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0px;\n  left: 5%;\n  margin: 0px;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n  border: 1px #222 solid;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL25hdi5zY3NzIiwic3JjL2FwcC9tb2R1bGVzL2NvcmUvbmF2YmFyL25hdmJhci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksNENBQUE7QUNDSjs7QURFQTtFQUNJLFlBQUE7RUFDQSxrQkFBQTtFQUNBLG1EQUFBO0FDQ0o7O0FERUE7RUFDSSxrQ0FBQTtFQUNBLG9DQUFBO0FDQ0o7O0FERUE7RUFDSSxvQ0FBQTtBQ0NKOztBQWZBO0VBQ0kseUJBQUE7QUFrQko7O0FBZkE7RUFDSSxVQUFBO0FBa0JKOztBQWZBO0VBQ0ksYUFBQTtFQUNBLHlCQUFBO0FBa0JKOztBQWZBO0VBQ0ksa0JBQUE7RUFDQSxRQUFBO0VBQ0EsUUFBQTtFQUNBLFdBQUE7RUFDQSwyRkFBQTtFQUNBLHNCQ2xCSztBRG9DVCIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvY29yZS9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm5hdmJhciB7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHJnYmEoMCwgMCwgMCwgLjEyKTtcbn1cblxuLm5hdmJhci1icmFuZCB7XG4gICAgb3BhY2l0eTogLjY7XG4gICAgbWFyZ2luLXJpZ2h0OiAzcmVtO1xuICAgIGZvbnQ6IDQwMCAyNHB4IFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmO1xufVxuXG4uYmctbGlnaHQge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlICFpbXBvcnRhbnQ7XG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZCAhaW1wb3J0YW50O1xufVxuXG4ubmF2YmFyIC5uYXZiYXItZXhwYW5kLWxnIC5uYXZiYXItbGlnaHQgLmJnLWxpZ2h0IHtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59IiwiLm5hdmJhciB7XG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCByZ2JhKDAsIDAsIDAsIDAuMTIpO1xufVxuXG4ubmF2YmFyLWJyYW5kIHtcbiAgb3BhY2l0eTogMC42O1xuICBtYXJnaW4tcmlnaHQ6IDNyZW07XG4gIGZvbnQ6IDQwMCAyNHB4IFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmO1xufVxuXG4uYmctbGlnaHQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5uYXZiYXIgLm5hdmJhci1leHBhbmQtbGcgLm5hdmJhci1saWdodCAuYmctbGlnaHQge1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5jYXJkIHtcbiAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbn1cblxuLmNhcmQtYm9keSB7XG4gIHBhZGRpbmc6IDA7XG59XG5cbmJ1dHRvbiB7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIG1hcmdpbjogMTBweCA1cHggMHB4IDE1cHg7XG59XG5cbi5saW5rLWJ1dHRvbi0tc2F2ZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwcHg7XG4gIGxlZnQ6IDUlO1xuICBtYXJnaW46IDBweDtcbiAgYm94LXNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSwgMTBweCAxMHB4IDIwcHggI2M4Y2VkNSwgaW5zZXQgMCAwIDEwcHggI2M4Y2VkNTtcbiAgYm9yZGVyOiAxcHggIzIyMiBzb2xpZDtcbn0iLCIkYm94U2hhZG93OiBpbnNldCAtMTBweCAtMTBweCAxMDBweCAjYzhjZWQ1LFxuMTBweCAxMHB4IDIwcHggI2M4Y2VkNSxcbmluc2V0IDAgMCAxMHB4ICNjOGNlZDU7XG4kYm9yZGVyOiAxcHggIzIyMiBzb2xpZDsiXX0= */"] });
+    } }, directives: [i2.RouterLinkWithHref, i2.RouterLinkActive, i3.NgIf, i2.RouterLink, i2.RouterOutlet], styles: [".navbar[_ngcontent-%COMP%] {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n\n.navbar-brand[_ngcontent-%COMP%] {\n  opacity: 0.6;\n  margin-right: 3rem;\n  font: 400 24px Roboto, \"Helvetica Neue\", sans-serif;\n}\n\n.bg-light[_ngcontent-%COMP%] {\n  background-color: white !important;\n  justify-content: flex-end !important;\n}\n\n.navbar[_ngcontent-%COMP%]   .navbar-expand-lg[_ngcontent-%COMP%]   .navbar-light[_ngcontent-%COMP%]   .bg-light[_ngcontent-%COMP%] {\n  justify-content: flex-end !important;\n}\n\n.card[_ngcontent-%COMP%] {\n  justify-content: flex-end;\n}\n\n.card-body[_ngcontent-%COMP%] {\n  padding: 0;\n}\n\nbutton[_ngcontent-%COMP%] {\n  padding: 10px;\n  margin: 10px 5px 0px 15px;\n}\n\n.link-button--save[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0px;\n  left: 5%;\n  margin: 0px;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n  border: 1px #222 solid;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL25hdi5zY3NzIiwic3JjL2FwcC9tb2R1bGVzL2NvcmUvbmF2YmFyL25hdmJhci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksNENBQUE7QUNDSjs7QURFQTtFQUNJLFlBQUE7RUFDQSxrQkFBQTtFQUNBLG1EQUFBO0FDQ0o7O0FERUE7RUFDSSxrQ0FBQTtFQUNBLG9DQUFBO0FDQ0o7O0FERUE7RUFDSSxvQ0FBQTtBQ0NKOztBQWZBO0VBQ0kseUJBQUE7QUFrQko7O0FBZkE7RUFDSSxVQUFBO0FBa0JKOztBQWZBO0VBQ0ksYUFBQTtFQUNBLHlCQUFBO0FBa0JKOztBQWZBO0VBQ0ksa0JBQUE7RUFDQSxRQUFBO0VBQ0EsUUFBQTtFQUNBLFdBQUE7RUFDQSwyRkFBQTtFQUNBLHNCQ2xCSztBRG9DVCIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvY29yZS9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm5hdmJhciB7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHJnYmEoMCwgMCwgMCwgLjEyKTtcbn1cblxuLm5hdmJhci1icmFuZCB7XG4gICAgb3BhY2l0eTogLjY7XG4gICAgbWFyZ2luLXJpZ2h0OiAzcmVtO1xuICAgIGZvbnQ6IDQwMCAyNHB4IFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmO1xufVxuXG4uYmctbGlnaHQge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlICFpbXBvcnRhbnQ7XG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZCAhaW1wb3J0YW50O1xufVxuXG4ubmF2YmFyIC5uYXZiYXItZXhwYW5kLWxnIC5uYXZiYXItbGlnaHQgLmJnLWxpZ2h0IHtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59IiwiLm5hdmJhciB7XG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCByZ2JhKDAsIDAsIDAsIDAuMTIpO1xufVxuXG4ubmF2YmFyLWJyYW5kIHtcbiAgb3BhY2l0eTogMC42O1xuICBtYXJnaW4tcmlnaHQ6IDNyZW07XG4gIGZvbnQ6IDQwMCAyNHB4IFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmO1xufVxuXG4uYmctbGlnaHQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5uYXZiYXIgLm5hdmJhci1leHBhbmQtbGcgLm5hdmJhci1saWdodCAuYmctbGlnaHQge1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5jYXJkIHtcbiAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbn1cblxuLmNhcmQtYm9keSB7XG4gIHBhZGRpbmc6IDA7XG59XG5cbmJ1dHRvbiB7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIG1hcmdpbjogMTBweCA1cHggMHB4IDE1cHg7XG59XG5cbi5saW5rLWJ1dHRvbi0tc2F2ZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwcHg7XG4gIGxlZnQ6IDUlO1xuICBtYXJnaW46IDBweDtcbiAgYm94LXNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSwgMTBweCAxMHB4IDIwcHggI2M4Y2VkNSwgaW5zZXQgMCAwIDEwcHggI2M4Y2VkNTtcbiAgYm9yZGVyOiAxcHggIzIyMiBzb2xpZDtcbn0iLCIkYm94U2hhZG93OiBpbnNldCAtMTBweCAtMTBweCAxMDBweCAjYzhjZWQ1LFxuMTBweCAxMHB4IDIwcHggI2M4Y2VkNSxcbmluc2V0IDAgMCAxMHB4ICNjOGNlZDU7XG4kYm9yZGVyOiAxcHggIzIyMiBzb2xpZDsiXX0= */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NavbarComponent, [{
         type: core_1.Component,
         args: [{
                 selector: 'app-navbar',
                 templateUrl: './navbar.component.html',
-                styleUrls: ['./navbar.component.scss']
+                styleUrls: ['./navbar.component.scss'],
             }]
-    }], function () { return [{ type: i1.AuthService }, { type: i2.UserSharedService }]; }, null); })();
+    }], function () { return [{ type: i1.AuthService }]; }, null); })();
 
 
 /***/ }),
@@ -1305,6 +1324,59 @@ ContactComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ContactComponent, select
 
 /***/ }),
 
+/***/ "./src/app/modules/users/profile/profile.component.ts":
+/*!************************************************************!*\
+  !*** ./src/app/modules/users/profile/profile.component.ts ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProfileComponent = void 0;
+const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+class ProfileComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+}
+exports.ProfileComponent = ProfileComponent;
+ProfileComponent.ɵfac = function ProfileComponent_Factory(t) { return new (t || ProfileComponent)(); };
+ProfileComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ProfileComponent, selectors: [["app-profile"]], decls: 13, vars: 0, consts: [[1, "row"], [1, "col-3"], [1, "col-9"]], template: function ProfileComponent_Template(rf, ctx) { if (rf & 1) {
+        i0.ɵɵelementStart(0, "div");
+        i0.ɵɵelementStart(1, "h3");
+        i0.ɵɵtext(2, "Profil");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(3, "dl", 0);
+        i0.ɵɵelementStart(4, "dt", 1);
+        i0.ɵɵtext(5, "Nazwa");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelement(6, "dd", 2);
+        i0.ɵɵelementStart(7, "dt", 1);
+        i0.ɵɵtext(8, "Email");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelement(9, "dd", 2);
+        i0.ɵɵelementStart(10, "dt", 1);
+        i0.ɵɵtext(11, "Typ u\u017Cytkownika");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelement(12, "dd", 2);
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementEnd();
+    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvdXNlcnMvcHJvZmlsZS9wcm9maWxlLmNvbXBvbmVudC5zY3NzIn0= */"] });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(ProfileComponent, [{
+        type: core_1.Component,
+        args: [{
+                selector: 'app-profile',
+                templateUrl: './profile.component.html',
+                styleUrls: ['./profile.component.scss']
+            }]
+    }], function () { return []; }, null); })();
+
+
+/***/ }),
+
 /***/ "./src/app/modules/users/user-login/user-login.component.ts":
 /*!******************************************************************!*\
   !*** ./src/app/modules/users/user-login/user-login.component.ts ***!
@@ -1318,7 +1390,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserLoginComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-const user_shared_service_1 = __webpack_require__(/*! ../../../shared/shared-services/user-shared.service */ "./src/app/shared/shared-services/user-shared.service.ts");
 const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
@@ -1377,7 +1448,7 @@ class UserLoginComponent {
 }
 exports.UserLoginComponent = UserLoginComponent;
 UserLoginComponent.ɵfac = function UserLoginComponent_Factory(t) { return new (t || UserLoginComponent)(i0.ɵɵdirectiveInject(i1.FormBuilder), i0.ɵɵdirectiveInject(i2.Router), i0.ɵɵdirectiveInject(i3.LoggerService), i0.ɵɵdirectiveInject(i4.UserSharedService), i0.ɵɵdirectiveInject(i5.AuthService)); };
-UserLoginComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserLoginComponent, selectors: [["app-user-login"]], features: [i0.ɵɵProvidersFeature([user_shared_service_1.UserSharedService])], decls: 24, vars: 3, consts: [[1, "jumbotron", "content"], [1, "panel", "panel-default"], [1, "panel-heading", "text-center"], [1, "panel-body"], ["id", "login-form", 1, "example-form", 3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "username"], ["required", "", "type", "text", "formControlName", "username", "name", "username", 1, "form-control"], [4, "ngIf"], ["for", "password"], ["required", "", "type", "password", "formControlName", "password", "name", "password", 1, "form-control"], ["type", "submit", "id", "Login", "title", "Login", 1, "btn", "btn-success"]], template: function UserLoginComponent_Template(rf, ctx) { if (rf & 1) {
+UserLoginComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserLoginComponent, selectors: [["app-user-login"]], decls: 24, vars: 3, consts: [[1, "jumbotron", "content"], [1, "panel", "panel-default"], [1, "panel-heading", "text-center"], [1, "panel-body"], ["id", "login-form", 1, "example-form", 3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "username"], ["required", "", "type", "text", "formControlName", "username", "name", "username", 1, "form-control"], [4, "ngIf"], ["for", "password"], ["required", "", "type", "password", "formControlName", "password", "name", "password", 1, "form-control"], ["type", "submit", "id", "Login", "title", "Login", 1, "btn", "btn-success"]], template: function UserLoginComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "div", 0);
         i0.ɵɵelementStart(1, "div", 1);
         i0.ɵɵelementStart(2, "div", 2);
@@ -1431,7 +1502,6 @@ UserLoginComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserLoginComponent, se
                 selector: 'app-user-login',
                 templateUrl: './user-login.component.html',
                 styleUrls: ['./user-login.component.scss'],
-                providers: [user_shared_service_1.UserSharedService]
             }]
     }], function () { return [{ type: i1.FormBuilder }, { type: i2.Router }, { type: i3.LoggerService }, { type: i4.UserSharedService }, { type: i5.AuthService }]; }, null); })();
 
@@ -1452,6 +1522,7 @@ exports.UserRegistrationComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 const user_1 = __webpack_require__(/*! ../user */ "./src/app/modules/users/user.ts");
+const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 const i2 = __webpack_require__(/*! ../../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
@@ -1496,6 +1567,12 @@ class UserRegistrationComponent {
                         this.registrationForm.reset();
                         break;
                     }
+                }
+            }, (Error) => {
+                if (Error instanceof http_1.HttpErrorResponse) {
+                    this.logger.error('Error name: ' + Error.error);
+                    this.logger.error('Error status text: ' + Error.statusText);
+                    this.logger.error('Error status: ' + Error.status);
                 }
             });
         }
@@ -1668,6 +1745,8 @@ const user_registration_component_1 = __webpack_require__(/*! ./user-registratio
 const user_component_1 = __webpack_require__(/*! ./user/user.component */ "./src/app/modules/users/user/user.component.ts");
 const contact_component_1 = __webpack_require__(/*! ./contact/contact.component */ "./src/app/modules/users/contact/contact.component.ts");
 const user_login_component_1 = __webpack_require__(/*! ./user-login/user-login.component */ "./src/app/modules/users/user-login/user-login.component.ts");
+const auth_guard_service_1 = __webpack_require__(/*! ../core/authentication/auth-guard.service */ "./src/app/modules/core/authentication/auth-guard.service.ts");
+const profile_component_1 = __webpack_require__(/*! ./profile/profile.component */ "./src/app/modules/users/profile/profile.component.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const routes = [
@@ -1678,6 +1757,7 @@ const routes = [
             {
                 path: 'registration',
                 data: { title: 'Rejestracja' },
+                canActivate: [auth_guard_service_1.AuthGuardService],
                 component: user_registration_component_1.UserRegistrationComponent,
             },
             {
@@ -1689,7 +1769,12 @@ const routes = [
                 path: 'contact',
                 data: { title: 'Kontakt' },
                 component: contact_component_1.ContactComponent,
-            }
+            },
+            {
+                path: 'profile',
+                data: { title: 'Profil' },
+                component: profile_component_1.ProfileComponent,
+            },
         ]
     },
 ];
@@ -1730,12 +1815,13 @@ const forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angul
 const user_component_1 = __webpack_require__(/*! ./user/user.component */ "./src/app/modules/users/user/user.component.ts");
 const contact_component_1 = __webpack_require__(/*! ./contact/contact.component */ "./src/app/modules/users/contact/contact.component.ts");
 const user_login_component_1 = __webpack_require__(/*! ./user-login/user-login.component */ "./src/app/modules/users/user-login/user-login.component.ts");
+const profile_component_1 = __webpack_require__(/*! ./profile/profile.component */ "./src/app/modules/users/profile/profile.component.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 class UsersModule {
 }
 exports.UsersModule = UsersModule;
 UsersModule.ɵmod = i0.ɵɵdefineNgModule({ type: UsersModule });
-UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factory(t) { return new (t || UsersModule)(); }, providers: [], imports: [[
+UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factory(t) { return new (t || UsersModule)(); }, imports: [[
             common_1.CommonModule,
             users_routing_module_1.UsersRoutingModule,
             router_1.RouterModule,
@@ -1744,13 +1830,15 @@ UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factor
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(UsersModule, { declarations: [user_registration_component_1.UserRegistrationComponent,
         user_component_1.UserComponent,
         contact_component_1.ContactComponent,
-        user_login_component_1.UserLoginComponent], imports: [common_1.CommonModule,
+        user_login_component_1.UserLoginComponent,
+        profile_component_1.ProfileComponent], imports: [common_1.CommonModule,
         users_routing_module_1.UsersRoutingModule,
         router_1.RouterModule,
         forms_1.ReactiveFormsModule], exports: [user_registration_component_1.UserRegistrationComponent,
         user_component_1.UserComponent,
         contact_component_1.ContactComponent,
-        user_login_component_1.UserLoginComponent] }); })();
+        user_login_component_1.UserLoginComponent,
+        profile_component_1.ProfileComponent] }); })();
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(UsersModule, [{
         type: core_1.NgModule,
         args: [{
@@ -1758,7 +1846,8 @@ UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factor
                     user_registration_component_1.UserRegistrationComponent,
                     user_component_1.UserComponent,
                     contact_component_1.ContactComponent,
-                    user_login_component_1.UserLoginComponent
+                    user_login_component_1.UserLoginComponent,
+                    profile_component_1.ProfileComponent,
                 ],
                 imports: [
                     common_1.CommonModule,
@@ -1770,9 +1859,9 @@ UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factor
                     user_registration_component_1.UserRegistrationComponent,
                     user_component_1.UserComponent,
                     contact_component_1.ContactComponent,
-                    user_login_component_1.UserLoginComponent
-                ],
-                providers: []
+                    user_login_component_1.UserLoginComponent,
+                    profile_component_1.ProfileComponent
+                ]
             }]
     }], null, null); })();
 
@@ -2053,7 +2142,8 @@ const rxjs_1 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/ind
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 class UserSharedService {
     constructor() {
-        this.userSource = new rxjs_1.Subject();
+        // zapamietuje dane w innych komponentach
+        this.userSource = new rxjs_1.BehaviorSubject(null);
         this.userContent$ = this.userSource.asObservable();
     }
     shareUser(user) {

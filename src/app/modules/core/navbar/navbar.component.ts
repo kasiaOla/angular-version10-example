@@ -9,8 +9,7 @@ import { AuthService } from '../authentication/auth.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  constructor(public authService: AuthService) {
-  }
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {}
 

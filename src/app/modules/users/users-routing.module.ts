@@ -5,6 +5,7 @@ import { UserComponent } from './user/user.component';
 import { ContactComponent } from './contact/contact.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { AuthGuardService } from '../core/authentication/auth-guard.service';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -27,7 +28,12 @@ const routes: Routes = [
         path: 'contact',
         data: { title: 'Kontakt' },
         component: ContactComponent,
-      }
+      },
+      {
+        path: 'profile',
+        data: { title: 'Profil' },
+        component: ProfileComponent,
+      },
     ]
   },
 
