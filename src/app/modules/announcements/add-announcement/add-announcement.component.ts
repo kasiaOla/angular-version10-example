@@ -22,10 +22,9 @@ export class AddAnnouncementComponent implements OnInit {
   id_type: string;
 
   constructor(private fb: FormBuilder,
-    private logger: LoggerService,
-    private announcementService: AnnouncementService,
-    private route: ActivatedRoute) {
-  }
+              private logger: LoggerService,
+              private announcementService: AnnouncementService,
+              private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     // this.id_category = +this.route.snapshot.paramMap.get('id_category'); // sniszczyc shaphot ostatnia wersje komponentu
