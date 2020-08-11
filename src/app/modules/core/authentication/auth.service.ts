@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User, Session } from '../../users/user';
 import { Observable, of, BehaviorSubject } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, tap, share } from 'rxjs/operators';
 import { LoggerService } from '../../../shared/shared-services/logger.service';
 
 
@@ -36,7 +36,7 @@ export class AuthService {
     return this.httpClient.post<Session>('/login', user, this.httpOptions).pipe(
       tap(state => {
         this.userSession.next(state); this.isAuthenticated = true;
-      }),
+      }), share(),
       catchError(this.handleError<User>('Login user'))
     );
   }
@@ -57,9 +57,9 @@ export class AuthService {
     const session = this.userSession.getValue();
     return session && session.token;
   }
-  getCurrentUser(): any | null {
+  getCurrentUser(): Session | string {
     const session = this.userSession.getValue();
-    return session && session.respons;
+    return session && session !== null ? session.respons.username : session;
   }
 
 }

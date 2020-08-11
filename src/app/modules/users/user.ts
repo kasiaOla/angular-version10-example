@@ -1,6 +1,6 @@
 export interface User {
   id?: number;
-  name: string;
+  username: string;
   photoUrl?: string;
   description?: string;
   password?: string;
@@ -26,6 +26,6 @@ export enum CustomerType {
 export interface Session {
   success: boolean;
   message: string;
-  respons?: any;
+  respons?: User;
   token?: string;
 }
