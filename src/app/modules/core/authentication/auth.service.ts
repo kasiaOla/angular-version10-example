@@ -16,7 +16,7 @@ export class AuthService {
   // state - stan czy użytkownik jest zalogowany
   state = this.userSession.pipe(
     map(session => session && !!session.token),
-    tap(state => console.log('>>>>> ', this.isAuthenticated = state))
+    tap(state => this.isAuthenticated = state)
   );
 
   httpOptions = {
