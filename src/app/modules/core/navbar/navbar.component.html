@@ -1,6 +1,5 @@
 <div class="card-body">
     <nav class="navbar navbar-light bg-light">
-        <!-- <div *ngIf='userName'>{{userName}}</div> -->
         <div><a class="navbar-brand" [routerLink]="'/home'" routerLinkActive="active" name='home'>Strona główna</a></div>
         <div><a class="navbar-brand" [routerLink]="'/user/registration'" routerLinkActive="active" *ngIf="!authService.isLogged" name='registration'>Rejestracja</a></div>
         <div><a class="navbar-brand" [routerLink]="'/user/login'" routerLinkActive="active" *ngIf="!authService.isLogged" name='login'>Zaloguj</a></div>
