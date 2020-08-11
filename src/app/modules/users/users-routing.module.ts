@@ -4,6 +4,7 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 import { UserComponent } from './user/user.component';
 import { ContactComponent } from './contact/contact.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { AuthGuardService } from '../core/authentication/auth-guard.service';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
       {
         path: 'registration',
         data: { title: 'Rejestracja' },
+        canActivate: [AuthGuardService], // jeśli false blokuje przejscie do ścieżki
         component: UserRegistrationComponent,
       },
       {

@@ -7,6 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserComponent } from './user/user.component';
 import { ContactComponent } from './contact/contact.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { AuthGuardService } from '../core/authentication/auth-guard.service';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { UserLoginComponent } from './user-login/user-login.component';
     UserRegistrationComponent,
     UserComponent,
     ContactComponent,
-    UserLoginComponent
+    UserLoginComponent,
+
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,5 @@ import { UserLoginComponent } from './user-login/user-login.component';
     ContactComponent,
     UserLoginComponent
   ],
-  providers: []
 })
 export class UsersModule { }
