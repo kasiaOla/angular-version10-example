@@ -16,7 +16,7 @@ export class AnnouncementService {
 
   constructor(private httpClient: HttpClient, private logger: LoggerService) { }
 
-  public addAnnouncement(newAnnouncement: Announcement, idCategory: string, idType: string): any {
+  public addAnnouncement(newAnnouncement: Partial<Announcement>, idCategory: string, idType: string): any {
     return this.httpClient.post<Announcement>(`/category/${idCategory}/type/${idType}`, newAnnouncement, this.httpOptions)
       .pipe(
         catchError(this.handleError<Announcement>('Add Announcement'))
