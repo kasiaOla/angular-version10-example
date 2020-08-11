@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../../core/authentication/auth/auth.service';
 import { UserSharedService } from '../../../shared/shared-services/user/user-shared.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -18,7 +17,6 @@ export class UserLoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private router: Router,
               private logger: LoggerService,
               private userSharedService: UserSharedService,
               private authService: AuthService) {}
@@ -42,12 +40,22 @@ export class UserLoginComponent implements OnInit {
 
       this.authService.login(this.loginForm.value)
         .subscribe(data => {
-          if (data.success === false) {
-          } else if (data.success === true) {
-            this.userSharedService.shareUser(data.respons);
-         //   this.router.navigate(['user/profile']);
+          switch (data.success) {
+            case false: {
+              this.logger.error(`Error code ${data.message}`);
+              break;
+            }
+            case true: {
+              this.logger.info('Logged in successfully');
+              this.userSharedService.shareUser(data.respons);
+              this.loginForm.reset();
+              break;
+            }
+            default: {
+              this.loginForm.reset();
+              break;
+            }
           }
-          this.loginForm.reset();
         }, (Error: any) => {
           if (Error instanceof HttpErrorResponse) {
             this.logger.error('Error name: ' + Error.error);
@@ -55,8 +63,6 @@ export class UserLoginComponent implements OnInit {
             this.logger.error('Error status: ' + Error.status);
           }
         });
-
     }
   }
-
 }
