@@ -5,7 +5,7 @@ import { AddAnnouncementComponent } from './add-announcement/add-announcement.co
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AddCategoryAnnouncementComponent } from './add-category-announcement/add-category-announcement.component';
-import { AnnouncementService } from '../../shared/shared-services/announcement.service';
+import { AnnouncementService } from '../../shared/shared-services/announcement/announcement.service';
 import { AnnouncementComponent } from './announcement/announcement.component';
 
 

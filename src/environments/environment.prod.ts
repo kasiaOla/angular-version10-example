@@ -1,5 +1,5 @@
-import { LoggerDebugService } from '../app/shared/shared-services/logger.service';
-import { AnnouncementService } from 'src/app/shared/shared-services/announcement.service';
+import { LoggerDebugService } from '../app/shared/shared-services/logger/logger.service';
+import { AnnouncementService } from 'src/app/shared/shared-services/announcement/announcement.service';
 export const environment = {
   production: true
 };

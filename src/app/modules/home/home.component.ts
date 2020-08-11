@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GridOptions } from '@ag-grid-community/all-modules';
 import { ColDef, GridApi, ColumnApi } from 'ag-grid-community';
-import { AnnouncementService } from 'src/app/shared/shared-services/announcement.service';
+import { AnnouncementService } from 'src/app/shared/shared-services/announcement/announcement.service';
 import { Announcement } from '../announcements/announcement';
-import { LoggerService } from '../../shared/shared-services/logger.service';
+import { LoggerService } from '../../shared/shared-services/logger/logger.service';
 import { AgGridHeaderComponent } from '../../shared/shared-ag-grid-header/ag-grid-header.component';
 import { Subscription } from 'rxjs/internal/Subscription';
 

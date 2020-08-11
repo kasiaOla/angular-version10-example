@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AnnouncementsCategories, AnnouncementType, Announcement } from '../announcement';
-import { AnnouncementService } from 'src/app/shared/shared-services/announcement.service';
-import { LoggerService } from '../../../shared/shared-services/logger.service';
+import { AnnouncementService } from 'src/app/shared/shared-services/announcement/announcement.service';
+import { LoggerService } from '../../../shared/shared-services/logger/logger.service';
 
 @Component({
   selector: 'app-add-announcement',

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { User, CustomerType } from '../user';
 import { AuthService } from '../../core/authentication/auth/auth.service';
-import { LoggerService } from '../../../shared/shared-services/logger.service';
+import { LoggerService } from '../../../shared/shared-services/logger/logger.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 

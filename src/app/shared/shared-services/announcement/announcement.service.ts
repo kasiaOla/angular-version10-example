@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Announcement } from '../../modules/announcements/announcement';
 import { catchError, tap, share } from 'rxjs/operators';
-import { LoggerService } from './logger.service';
+import { Announcement } from '../../../modules/announcements/announcement';
+import { LoggerService } from '../logger/logger.service';
 
 @Injectable({
   providedIn: 'root'

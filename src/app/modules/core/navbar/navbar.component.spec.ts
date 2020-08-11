@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AuthService } from '../authentication/auth/auth.service';
-import { LoggerService } from '../../../shared/shared-services/logger.service';
+import { LoggerService } from '../../../shared/shared-services/logger/logger.service';
 
 
 describe('NavbarComponent', () => {

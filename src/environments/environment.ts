@@ -1,8 +1,8 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-import { LoggerDebugService } from '../app/shared/shared-services/logger.service';
-import { AnnouncementService } from '../app/shared/shared-services/announcement.service';
+import { LoggerDebugService } from '../app/shared/shared-services/logger/logger.service';
+import { AnnouncementService } from '../app/shared/shared-services/announcement/announcement.service';
 
 export const environment = {
   production: false

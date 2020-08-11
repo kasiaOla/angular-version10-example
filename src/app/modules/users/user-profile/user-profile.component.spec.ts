@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserProfileComponent } from './user-profile.component';
 import { AuthService } from '../../core/authentication/auth/auth.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { LoggerService } from '../../../shared/shared-services/logger.service';
+import { LoggerService } from '../../../shared/shared-services/logger/logger.service';
 
 class MockAuthService extends AuthService { }
 

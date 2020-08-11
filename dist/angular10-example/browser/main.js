@@ -148,10 +148,10 @@ const forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angul
 const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 const core_module_1 = __webpack_require__(/*! ./modules/core/core.module */ "./src/app/modules/core/core.module.ts");
 const common_1 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-const logger_service_1 = __webpack_require__(/*! ./shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
+const logger_service_1 = __webpack_require__(/*! ./shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
 const environment_prod_1 = __webpack_require__(/*! ../environments/environment.prod */ "./src/environments/environment.prod.ts");
 const ag_grid_angular_1 = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/__ivy_ngcc__/fesm2015/ag-grid-angular.js");
-const announcement_service_1 = __webpack_require__(/*! ./shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
+const announcement_service_1 = __webpack_require__(/*! ./shared/shared-services/announcement/announcement.service */ "./src/app/shared/shared-services/announcement/announcement.service.ts");
 const ag_grid_header_component_1 = __webpack_require__(/*! ./shared/shared-ag-grid-header/ag-grid-header.component */ "./src/app/shared/shared-ag-grid-header/ag-grid-header.component.ts");
 const authentication_module_1 = __webpack_require__(/*! ./modules/core/authentication/authentication.module */ "./src/app/modules/core/authentication/authentication.module.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
@@ -254,8 +254,8 @@ const forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angul
 const announcement_1 = __webpack_require__(/*! ../announcement */ "./src/app/modules/announcements/announcement.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-const i2 = __webpack_require__(/*! ../../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
-const i3 = __webpack_require__(/*! src/app/shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
+const i2 = __webpack_require__(/*! ../../../shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
+const i3 = __webpack_require__(/*! src/app/shared/shared-services/announcement/announcement.service */ "./src/app/shared/shared-services/announcement/announcement.service.ts");
 const i4 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 class AddAnnouncementComponent {
     constructor(fb, logger, announcementService, route) {
@@ -664,7 +664,7 @@ const add_announcement_component_1 = __webpack_require__(/*! ./add-announcement/
 const forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 const router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const add_category_announcement_component_1 = __webpack_require__(/*! ./add-category-announcement/add-category-announcement.component */ "./src/app/modules/announcements/add-category-announcement/add-category-announcement.component.ts");
-const announcement_service_1 = __webpack_require__(/*! ../../shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
+const announcement_service_1 = __webpack_require__(/*! ../../shared/shared-services/announcement/announcement.service */ "./src/app/shared/shared-services/announcement/announcement.service.ts");
 const announcement_component_1 = __webpack_require__(/*! ./announcement/announcement.component */ "./src/app/modules/announcements/announcement/announcement.component.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 class AnnouncementModule {
@@ -875,7 +875,7 @@ const rxjs_1 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/ind
 const operators_1 = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
-const i2 = __webpack_require__(/*! ../../../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
+const i2 = __webpack_require__(/*! ../../../../shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
 class AuthService {
     constructor(httpClient, logger) {
         this.httpClient = httpClient;
@@ -1285,8 +1285,8 @@ const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular
 const ag_grid_header_component_1 = __webpack_require__(/*! ../../shared/shared-ag-grid-header/ag-grid-header.component */ "./src/app/shared/shared-ag-grid-header/ag-grid-header.component.ts");
 const Subscription_1 = __webpack_require__(/*! rxjs/internal/Subscription */ "./node_modules/rxjs/internal/Subscription.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-const i1 = __webpack_require__(/*! src/app/shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
-const i2 = __webpack_require__(/*! ../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
+const i1 = __webpack_require__(/*! src/app/shared/shared-services/announcement/announcement.service */ "./src/app/shared/shared-services/announcement/announcement.service.ts");
+const i2 = __webpack_require__(/*! ../../shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
 const i3 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 const i4 = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/__ivy_ngcc__/fesm2015/ag-grid-angular.js");
 function HomeComponent_ag_grid_angular_0_Template(rf, ctx) { if (rf & 1) {
@@ -1446,8 +1446,8 @@ const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 const i2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-const i3 = __webpack_require__(/*! ../../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
-const i4 = __webpack_require__(/*! ../../../shared/shared-services/user-shared.service */ "./src/app/shared/shared-services/user-shared.service.ts");
+const i3 = __webpack_require__(/*! ../../../shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
+const i4 = __webpack_require__(/*! ../../../shared/shared-services/user/user-shared.service */ "./src/app/shared/shared-services/user/user-shared.service.ts");
 const i5 = __webpack_require__(/*! ../../core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
 const i6 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 function UserLoginComponent_div_13_Template(rf, ctx) { if (rf & 1) {
@@ -1637,7 +1637,7 @@ const user_1 = __webpack_require__(/*! ../user */ "./src/app/modules/users/user.
 const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-const i2 = __webpack_require__(/*! ../../../shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
+const i2 = __webpack_require__(/*! ../../../shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
 const i3 = __webpack_require__(/*! ../../core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
 const i4 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 class UserRegistrationComponent {
@@ -2126,10 +2126,10 @@ AgGridHeaderComponent.ɵcmp = i0.ɵɵdefineComponent({ type: AgGridHeaderCompone
 
 /***/ }),
 
-/***/ "./src/app/shared/shared-services/announcement.service.ts":
-/*!****************************************************************!*\
-  !*** ./src/app/shared/shared-services/announcement.service.ts ***!
-  \****************************************************************/
+/***/ "./src/app/shared/shared-services/announcement/announcement.service.ts":
+/*!*****************************************************************************!*\
+  !*** ./src/app/shared/shared-services/announcement/announcement.service.ts ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2143,7 +2143,7 @@ const rxjs_1 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/ind
 const operators_1 = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
-const i2 = __webpack_require__(/*! ./logger.service */ "./src/app/shared/shared-services/logger.service.ts");
+const i2 = __webpack_require__(/*! ../logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
 class AnnouncementService {
     constructor(httpClient, logger) {
         this.httpClient = httpClient;
@@ -2180,10 +2180,10 @@ AnnouncementService.ɵprov = i0.ɵɵdefineInjectable({ token: AnnouncementServic
 
 /***/ }),
 
-/***/ "./src/app/shared/shared-services/logger.service.ts":
-/*!**********************************************************!*\
-  !*** ./src/app/shared/shared-services/logger.service.ts ***!
-  \**********************************************************/
+/***/ "./src/app/shared/shared-services/logger/logger.service.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/shared/shared-services/logger/logger.service.ts ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2253,10 +2253,10 @@ exports.LoggerErrorService = LoggerErrorService;
 
 /***/ }),
 
-/***/ "./src/app/shared/shared-services/user-shared.service.ts":
-/*!***************************************************************!*\
-  !*** ./src/app/shared/shared-services/user-shared.service.ts ***!
-  \***************************************************************/
+/***/ "./src/app/shared/shared-services/user/user-shared.service.ts":
+/*!********************************************************************!*\
+  !*** ./src/app/shared/shared-services/user/user-shared.service.ts ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2301,8 +2301,8 @@ UserSharedService.ɵprov = i0.ɵɵdefineInjectable({ token: UserSharedService, f
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.envProdAnnouncementService = exports.envProdServiceLogger = exports.environment = void 0;
-const logger_service_1 = __webpack_require__(/*! ../app/shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
-const announcement_service_1 = __webpack_require__(/*! src/app/shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
+const logger_service_1 = __webpack_require__(/*! ../app/shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
+const announcement_service_1 = __webpack_require__(/*! src/app/shared/shared-services/announcement/announcement.service */ "./src/app/shared/shared-services/announcement/announcement.service.ts");
 exports.environment = {
     production: true
 };
@@ -2326,8 +2326,8 @@ exports.envAnnouncementService = exports.envServiceLogger = exports.environment 
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-const logger_service_1 = __webpack_require__(/*! ../app/shared/shared-services/logger.service */ "./src/app/shared/shared-services/logger.service.ts");
-const announcement_service_1 = __webpack_require__(/*! ../app/shared/shared-services/announcement.service */ "./src/app/shared/shared-services/announcement.service.ts");
+const logger_service_1 = __webpack_require__(/*! ../app/shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
+const announcement_service_1 = __webpack_require__(/*! ../app/shared/shared-services/announcement/announcement.service */ "./src/app/shared/shared-services/announcement/announcement.service.ts");
 exports.environment = {
     production: false
 };
