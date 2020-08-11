@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User, Session } from '../../users/user';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { LoggerService } from '../../../shared/shared-services/logger.service';
-import { Subscription } from 'rxjs/internal/Subscription';
 
 
 @Injectable({
@@ -17,7 +16,7 @@ export class AuthService {
   // state - stan czy użytkownik jest zalogowany
   state = this.userSession.pipe(
     map(session => session && !!session.token),
-    tap(state => console.log('>>>>> ' , this.isAuthenticated = state))
+    tap(state => console.log('>>>>> ', this.isAuthenticated = state))
   );
 
   httpOptions = {
@@ -35,10 +34,10 @@ export class AuthService {
   }
 
   public login(user: User): Observable<Session> {
-    return this.httpClient.post<Session>('/login', user,  this.httpOptions).pipe(
-      tap(state =>  this.userSession.next(state)),
+    return this.httpClient.post<Session>('/login', user, this.httpOptions).pipe(
+      tap(state => {this.userSession.next(state);  this.isLogged = true;}),
       catchError(this.handleError<User>('Login user'))
-      );
+    );
   }
 
   public loginOut(): void {
@@ -54,7 +53,7 @@ export class AuthService {
   }
   getToken(): string | null {
     // getValue - zwraca ostatnią wartość w BehaviorSubject
-    const session  = this.userSession.getValue();
+    const session = this.userSession.getValue();
     return session && session.token;
   }
   getCurrentUser(): any | null {
