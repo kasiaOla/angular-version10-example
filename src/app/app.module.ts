@@ -5,17 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './modules/home/home.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from './modules/core/core.module';
 import { CommonModule } from '@angular/common';
 import { LoggerService } from './shared/shared-services/logger.service';
 import { envProdServiceLogger } from '../environments/environment.prod';
 import { AgGridModule } from 'ag-grid-angular';
 import { AnnouncementService } from './shared/shared-services/announcement.service';
-import { AuthGuardService } from './modules/core/authentication/auth-guard.service';
-import { AuthService } from './modules/core/authentication/auth.service';
 import { AgGridHeaderComponent } from './shared/ag-grid-header/ag-grid-header.component';
-import { AuthInterceptorService } from './modules/core/authentication/auth-interceptor.service';
+import { AuthenticationModule } from './modules/core/authentication/authentication/authentication.module';
 
 
 @NgModule({
@@ -37,6 +35,7 @@ import { AuthInterceptorService } from './modules/core/authentication/auth-inter
     HttpClientModule,
     BrowserAnimationsModule,
     CoreModule,
+    AuthenticationModule
   ],
   exports: [
     AppComponent,
@@ -44,18 +43,10 @@ import { AuthInterceptorService } from './modules/core/authentication/auth-inter
     AgGridHeaderComponent
   ],
   providers: [
-    AuthGuardService,
     AnnouncementService,
-    AuthService,
     {
       provide: LoggerService,
       useClass: envProdServiceLogger,
-
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true
     }
   ],
   entryComponents: [
