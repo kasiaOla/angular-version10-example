@@ -1,32 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../authentication/auth.service';
-import { UserSharedService } from '../../../shared/shared-services/user-shared.service';
-import { Subscription } from 'rxjs/internal/Subscription';
+
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  public subscription: Subscription;
-  public userName: string;
-
-  constructor(public authService: AuthService,
-              private userSharedService: UserSharedService) {
-
+  constructor(public authService: AuthService) {
   }
 
-  ngOnInit(): void {
-    this.subscription = this.userSharedService.userContent$.subscribe((user) => {
-      this.userName = user.name;
-    });
-   }
+  ngOnInit(): void {}
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 
   loginOut(): void {
     this.authService.loginOut();

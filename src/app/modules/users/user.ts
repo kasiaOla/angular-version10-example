@@ -26,6 +26,6 @@ export enum CustomerType {
 export interface Session {
   success: boolean;
   message: string;
-  respons: any;
-  token: string;
+  respons?: any;
+  token?: string;
 }

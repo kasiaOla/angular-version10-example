@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { User } from '../../modules/users/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserSharedService {
-
-  private userSource = new Subject<User>();
+  // zapamietuje dane w innych komponentach
+  private userSource = new BehaviorSubject<User>(null);
   public userContent$ = this.userSource.asObservable();
 
   constructor() {}

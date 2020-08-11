@@ -11,12 +11,11 @@ import { LoggerService } from '../../../shared/shared-services/logger.service';
   selector: 'app-user-login',
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.scss'],
-  providers: [UserSharedService]
+
 })
 export class UserLoginComponent implements OnInit {
 
   loginForm: FormGroup;
-
 
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -40,6 +39,7 @@ export class UserLoginComponent implements OnInit {
   login(): void {
 
     if (this.loginForm.dirty && this.loginForm.valid) {
+
       this.authService.login(this.loginForm.value)
         .subscribe(data => {
           if (data.success === false) {
@@ -49,12 +49,14 @@ export class UserLoginComponent implements OnInit {
           }
           this.loginForm.reset();
         }, (Error: any) => {
-          if (Error instanceof HttpErrorResponse){
+          if (Error instanceof HttpErrorResponse) {
             this.logger.error('Error name: ' + Error.error);
             this.logger.error('Error status text: ' + Error.statusText);
             this.logger.error('Error status: ' + Error.status);
           }
         });
+
     }
   }
+
 }

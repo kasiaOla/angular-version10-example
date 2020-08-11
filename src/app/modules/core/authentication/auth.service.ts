@@ -1,15 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../../users/user';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { User, Session } from '../../users/user';
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { LoggerService } from '../../../shared/shared-services/logger.service';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private userSession = new BehaviorSubject<Session>(null);
+  isAuthenticated = false;
+
+  // state - stan czy użytkownik jest zalogowany
+  state = this.userSession.pipe(
+    map(session => session && !!session.token),
+    tap(state => console.log('>>>>> ' , this.isAuthenticated = state))
+  );
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,13 +34,11 @@ export class AuthService {
       );
   }
 
-
-  public login(user: User): Observable<any> {
-    let headers = new HttpHeaders();
-    headers = headers.set('content-type', 'application/json');
-    this.isLogged = true;
-
-    return this.httpClient.post('/login', JSON.stringify(user), { headers });
+  public login(user: User): Observable<Session> {
+    return this.httpClient.post<Session>('/login', user,  this.httpOptions).pipe(
+      tap(state =>  this.userSession.next(state)),
+      catchError(this.handleError<User>('Login user'))
+      );
   }
 
   public loginOut(): void {
@@ -45,4 +52,14 @@ export class AuthService {
       return of(result as T);
     };
   }
+  getToken(): string | null {
+    // getValue - zwraca ostatnią wartość w BehaviorSubject
+    const session  = this.userSession.getValue();
+    return session && session.token;
+  }
+  getCurrentUser(): any | null {
+    const session = this.userSession.getValue();
+    return session && session.respons;
+  }
+
 }
