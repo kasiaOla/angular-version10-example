@@ -1,9 +1,9 @@
 <div class="card-body">
     <nav class="navbar navbar-light bg-light">
         <div><a class="navbar-brand" [routerLink]="'/home'" routerLinkActive="active" name='home'>Strona główna</a></div>
-        <div><a class="navbar-brand" [routerLink]="'/user/registration'" routerLinkActive="active" *ngIf="!authService.isLogged" name='registration'>Rejestracja</a></div>
-        <div><a class="navbar-brand" [routerLink]="'/user/login'" routerLinkActive="active" *ngIf="!authService.isLogged" name='login'>Zaloguj</a></div>
-        <div><a class="navbar-brand" (click)="loginOut()" *ngIf="authService.isLogged" name='loginOut'>Wyloguj</a></div>
+        <div><a class="navbar-brand" [routerLink]="'/user/registration'" routerLinkActive="active" *ngIf="!authService.isAuthenticated" name='registration'>Rejestracja</a></div>
+        <div><a class="navbar-brand" [routerLink]="'/user/login'" routerLinkActive="active" *ngIf="!authService.isAuthenticated" name='login'>Zaloguj</a></div>
+        <div><a class="navbar-brand" (click)="loginOut()" *ngIf="authService.isAuthenticated" name='loginOut'>Wyloguj</a></div>
         <div><a class="navbar-brand" [routerLink]="'/user/contact'" routerLinkActive="active" name='contact'>Kontakt</a></div>
     </nav>
     <button class="btn btn-default link-button--save" [routerLink]="'/announcement/category'" routerLinkActive="active">Dodaj ogłoszenie</button>

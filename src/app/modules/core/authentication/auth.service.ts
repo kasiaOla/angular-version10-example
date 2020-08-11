@@ -11,7 +11,7 @@ import { LoggerService } from '../../../shared/shared-services/logger.service';
 })
 export class AuthService {
   private userSession = new BehaviorSubject<Session>(null);
-  isAuthenticated = false;
+  public isAuthenticated = false;
 
   // state - stan czy użytkownik jest zalogowany
   state = this.userSession.pipe(
@@ -23,7 +23,6 @@ export class AuthService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  public isLogged = false;
   constructor(private httpClient: HttpClient, private logger: LoggerService) { }
 
   public registration(newUser: User): Observable<any> {
@@ -35,13 +34,15 @@ export class AuthService {
 
   public login(user: User): Observable<Session> {
     return this.httpClient.post<Session>('/login', user, this.httpOptions).pipe(
-      tap(state => {this.userSession.next(state);  this.isLogged = true;}),
+      tap(state => {
+        this.userSession.next(state); this.isAuthenticated = true;
+      }),
       catchError(this.handleError<User>('Login user'))
     );
   }
 
   public loginOut(): void {
-    this.isLogged = false;
+    this.isAuthenticated = false;
   }
 
   private handleError<T>(operation = 'operation', result?: T): any {
