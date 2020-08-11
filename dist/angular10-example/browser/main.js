@@ -1429,66 +1429,6 @@ ContactComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ContactComponent, select
 
 /***/ }),
 
-/***/ "./src/app/modules/users/profile/profile.component.ts":
-/*!************************************************************!*\
-  !*** ./src/app/modules/users/profile/profile.component.ts ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProfileComponent = void 0;
-const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-const i1 = __webpack_require__(/*! ../../core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
-class ProfileComponent {
-    constructor(authService) {
-        this.authService = authService;
-    }
-    ngOnInit() {
-    }
-}
-exports.ProfileComponent = ProfileComponent;
-ProfileComponent.ɵfac = function ProfileComponent_Factory(t) { return new (t || ProfileComponent)(i0.ɵɵdirectiveInject(i1.AuthService)); };
-ProfileComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ProfileComponent, selectors: [["app-profile"]], decls: 15, vars: 0, consts: [[1, "row"], [1, "col-3"], [1, "col-9"], [3, "click"]], template: function ProfileComponent_Template(rf, ctx) { if (rf & 1) {
-        i0.ɵɵelementStart(0, "div");
-        i0.ɵɵelementStart(1, "h3");
-        i0.ɵɵtext(2, "Profil");
-        i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(3, "dl", 0);
-        i0.ɵɵelementStart(4, "dt", 1);
-        i0.ɵɵtext(5, "Nazwa");
-        i0.ɵɵelementEnd();
-        i0.ɵɵelement(6, "dd", 2);
-        i0.ɵɵelementStart(7, "dt", 1);
-        i0.ɵɵtext(8, "Email");
-        i0.ɵɵelementEnd();
-        i0.ɵɵelement(9, "dd", 2);
-        i0.ɵɵelementStart(10, "dt", 1);
-        i0.ɵɵtext(11, "Typ u\u017Cytkownika");
-        i0.ɵɵelementEnd();
-        i0.ɵɵelement(12, "dd", 2);
-        i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(13, "button", 3);
-        i0.ɵɵlistener("click", function ProfileComponent_Template_button_click_13_listener() { return ctx.authService.loginOut(); });
-        i0.ɵɵtext(14, "Wyloguj si\u0119");
-        i0.ɵɵelementEnd();
-        i0.ɵɵelementEnd();
-    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvdXNlcnMvcHJvZmlsZS9wcm9maWxlLmNvbXBvbmVudC5zY3NzIn0= */"] });
-/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(ProfileComponent, [{
-        type: core_1.Component,
-        args: [{
-                selector: 'app-profile',
-                templateUrl: './profile.component.html',
-                styleUrls: ['./profile.component.scss']
-            }]
-    }], function () { return [{ type: i1.AuthService }]; }, null); })();
-
-
-/***/ }),
-
 /***/ "./src/app/modules/users/user-login/user-login.component.ts":
 /*!******************************************************************!*\
   !*** ./src/app/modules/users/user-login/user-login.component.ts ***!
@@ -1616,6 +1556,66 @@ UserLoginComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserLoginComponent, se
                 styleUrls: ['./user-login.component.scss'],
             }]
     }], function () { return [{ type: i1.FormBuilder }, { type: i2.Router }, { type: i3.LoggerService }, { type: i4.UserSharedService }, { type: i5.AuthService }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/modules/users/user-profile/user-profile.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/modules/users/user-profile/user-profile.component.ts ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserProfileComponent = void 0;
+const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i1 = __webpack_require__(/*! ../../core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
+class UserProfileComponent {
+    constructor(authService) {
+        this.authService = authService;
+    }
+    ngOnInit() {
+    }
+}
+exports.UserProfileComponent = UserProfileComponent;
+UserProfileComponent.ɵfac = function UserProfileComponent_Factory(t) { return new (t || UserProfileComponent)(i0.ɵɵdirectiveInject(i1.AuthService)); };
+UserProfileComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserProfileComponent, selectors: [["app-user-profile"]], decls: 15, vars: 0, consts: [[1, "row"], [1, "col-3"], [1, "col-9"], [3, "click"]], template: function UserProfileComponent_Template(rf, ctx) { if (rf & 1) {
+        i0.ɵɵelementStart(0, "div");
+        i0.ɵɵelementStart(1, "h3");
+        i0.ɵɵtext(2, "Profil");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(3, "dl", 0);
+        i0.ɵɵelementStart(4, "dt", 1);
+        i0.ɵɵtext(5, "Nazwa");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelement(6, "dd", 2);
+        i0.ɵɵelementStart(7, "dt", 1);
+        i0.ɵɵtext(8, "Email");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelement(9, "dd", 2);
+        i0.ɵɵelementStart(10, "dt", 1);
+        i0.ɵɵtext(11, "Typ u\u017Cytkownika");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelement(12, "dd", 2);
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(13, "button", 3);
+        i0.ɵɵlistener("click", function UserProfileComponent_Template_button_click_13_listener() { return ctx.authService.loginOut(); });
+        i0.ɵɵtext(14, "Wyloguj si\u0119");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementEnd();
+    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvdXNlcnMvdXNlci1wcm9maWxlL3VzZXItcHJvZmlsZS5jb21wb25lbnQuc2NzcyJ9 */"] });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(UserProfileComponent, [{
+        type: core_1.Component,
+        args: [{
+                selector: 'app-user-profile',
+                templateUrl: './user-profile.component.html',
+                styleUrls: ['./user-profile.component.scss']
+            }]
+    }], function () { return [{ type: i1.AuthService }]; }, null); })();
 
 
 /***/ }),
@@ -1858,7 +1858,7 @@ const user_component_1 = __webpack_require__(/*! ./user/user.component */ "./src
 const contact_component_1 = __webpack_require__(/*! ./contact/contact.component */ "./src/app/modules/users/contact/contact.component.ts");
 const user_login_component_1 = __webpack_require__(/*! ./user-login/user-login.component */ "./src/app/modules/users/user-login/user-login.component.ts");
 const auth_guard_service_1 = __webpack_require__(/*! ../core/authentication/auth-guard/auth-guard.service */ "./src/app/modules/core/authentication/auth-guard/auth-guard.service.ts");
-const profile_component_1 = __webpack_require__(/*! ./profile/profile.component */ "./src/app/modules/users/profile/profile.component.ts");
+const user_profile_component_1 = __webpack_require__(/*! ./user-profile/user-profile.component */ "./src/app/modules/users/user-profile/user-profile.component.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const routes = [
@@ -1885,7 +1885,7 @@ const routes = [
             {
                 path: 'profile',
                 data: { title: 'Profil' },
-                component: profile_component_1.ProfileComponent,
+                component: user_profile_component_1.UserProfileComponent,
             },
         ]
     },
@@ -1927,7 +1927,7 @@ const forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angul
 const user_component_1 = __webpack_require__(/*! ./user/user.component */ "./src/app/modules/users/user/user.component.ts");
 const contact_component_1 = __webpack_require__(/*! ./contact/contact.component */ "./src/app/modules/users/contact/contact.component.ts");
 const user_login_component_1 = __webpack_require__(/*! ./user-login/user-login.component */ "./src/app/modules/users/user-login/user-login.component.ts");
-const profile_component_1 = __webpack_require__(/*! ./profile/profile.component */ "./src/app/modules/users/profile/profile.component.ts");
+const user_profile_component_1 = __webpack_require__(/*! ./user-profile/user-profile.component */ "./src/app/modules/users/user-profile/user-profile.component.ts");
 const auth_interceptor_service_1 = __webpack_require__(/*! ../core/authentication/auth-interceptor/auth-interceptor.service */ "./src/app/modules/core/authentication/auth-interceptor/auth-interceptor.service.ts");
 const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
@@ -1951,14 +1951,14 @@ UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factor
         user_component_1.UserComponent,
         contact_component_1.ContactComponent,
         user_login_component_1.UserLoginComponent,
-        profile_component_1.ProfileComponent], imports: [common_1.CommonModule,
+        user_profile_component_1.UserProfileComponent], imports: [common_1.CommonModule,
         users_routing_module_1.UsersRoutingModule,
         router_1.RouterModule,
         forms_1.ReactiveFormsModule], exports: [user_registration_component_1.UserRegistrationComponent,
         user_component_1.UserComponent,
         contact_component_1.ContactComponent,
         user_login_component_1.UserLoginComponent,
-        profile_component_1.ProfileComponent] }); })();
+        user_profile_component_1.UserProfileComponent] }); })();
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(UsersModule, [{
         type: core_1.NgModule,
         args: [{
@@ -1967,7 +1967,7 @@ UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factor
                     user_component_1.UserComponent,
                     contact_component_1.ContactComponent,
                     user_login_component_1.UserLoginComponent,
-                    profile_component_1.ProfileComponent,
+                    user_profile_component_1.UserProfileComponent,
                 ],
                 imports: [
                     common_1.CommonModule,
@@ -1980,7 +1980,7 @@ UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factor
                     user_component_1.UserComponent,
                     contact_component_1.ContactComponent,
                     user_login_component_1.UserLoginComponent,
-                    profile_component_1.ProfileComponent
+                    user_profile_component_1.UserProfileComponent
                 ],
                 providers: [
                     {
