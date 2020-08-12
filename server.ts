@@ -9,9 +9,13 @@ import { existsSync } from 'fs';
 import * as mongoose from 'mongoose';
 import { UserRoute } from './server/routes/user';
 import { AnnouncementRoute } from './server/routes/announcement';
+import { LocationRoute } from './server/routes/location';
+
+
 const bodyParser = require('body-parser');
 const userRoute: UserRoute = new UserRoute();
 const announcementRoute: AnnouncementRoute = new AnnouncementRoute();
+const locationRoute: LocationRoute = new LocationRoute();
 
 export function app(): express.Express {
   const server = express();
@@ -53,6 +57,7 @@ export function app(): express.Express {
 
   userRoute.userRoute(server);
   announcementRoute.announcementRoute(server);
+  locationRoute.locationRoute(server);
 
   server.get('*', (req, res) => {
     console.log('req ' , req.baseUrl);
