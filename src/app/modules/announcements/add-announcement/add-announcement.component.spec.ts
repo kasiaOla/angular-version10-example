@@ -3,9 +3,9 @@ import { AddAnnouncementComponent } from './add-announcement.component';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { AnnouncementService } from '../../../shared/shared-services/announcement.service';
 import { ActivatedRoute } from '@angular/router';
 import { LoggerService } from '../../../shared/shared-services/logger/logger.service';
+import { AnnouncementService } from '../../../shared/shared-services/announcement/announcement.service';
 
 
 const mockAnnouncementService = {
