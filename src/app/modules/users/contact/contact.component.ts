@@ -15,13 +15,12 @@ export class ContactComponent implements OnInit {
 
   constructor(public locationService: LocationService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   search(value: string): void {
     this.searchValue = value;
-
-    this.locations = this.locations.pipe(
-      map(result => result.filter(valueFilter => valueFilter.name.indexOf(this.searchValue) >= 0) ),
+    this.locations =  this.locationService.locationSession$.pipe(
+      map(result => result.filter(valueFilter => valueFilter.name.indexOf(this.searchValue) >= 0)),
       share(),
     );
   }

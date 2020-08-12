@@ -10,6 +10,8 @@ import { share, tap, map, filter, switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LocationService {
+  private locationSession = new BehaviorSubject<Location[]>(null);
+  public locationSession$ = this.locationSession.asObservable();
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,6 +25,7 @@ export class LocationService {
     return this.httpClient.get<Location[]>(`/api/get-locations`, this.httpOptions).pipe(
       map(data => data),
       tap(announcements => {
+        this.locationSession.next(announcements);
         this.logger.info('locations retrieved!' + announcements);
       }),
       share()
