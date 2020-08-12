@@ -154,6 +154,7 @@ const ag_grid_angular_1 = __webpack_require__(/*! ag-grid-angular */ "./node_mod
 const announcement_service_1 = __webpack_require__(/*! ./shared/shared-services/announcement/announcement.service */ "./src/app/shared/shared-services/announcement/announcement.service.ts");
 const ag_grid_header_component_1 = __webpack_require__(/*! ./shared/shared-ag-grid-header/ag-grid-header.component */ "./src/app/shared/shared-ag-grid-header/ag-grid-header.component.ts");
 const authentication_module_1 = __webpack_require__(/*! ./modules/core/authentication/authentication.module */ "./src/app/modules/core/authentication/authentication.module.ts");
+const location_service_1 = __webpack_require__(/*! ./shared/shared-services/location/location.service */ "./src/app/shared/shared-services/location/location.service.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
 const i2 = __webpack_require__(/*! ag-grid-angular */ "./node_modules/ag-grid-angular/__ivy_ngcc__/fesm2015/ag-grid-angular.js");
@@ -163,6 +164,7 @@ exports.AppModule = AppModule;
 AppModule.ɵmod = i0.ɵɵdefineNgModule({ type: AppModule, bootstrap: [app_component_1.AppComponent] });
 AppModule.ɵinj = i0.ɵɵdefineInjector({ factory: function AppModule_Factory(t) { return new (t || AppModule)(); }, providers: [
         announcement_service_1.AnnouncementService,
+        location_service_1.LocationService,
         {
             provide: logger_service_1.LoggerService,
             useClass: environment_prod_1.envProdServiceLogger,
@@ -223,6 +225,7 @@ AppModule.ɵinj = i0.ɵɵdefineInjector({ factory: function AppModule_Factory(t)
                 ],
                 providers: [
                     announcement_service_1.AnnouncementService,
+                    location_service_1.LocationService,
                     {
                         provide: logger_service_1.LoggerService,
                         useClass: environment_prod_1.envProdServiceLogger,
@@ -759,8 +762,7 @@ const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/cor
 const i1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 class AnnouncementComponent {
     constructor() { }
-    ngOnInit() {
-    }
+    ngOnInit() { }
 }
 exports.AnnouncementComponent = AnnouncementComponent;
 AnnouncementComponent.ɵfac = function AnnouncementComponent_Factory(t) { return new (t || AnnouncementComponent)(); };
@@ -828,14 +830,35 @@ AuthGuardService.ɵprov = i0.ɵɵdefineInjectable({ token: AuthGuardService, fac
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthInterceptorService = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+const operators_1 = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+const rxjs_2 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! ../auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
+const i2 = __webpack_require__(/*! ../../../../shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
 class AuthInterceptorService {
-    constructor(auth) {
+    constructor(auth, logger) {
         this.auth = auth;
+        this.logger = logger;
     }
     intercept(req, next) {
-        return next.handle(this.getAuthorizedRequest(req));
+        return next.handle(this.getAuthorizedRequest(req)).pipe(operators_1.catchError((Error, caught) => {
+            if (Error instanceof http_1.HttpErrorResponse && Error.status === 401) {
+                this.logger.error('Authorization Request ');
+                return rxjs_2.empty();
+            }
+            else if (Error instanceof http_1.HttpErrorResponse && Error.status === 403) {
+                this.logger.error('Forbidden');
+                return rxjs_2.empty();
+            }
+            else if (Error instanceof http_1.HttpErrorResponse && Error.status === 404) {
+                this.logger.error('Not Found');
+                return rxjs_2.empty(); // empty() - przerwanie obsługi
+            }
+            // tslint:disable-next-line: deprecation
+            return rxjs_1.throwError(Error);
+        }));
     }
     getAuthorizedRequest(req) {
         return req.clone({
@@ -846,14 +869,14 @@ class AuthInterceptorService {
     }
 }
 exports.AuthInterceptorService = AuthInterceptorService;
-AuthInterceptorService.ɵfac = function AuthInterceptorService_Factory(t) { return new (t || AuthInterceptorService)(i0.ɵɵinject(i1.AuthService)); };
+AuthInterceptorService.ɵfac = function AuthInterceptorService_Factory(t) { return new (t || AuthInterceptorService)(i0.ɵɵinject(i1.AuthService), i0.ɵɵinject(i2.LoggerService)); };
 AuthInterceptorService.ɵprov = i0.ɵɵdefineInjectable({ token: AuthInterceptorService, factory: AuthInterceptorService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AuthInterceptorService, [{
         type: core_1.Injectable,
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: i1.AuthService }]; }, null); })();
+    }], function () { return [{ type: i1.AuthService }, { type: i2.LoggerService }]; }, null); })();
 
 
 /***/ }),
@@ -1379,44 +1402,78 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ContactComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i1 = __webpack_require__(/*! ../../../shared/shared-services/location/location.service */ "./src/app/shared/shared-services/location/location.service.ts");
+const i2 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+function ContactComponent_div_9_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div", 15);
+    i0.ɵɵtext(1);
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    const location_r1 = ctx.$implicit;
+    i0.ɵɵadvance(1);
+    i0.ɵɵtextInterpolate1(" ", location_r1.name, " ");
+} }
 class ContactComponent {
-    constructor() { }
+    constructor(locationService) {
+        this.locationService = locationService;
+        this.locations = this.locationService.getLocations();
+    }
     ngOnInit() { }
+    search(value) { }
 }
 exports.ContactComponent = ContactComponent;
-ContactComponent.ɵfac = function ContactComponent_Factory(t) { return new (t || ContactComponent)(); };
-ContactComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ContactComponent, selectors: [["app-contact"]], decls: 20, vars: 0, consts: [[1, "jumbotron", "content"], [1, "panel", "panel-default"], [1, "panel-body"], [1, "col-md-3", "mb-md-0", "mb-3"], [1, "text-uppercase"], [1, "fa", "fa-home", "mr-3"], [1, "fa", "fa-envelope", "mr-3"], [1, "fa", "fa-phone", "mr-3"], [1, "fa", "fa-print", "mr-3"]], template: function ContactComponent_Template(rf, ctx) { if (rf & 1) {
+ContactComponent.ɵfac = function ContactComponent_Factory(t) { return new (t || ContactComponent)(i0.ɵɵdirectiveInject(i1.LocationService)); };
+ContactComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ContactComponent, selectors: [["app-contact"]], decls: 29, vars: 3, consts: [[1, "jumbotron", "content"], [1, "panel", "panel-default"], [1, "row"], [1, "col"], [1, "input-group", "mb-3"], ["type", "text", "placeholder", "Search ...", 1, "form-control", 3, "keyup.enter"], [1, "list-group"], ["class", "list-group-item", 4, "ngFor", "ngForOf"], [1, "panel-body"], [1, "col-md-3", "mb-md-0", "mb-3"], [1, "text-uppercase"], [1, "fa", "fa-home", "mr-3"], [1, "fa", "fa-envelope", "mr-3"], [1, "fa", "fa-phone", "mr-3"], [1, "fa", "fa-print", "mr-3"], [1, "list-group-item"]], template: function ContactComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "div", 0);
         i0.ɵɵelementStart(1, "div", 1);
         i0.ɵɵelementStart(2, "div", 2);
-        i0.ɵɵelementStart(3, "h2");
-        i0.ɵɵtext(4, "Kontakt");
+        i0.ɵɵelementStart(3, "div", 3);
+        i0.ɵɵelementStart(4, "h3");
+        i0.ɵɵtext(5, "Wybierz lokalizacj\u0119");
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(5, "div", 3);
-        i0.ɵɵelementStart(6, "h5", 4);
-        i0.ɵɵtext(7, "Adres");
+        i0.ɵɵelementStart(6, "div", 4);
+        i0.ɵɵelementStart(7, "input", 5);
+        i0.ɵɵlistener("keyup.enter", function ContactComponent_Template_input_keyup_enter_7_listener($event) { return ctx.search($event.target.value); });
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(8, "p");
-        i0.ɵɵelement(9, "i", 5);
-        i0.ɵɵtext(10, " Warszawa 02-942 Konstanci\u0144ska 7b/36");
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(11, "p");
-        i0.ɵɵelement(12, "i", 6);
-        i0.ɵɵtext(13, " test@example.com");
+        i0.ɵɵelementStart(8, "div", 6);
+        i0.ɵɵtemplate(9, ContactComponent_div_9_Template, 2, 1, "div", 7);
+        i0.ɵɵpipe(10, "async");
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(14, "p");
-        i0.ɵɵelement(15, "i", 7);
-        i0.ɵɵtext(16, " + ");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(11, "div", 8);
+        i0.ɵɵelementStart(12, "h2");
+        i0.ɵɵtext(13, "Kontakt");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(14, "div", 9);
+        i0.ɵɵelementStart(15, "h5", 10);
+        i0.ɵɵtext(16, "Adres");
         i0.ɵɵelementEnd();
         i0.ɵɵelementStart(17, "p");
-        i0.ɵɵelement(18, "i", 8);
-        i0.ɵɵtext(19, " + 01 234 567 89");
+        i0.ɵɵelement(18, "i", 11);
+        i0.ɵɵtext(19, " Warszawa 02-942 Konstanci\u0144ska 7b/36");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(20, "p");
+        i0.ɵɵelement(21, "i", 12);
+        i0.ɵɵtext(22, " test@example.com");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(23, "p");
+        i0.ɵɵelement(24, "i", 13);
+        i0.ɵɵtext(25, " + ");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(26, "p");
+        i0.ɵɵelement(27, "i", 14);
+        i0.ɵɵtext(28, " + 01 234 567 89");
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
-    } }, styles: [".content[_ngcontent-%COMP%] {\n  width: 80%;\n  margin: 10%;\n  background-color: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy91c2Vycy9jb250YWN0L2NvbnRhY3QuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLFVBQUE7RUFDQSxXQUFBO0VBQ0EsaUdDSlE7QURJWiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvdXNlcnMvY29udGFjdC9jb250YWN0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uLy4uLy4uL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2Nzc1wiO1xyXG4uY29udGVudCB7XHJcbiAgICB3aWR0aDogODAlO1xyXG4gICAgbWFyZ2luOiAxMCU7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkYm94U2hhZG93O1xyXG59XHJcbiIsIiRib3hTaGFkb3c6IGluc2V0IC0xMHB4IC0xMHB4IDEwMHB4ICNjOGNlZDUsXG4xMHB4IDEwcHggMjBweCAjYzhjZWQ1LFxuaW5zZXQgMCAwIDEwcHggI2M4Y2VkNTtcbiRib3JkZXI6IDFweCAjMjIyIHNvbGlkOyJdfQ== */"] });
+    } if (rf & 2) {
+        i0.ɵɵadvance(9);
+        i0.ɵɵproperty("ngForOf", i0.ɵɵpipeBind1(10, 1, ctx.locations));
+    } }, directives: [i2.NgForOf], pipes: [i2.AsyncPipe], styles: [".content[_ngcontent-%COMP%] {\n  width: 80%;\n  margin: 10%;\n  background-color: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy91c2Vycy9jb250YWN0L2NvbnRhY3QuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLFVBQUE7RUFDQSxXQUFBO0VBQ0EsaUdDSlE7QURJWiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvdXNlcnMvY29udGFjdC9jb250YWN0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uLy4uLy4uL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2Nzc1wiO1xyXG4uY29udGVudCB7XHJcbiAgICB3aWR0aDogODAlO1xyXG4gICAgbWFyZ2luOiAxMCU7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkYm94U2hhZG93O1xyXG59XHJcbiIsIiRib3hTaGFkb3c6IGluc2V0IC0xMHB4IC0xMHB4IDEwMHB4ICNjOGNlZDUsXG4xMHB4IDEwcHggMjBweCAjYzhjZWQ1LFxuaW5zZXQgMCAwIDEwcHggI2M4Y2VkNTtcbiRib3JkZXI6IDFweCAjMjIyIHNvbGlkOyJdfQ== */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(ContactComponent, [{
         type: core_1.Component,
         args: [{
@@ -1424,7 +1481,7 @@ ContactComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ContactComponent, select
                 templateUrl: './contact.component.html',
                 styleUrls: ['./contact.component.scss']
             }]
-    }], function () { return []; }, null); })();
+    }], function () { return [{ type: i1.LocationService }]; }, null); })();
 
 
 /***/ }),
@@ -1445,11 +1502,10 @@ const forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angul
 const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-const i2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-const i3 = __webpack_require__(/*! ../../../shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
-const i4 = __webpack_require__(/*! ../../../shared/shared-services/user/user-shared.service */ "./src/app/shared/shared-services/user/user-shared.service.ts");
-const i5 = __webpack_require__(/*! ../../core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
-const i6 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+const i2 = __webpack_require__(/*! ../../../shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
+const i3 = __webpack_require__(/*! ../../../shared/shared-services/user/user-shared.service */ "./src/app/shared/shared-services/user/user-shared.service.ts");
+const i4 = __webpack_require__(/*! ../../core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
+const i5 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 function UserLoginComponent_div_13_Template(rf, ctx) { if (rf & 1) {
     i0.ɵɵelementStart(0, "div");
     i0.ɵɵtext(1, " Wprowad\u017A nazw\u0119 klienta ");
@@ -1461,9 +1517,8 @@ function UserLoginComponent_div_20_Template(rf, ctx) { if (rf & 1) {
     i0.ɵɵelementEnd();
 } }
 class UserLoginComponent {
-    constructor(fb, router, logger, userSharedService, authService) {
+    constructor(fb, logger, userSharedService, authService) {
         this.fb = fb;
-        this.router = router;
         this.logger = logger;
         this.userSharedService = userSharedService;
         this.authService = authService;
@@ -1481,13 +1536,22 @@ class UserLoginComponent {
         if (this.loginForm.dirty && this.loginForm.valid) {
             this.authService.login(this.loginForm.value)
                 .subscribe(data => {
-                if (data.success === false) {
+                switch (data.success) {
+                    case false: {
+                        this.logger.error(`Error code ${data.message}`);
+                        break;
+                    }
+                    case true: {
+                        this.logger.info('Logged in successfully');
+                        this.userSharedService.shareUser(data.respons);
+                        this.loginForm.reset();
+                        break;
+                    }
+                    default: {
+                        this.loginForm.reset();
+                        break;
+                    }
                 }
-                else if (data.success === true) {
-                    this.userSharedService.shareUser(data.respons);
-                    //   this.router.navigate(['user/profile']);
-                }
-                this.loginForm.reset();
             }, (Error) => {
                 if (Error instanceof http_1.HttpErrorResponse) {
                     this.logger.error('Error name: ' + Error.error);
@@ -1499,7 +1563,7 @@ class UserLoginComponent {
     }
 }
 exports.UserLoginComponent = UserLoginComponent;
-UserLoginComponent.ɵfac = function UserLoginComponent_Factory(t) { return new (t || UserLoginComponent)(i0.ɵɵdirectiveInject(i1.FormBuilder), i0.ɵɵdirectiveInject(i2.Router), i0.ɵɵdirectiveInject(i3.LoggerService), i0.ɵɵdirectiveInject(i4.UserSharedService), i0.ɵɵdirectiveInject(i5.AuthService)); };
+UserLoginComponent.ɵfac = function UserLoginComponent_Factory(t) { return new (t || UserLoginComponent)(i0.ɵɵdirectiveInject(i1.FormBuilder), i0.ɵɵdirectiveInject(i2.LoggerService), i0.ɵɵdirectiveInject(i3.UserSharedService), i0.ɵɵdirectiveInject(i4.AuthService)); };
 UserLoginComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserLoginComponent, selectors: [["app-user-login"]], decls: 24, vars: 3, consts: [[1, "jumbotron", "content"], [1, "panel", "panel-default"], [1, "panel-heading", "text-center"], [1, "panel-body"], ["id", "login-form", 1, "example-form", 3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "username"], ["required", "", "type", "text", "formControlName", "username", "name", "username", 1, "form-control"], [4, "ngIf"], ["for", "password"], ["required", "", "type", "password", "formControlName", "password", "name", "password", 1, "form-control"], ["type", "submit", "id", "Login", "title", "Login", 1, "btn", "btn-success"]], template: function UserLoginComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "div", 0);
         i0.ɵɵelementStart(1, "div", 1);
@@ -1547,7 +1611,7 @@ UserLoginComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserLoginComponent, se
         i0.ɵɵproperty("ngIf", ctx.isFieldInvalid("username"));
         i0.ɵɵadvance(7);
         i0.ɵɵproperty("ngIf", ctx.isFieldInvalid("password"));
-    } }, directives: [i1.ɵangular_packages_forms_forms_y, i1.NgControlStatusGroup, i1.FormGroupDirective, i1.DefaultValueAccessor, i1.RequiredValidator, i1.NgControlStatus, i1.FormControlName, i6.NgIf], styles: [".content[_ngcontent-%COMP%] {\n  width: 80%;\n  margin: 10%;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy91c2Vycy91c2VyLWxvZ2luL3VzZXItbG9naW4uY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLFVBQUE7RUFDQSxXQUFBO0VBQ0EsMkZDSlE7QURJWiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvdXNlcnMvdXNlci1sb2dpbi91c2VyLWxvZ2luLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uLy4uLy4uL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2Nzc1wiO1xyXG4uY29udGVudCB7XHJcbiAgICB3aWR0aDogODAlO1xyXG4gICAgbWFyZ2luOiAxMCU7XHJcbiAgICBib3gtc2hhZG93OiAkYm94U2hhZG93XHJcbn1cclxuIiwiJGJveFNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSxcbjEwcHggMTBweCAyMHB4ICNjOGNlZDUsXG5pbnNldCAwIDAgMTBweCAjYzhjZWQ1O1xuJGJvcmRlcjogMXB4ICMyMjIgc29saWQ7Il19 */"] });
+    } }, directives: [i1.ɵangular_packages_forms_forms_y, i1.NgControlStatusGroup, i1.FormGroupDirective, i1.DefaultValueAccessor, i1.RequiredValidator, i1.NgControlStatus, i1.FormControlName, i5.NgIf], styles: [".content[_ngcontent-%COMP%] {\n  width: 80%;\n  margin: 10%;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy91c2Vycy91c2VyLWxvZ2luL3VzZXItbG9naW4uY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLFVBQUE7RUFDQSxXQUFBO0VBQ0EsMkZDSlE7QURJWiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvdXNlcnMvdXNlci1sb2dpbi91c2VyLWxvZ2luLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uLy4uLy4uL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2Nzc1wiO1xyXG4uY29udGVudCB7XHJcbiAgICB3aWR0aDogODAlO1xyXG4gICAgbWFyZ2luOiAxMCU7XHJcbiAgICBib3gtc2hhZG93OiAkYm94U2hhZG93XHJcbn1cclxuIiwiJGJveFNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSxcbjEwcHggMTBweCAyMHB4ICNjOGNlZDUsXG5pbnNldCAwIDAgMTBweCAjYzhjZWQ1O1xuJGJvcmRlcjogMXB4ICMyMjIgc29saWQ7Il19 */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(UserLoginComponent, [{
         type: core_1.Component,
         args: [{
@@ -1555,7 +1619,7 @@ UserLoginComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserLoginComponent, se
                 templateUrl: './user-login.component.html',
                 styleUrls: ['./user-login.component.scss'],
             }]
-    }], function () { return [{ type: i1.FormBuilder }, { type: i2.Router }, { type: i3.LoggerService }, { type: i4.UserSharedService }, { type: i5.AuthService }]; }, null); })();
+    }], function () { return [{ type: i1.FormBuilder }, { type: i2.LoggerService }, { type: i3.UserSharedService }, { type: i4.AuthService }]; }, null); })();
 
 
 /***/ }),
@@ -2171,6 +2235,51 @@ exports.AnnouncementService = AnnouncementService;
 AnnouncementService.ɵfac = function AnnouncementService_Factory(t) { return new (t || AnnouncementService)(i0.ɵɵinject(i1.HttpClient), i0.ɵɵinject(i2.LoggerService)); };
 AnnouncementService.ɵprov = i0.ɵɵdefineInjectable({ token: AnnouncementService, factory: AnnouncementService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AnnouncementService, [{
+        type: core_1.Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return [{ type: i1.HttpClient }, { type: i2.LoggerService }]; }, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/shared/shared-services/location/location.service.ts":
+/*!*********************************************************************!*\
+  !*** ./src/app/shared/shared-services/location/location.service.ts ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LocationService = void 0;
+const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+const operators_1 = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+const i2 = __webpack_require__(/*! ../logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
+class LocationService {
+    constructor(httpClient, logger) {
+        this.httpClient = httpClient;
+        this.logger = logger;
+        this.httpOptions = {
+            headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
+        };
+    }
+    getLocations() {
+        const respons = this.httpClient.get(`/api/get-locations`, this.httpOptions).pipe(operators_1.map(data => data), operators_1.tap(announcements => {
+            this.logger.info('locations retrieved!' + announcements);
+        }), operators_1.share());
+        return respons;
+    }
+}
+exports.LocationService = LocationService;
+LocationService.ɵfac = function LocationService_Factory(t) { return new (t || LocationService)(i0.ɵɵinject(i1.HttpClient), i0.ɵɵinject(i2.LoggerService)); };
+LocationService.ɵprov = i0.ɵɵdefineInjectable({ token: LocationService, factory: LocationService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(LocationService, [{
         type: core_1.Injectable,
         args: [{
                 providedIn: 'root'

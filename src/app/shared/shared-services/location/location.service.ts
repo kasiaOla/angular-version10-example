@@ -2,9 +2,8 @@ import { Location } from './../../../modules/users/contact/location';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoggerService } from '../logger/logger.service';
-import { Observable, BehaviorSubject, of } from 'rxjs';
-import { share, tap, filter, switchMap, map } from 'rxjs/operators';
-import { Response } from 'express';
+import { Observable } from 'rxjs';
+import { share, tap , map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
