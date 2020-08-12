@@ -1,12 +1,11 @@
 <div class="jumbotron content">
     <div class="panel panel-default">
-
         <div class="row">
             <div class="col">
-                <h3>Wybierz lokalizację</h3>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" (keyup.enter)="search($event.target.value)" placeholder="Search ...">
+                    <input type="text" class="form-control" (keyup)="search($event.target.value)" placeholder="Wprowadź znaki ...">
                 </div>
+                <h3>Wybierz lokalizację</h3>
                 <div class="list-group">
                     <div class="list-group-item" *ngFor="let location of locations | async">
                         {{location.name}}
