@@ -49,6 +49,8 @@ In the database, you need to create a user with permissions. Please find below a
 
 2. `db.createUser({ user: "admin", pwd: "password", roles: [{ role: "root", db: "admin" }]});`
 
+![location](https://user-images.githubusercontent.com/67895860/89988482-e5a56300-dc7f-11ea-8d22-8bb673b7d9ba.png)
+
 
 Example data from the database are in files:
 
