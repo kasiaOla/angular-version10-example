@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationService } from '../../../shared/shared-services/location/location.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() {}
+  locations = this.locationService.getLocations();
+
+  constructor(public  locationService: LocationService) {}
 
   ngOnInit(): void {}
+  search(value: any): void {}
 }

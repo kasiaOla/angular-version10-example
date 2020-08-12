@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { catchError } from 'rxjs/operators';
 import { empty } from 'rxjs';
@@ -27,7 +27,8 @@ export class AuthInterceptorService implements HttpInterceptor {
           this.logger.error('Not Found');
           return empty(); // empty() - przerwanie obsługi
         }
-        return Observable.throw(Error);
+        // tslint:disable-next-line: deprecation
+        return throwError(Error);
       })
     );
   }

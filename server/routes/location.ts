@@ -3,19 +3,12 @@ import { Request, Response, NextFunction } from 'express';
 
 export class LocationRoute {
   locationRoute(app: any): void {
-    app.route('/api/get-location').get((req: Request, res: Response, next: NextFunction) => {
+    app.route('/api/get-locations').get((req: Request, res: Response, next: NextFunction) => {
       Location.find((error, data) => {
         if (error) {
-          return res.status(400).json({
-            success: false,
-            message: 'Error processing request ' + error
-          });
+          return res.status(400).json(error);
         } else {
-          return res.status(200).json({
-            success: true,
-            message: 'Get location was successful.',
-            respons: data
-          });
+          return res.status(200).json(data);
         }
       });
     });

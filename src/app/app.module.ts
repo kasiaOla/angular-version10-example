@@ -14,6 +14,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AnnouncementService } from './shared/shared-services/announcement/announcement.service';
 import { AgGridHeaderComponent } from './shared/shared-ag-grid-header/ag-grid-header.component';
 import { AuthenticationModule } from './modules/core/authentication/authentication.module';
+import { LocationService } from './shared/shared-services/location/location.service';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { AuthenticationModule } from './modules/core/authentication/authenticati
   ],
   providers: [
     AnnouncementService,
+    LocationService,
     {
       provide: LoggerService,
       useClass: envProdServiceLogger,
