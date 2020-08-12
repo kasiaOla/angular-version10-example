@@ -12,7 +12,7 @@ export class ContactComponent implements OnInit {
 
   locations = this.locationService.getLocations();
   searchValue: string;
-
+  limit = '10';
   constructor(public locationService: LocationService) { }
 
   ngOnInit(): void { }
@@ -23,5 +23,9 @@ export class ContactComponent implements OnInit {
       map(result => result.filter(valueFilter => valueFilter.name.indexOf(this.searchValue) >= 0)),
       share(),
     );
+  }
+
+  setLimit(valueLimit: string): string {
+   return this.limit = valueLimit;
   }
 }

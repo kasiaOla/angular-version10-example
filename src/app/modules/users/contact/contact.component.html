@@ -7,9 +7,19 @@
                 </div>
                 <h3>Wybierz lokalizację</h3>
                 <div class="list-group">
-                    <div class="list-group-item" *ngFor="let location of locations | async">
+                    <div class="list-group-item" *ngFor="let location of locations | async  | slice:0: limit ">
                         {{location.name}}
                     </div>
+                </div>
+                <div class="input-group mt-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Ustaw limit</div>
+                    </div>
+                    <select class="form-control" (change)="setLimit($event.target.value)">
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                    </select>
                 </div>
             </div>
         </div>
