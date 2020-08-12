@@ -51,7 +51,6 @@ In the database, you need to create a user with permissions. Please find below a
 
 ![location](https://user-images.githubusercontent.com/67895860/89988482-e5a56300-dc7f-11ea-8d22-8bb673b7d9ba.png)
 
-
 Example data from the database are in files:
 
 1. database-mongoDB\example-data\announcement.json
