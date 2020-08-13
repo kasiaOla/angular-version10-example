@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationService } from '../../../shared/shared-services/location/location.service';
 import { map, share } from 'rxjs/operators';
+import { LocationService } from '../../../shared/shared-services/location/location.service';
 
 
 @Component({
@@ -13,6 +13,7 @@ export class ContactComponent implements OnInit {
   locations = this.locationService.getLocations();
   searchValue: string;
   limit = '10';
+
   constructor(public locationService: LocationService) { }
 
   ngOnInit(): void { }

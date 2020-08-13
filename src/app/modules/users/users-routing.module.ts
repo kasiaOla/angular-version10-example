@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserComponent } from './user/user.component';
-import { ContactComponent } from './contact/contact.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { AuthGuardService } from '../core/authentication/auth-guard/auth-guard.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ContactComponent } from '../pages/contact/contact.component';
 
 
 const routes: Routes = [

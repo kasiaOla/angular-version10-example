@@ -27,7 +27,6 @@ export class AuthInterceptorService implements HttpInterceptor {
           this.logger.error('Not Found');
           return empty(); // empty() - przerwanie obsługi
         }
-        // tslint:disable-next-line: deprecation
         return throwError(Error);
       })
     );

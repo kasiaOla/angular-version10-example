@@ -1,4 +1,4 @@
-import { Address } from '../user';
+import { Address } from '../../users/user';
 
 export interface Location {
   id: string;

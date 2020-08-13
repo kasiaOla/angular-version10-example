@@ -1,9 +1,9 @@
-import { Location } from './../../../modules/users/contact/location';
+import { Location } from './../../../modules/pages/contact/location';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoggerService } from '../logger/logger.service';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { share, tap, map, filter, switchMap } from 'rxjs/operators';
+import { share, tap, map } from 'rxjs/operators';
 
 
 @Injectable({

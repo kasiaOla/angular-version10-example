@@ -856,7 +856,6 @@ class AuthInterceptorService {
                 this.logger.error('Not Found');
                 return rxjs_2.empty(); // empty() - przerwanie obsługi
             }
-            // tslint:disable-next-line: deprecation
             return rxjs_1.throwError(Error);
         }));
     }
@@ -1389,9 +1388,9 @@ HomeComponent.ɵcmp = i0.ɵɵdefineComponent({ type: HomeComponent, selectors: [
 
 /***/ }),
 
-/***/ "./src/app/modules/users/contact/contact.component.ts":
+/***/ "./src/app/modules/pages/contact/contact.component.ts":
 /*!************************************************************!*\
-  !*** ./src/app/modules/users/contact/contact.component.ts ***!
+  !*** ./src/app/modules/pages/contact/contact.component.ts ***!
   \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1401,11 +1400,13 @@ HomeComponent.ɵcmp = i0.ɵɵdefineComponent({ type: HomeComponent, selectors: [
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ContactComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const operators_1 = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! ../../../shared/shared-services/location/location.service */ "./src/app/shared/shared-services/location/location.service.ts");
 const i2 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+const i3 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 function ContactComponent_div_9_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "div", 15);
+    i0.ɵɵelementStart(0, "div", 22);
     i0.ɵɵtext(1);
     i0.ɵɵelementEnd();
 } if (rf & 2) {
@@ -1417,54 +1418,81 @@ class ContactComponent {
     constructor(locationService) {
         this.locationService = locationService;
         this.locations = this.locationService.getLocations();
+        this.limit = '10';
     }
     ngOnInit() { }
-    search(value) { }
+    search(value) {
+        this.searchValue = value;
+        this.locations = this.locationService.locationSession$.pipe(operators_1.map(result => result.filter(valueFilter => valueFilter.name.indexOf(this.searchValue) >= 0)), operators_1.share());
+    }
+    setLimit(valueLimit) {
+        return this.limit = valueLimit;
+    }
 }
 exports.ContactComponent = ContactComponent;
 ContactComponent.ɵfac = function ContactComponent_Factory(t) { return new (t || ContactComponent)(i0.ɵɵdirectiveInject(i1.LocationService)); };
-ContactComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ContactComponent, selectors: [["app-contact"]], decls: 29, vars: 3, consts: [[1, "jumbotron", "content"], [1, "panel", "panel-default"], [1, "row"], [1, "col"], [1, "input-group", "mb-3"], ["type", "text", "placeholder", "Search ...", 1, "form-control", 3, "keyup.enter"], [1, "list-group"], ["class", "list-group-item", 4, "ngFor", "ngForOf"], [1, "panel-body"], [1, "col-md-3", "mb-md-0", "mb-3"], [1, "text-uppercase"], [1, "fa", "fa-home", "mr-3"], [1, "fa", "fa-envelope", "mr-3"], [1, "fa", "fa-phone", "mr-3"], [1, "fa", "fa-print", "mr-3"], [1, "list-group-item"]], template: function ContactComponent_Template(rf, ctx) { if (rf & 1) {
+ContactComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ContactComponent, selectors: [["app-contact"]], decls: 41, vars: 7, consts: [[1, "jumbotron", "content"], [1, "panel", "panel-default"], [1, "row"], [1, "col"], [1, "input-group", "mb-3"], ["type", "text", "placeholder", "Wprowad\u017A znaki ...", 1, "form-control", 3, "keyup"], [1, "list-group"], ["class", "list-group-item", 4, "ngFor", "ngForOf"], [1, "input-group", "mt-3"], [1, "input-group-prepend"], [1, "input-group-text"], [1, "form-control", 3, "change"], ["value", "10"], ["value", "20"], ["value", "30"], [1, "panel-body"], [1, "col-md-3", "mb-md-0", "mb-3"], [1, "text-uppercase"], [1, "fa", "fa-home", "mr-3"], [1, "fa", "fa-envelope", "mr-3"], [1, "fa", "fa-phone", "mr-3"], [1, "fa", "fa-print", "mr-3"], [1, "list-group-item"]], template: function ContactComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "div", 0);
         i0.ɵɵelementStart(1, "div", 1);
         i0.ɵɵelementStart(2, "div", 2);
         i0.ɵɵelementStart(3, "div", 3);
-        i0.ɵɵelementStart(4, "h3");
-        i0.ɵɵtext(5, "Wybierz lokalizacj\u0119");
+        i0.ɵɵelementStart(4, "div", 4);
+        i0.ɵɵelementStart(5, "input", 5);
+        i0.ɵɵlistener("keyup", function ContactComponent_Template_input_keyup_5_listener($event) { return ctx.search($event.target.value); });
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(6, "div", 4);
-        i0.ɵɵelementStart(7, "input", 5);
-        i0.ɵɵlistener("keyup.enter", function ContactComponent_Template_input_keyup_enter_7_listener($event) { return ctx.search($event.target.value); });
         i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(6, "h3");
+        i0.ɵɵtext(7, "Wybierz lokalizacj\u0119");
         i0.ɵɵelementEnd();
         i0.ɵɵelementStart(8, "div", 6);
         i0.ɵɵtemplate(9, ContactComponent_div_9_Template, 2, 1, "div", 7);
-        i0.ɵɵpipe(10, "async");
+        i0.ɵɵpipe(10, "slice");
+        i0.ɵɵpipe(11, "async");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(12, "div", 8);
+        i0.ɵɵelementStart(13, "div", 9);
+        i0.ɵɵelementStart(14, "div", 10);
+        i0.ɵɵtext(15, "Ustaw limit");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(16, "select", 11);
+        i0.ɵɵlistener("change", function ContactComponent_Template_select_change_16_listener($event) { return ctx.setLimit($event.target.value); });
+        i0.ɵɵelementStart(17, "option", 12);
+        i0.ɵɵtext(18, "10");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(19, "option", 13);
+        i0.ɵɵtext(20, "20");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(21, "option", 14);
+        i0.ɵɵtext(22, "30");
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(11, "div", 8);
-        i0.ɵɵelementStart(12, "h2");
-        i0.ɵɵtext(13, "Kontakt");
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(14, "div", 9);
-        i0.ɵɵelementStart(15, "h5", 10);
-        i0.ɵɵtext(16, "Adres");
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(17, "p");
-        i0.ɵɵelement(18, "i", 11);
-        i0.ɵɵtext(19, " Warszawa 02-942 Konstanci\u0144ska 7b/36");
+        i0.ɵɵelementStart(23, "div", 15);
+        i0.ɵɵelementStart(24, "h2");
+        i0.ɵɵtext(25, "Kontakt");
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(20, "p");
-        i0.ɵɵelement(21, "i", 12);
-        i0.ɵɵtext(22, " test@example.com");
+        i0.ɵɵelementStart(26, "div", 16);
+        i0.ɵɵelementStart(27, "h5", 17);
+        i0.ɵɵtext(28, "Adres");
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(23, "p");
-        i0.ɵɵelement(24, "i", 13);
-        i0.ɵɵtext(25, " + ");
+        i0.ɵɵelementStart(29, "p");
+        i0.ɵɵelement(30, "i", 18);
+        i0.ɵɵtext(31, " Warszawa 02-942 Konstanci\u0144ska 7b/36");
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(26, "p");
-        i0.ɵɵelement(27, "i", 14);
-        i0.ɵɵtext(28, " + 01 234 567 89");
+        i0.ɵɵelementStart(32, "p");
+        i0.ɵɵelement(33, "i", 19);
+        i0.ɵɵtext(34, " test@example.com");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(35, "p");
+        i0.ɵɵelement(36, "i", 20);
+        i0.ɵɵtext(37, " + ");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(38, "p");
+        i0.ɵɵelement(39, "i", 21);
+        i0.ɵɵtext(40, " + 01 234 567 89");
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
@@ -1472,8 +1500,8 @@ ContactComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ContactComponent, select
         i0.ɵɵelementEnd();
     } if (rf & 2) {
         i0.ɵɵadvance(9);
-        i0.ɵɵproperty("ngForOf", i0.ɵɵpipeBind1(10, 1, ctx.locations));
-    } }, directives: [i2.NgForOf], pipes: [i2.AsyncPipe], styles: [".content[_ngcontent-%COMP%] {\n  width: 80%;\n  margin: 10%;\n  background-color: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy91c2Vycy9jb250YWN0L2NvbnRhY3QuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLFVBQUE7RUFDQSxXQUFBO0VBQ0EsaUdDSlE7QURJWiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvdXNlcnMvY29udGFjdC9jb250YWN0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uLy4uLy4uL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2Nzc1wiO1xyXG4uY29udGVudCB7XHJcbiAgICB3aWR0aDogODAlO1xyXG4gICAgbWFyZ2luOiAxMCU7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkYm94U2hhZG93O1xyXG59XHJcbiIsIiRib3hTaGFkb3c6IGluc2V0IC0xMHB4IC0xMHB4IDEwMHB4ICNjOGNlZDUsXG4xMHB4IDEwcHggMjBweCAjYzhjZWQ1LFxuaW5zZXQgMCAwIDEwcHggI2M4Y2VkNTtcbiRib3JkZXI6IDFweCAjMjIyIHNvbGlkOyJdfQ== */"] });
+        i0.ɵɵproperty("ngForOf", i0.ɵɵpipeBind3(10, 1, i0.ɵɵpipeBind1(11, 5, ctx.locations), 0, ctx.limit));
+    } }, directives: [i2.NgForOf, i3.NgSelectOption, i3.ɵangular_packages_forms_forms_x], pipes: [i2.SlicePipe, i2.AsyncPipe], styles: [".content[_ngcontent-%COMP%] {\n  width: 80%;\n  margin: 10%;\n  background-color: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy9wYWdlcy9jb250YWN0L2NvbnRhY3QuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLFVBQUE7RUFDQSxXQUFBO0VBQ0EsaUdDSlE7QURJWiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvcGFnZXMvY29udGFjdC9jb250YWN0LmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGltcG9ydCBcIi4uLy4uLy4uL3NoYXJlZC9zaGFyZWQtc2Nzcy92YXJpYWJsZXMuc2Nzc1wiO1xyXG4uY29udGVudCB7XHJcbiAgICB3aWR0aDogODAlO1xyXG4gICAgbWFyZ2luOiAxMCU7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAkYm94U2hhZG93O1xyXG59XHJcbiIsIiRib3hTaGFkb3c6IGluc2V0IC0xMHB4IC0xMHB4IDEwMHB4ICNjOGNlZDUsXG4xMHB4IDEwcHggMjBweCAjYzhjZWQ1LFxuaW5zZXQgMCAwIDEwcHggI2M4Y2VkNTtcbiRib3JkZXI6IDFweCAjMjIyIHNvbGlkOyJdfQ== */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(ContactComponent, [{
         type: core_1.Component,
         args: [{
@@ -1919,10 +1947,10 @@ const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular
 const router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const user_registration_component_1 = __webpack_require__(/*! ./user-registration/user-registration.component */ "./src/app/modules/users/user-registration/user-registration.component.ts");
 const user_component_1 = __webpack_require__(/*! ./user/user.component */ "./src/app/modules/users/user/user.component.ts");
-const contact_component_1 = __webpack_require__(/*! ./contact/contact.component */ "./src/app/modules/users/contact/contact.component.ts");
 const user_login_component_1 = __webpack_require__(/*! ./user-login/user-login.component */ "./src/app/modules/users/user-login/user-login.component.ts");
 const auth_guard_service_1 = __webpack_require__(/*! ../core/authentication/auth-guard/auth-guard.service */ "./src/app/modules/core/authentication/auth-guard/auth-guard.service.ts");
 const user_profile_component_1 = __webpack_require__(/*! ./user-profile/user-profile.component */ "./src/app/modules/users/user-profile/user-profile.component.ts");
+const contact_component_1 = __webpack_require__(/*! ../pages/contact/contact.component */ "./src/app/modules/pages/contact/contact.component.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const routes = [
@@ -1989,11 +2017,11 @@ const user_registration_component_1 = __webpack_require__(/*! ./user-registratio
 const router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 const user_component_1 = __webpack_require__(/*! ./user/user.component */ "./src/app/modules/users/user/user.component.ts");
-const contact_component_1 = __webpack_require__(/*! ./contact/contact.component */ "./src/app/modules/users/contact/contact.component.ts");
 const user_login_component_1 = __webpack_require__(/*! ./user-login/user-login.component */ "./src/app/modules/users/user-login/user-login.component.ts");
 const user_profile_component_1 = __webpack_require__(/*! ./user-profile/user-profile.component */ "./src/app/modules/users/user-profile/user-profile.component.ts");
 const auth_interceptor_service_1 = __webpack_require__(/*! ../core/authentication/auth-interceptor/auth-interceptor.service */ "./src/app/modules/core/authentication/auth-interceptor/auth-interceptor.service.ts");
 const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+const contact_component_1 = __webpack_require__(/*! ../pages/contact/contact.component */ "./src/app/modules/pages/contact/contact.component.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 class UsersModule {
 }
@@ -2257,6 +2285,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.LocationService = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+const rxjs_1 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
 const operators_1 = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
@@ -2265,15 +2294,17 @@ class LocationService {
     constructor(httpClient, logger) {
         this.httpClient = httpClient;
         this.logger = logger;
+        this.locationSession = new rxjs_1.BehaviorSubject(null);
+        this.locationSession$ = this.locationSession.asObservable();
         this.httpOptions = {
             headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
         };
     }
     getLocations() {
-        const respons = this.httpClient.get(`/api/get-locations`, this.httpOptions).pipe(operators_1.map(data => data), operators_1.tap(announcements => {
+        return this.httpClient.get(`/api/get-locations`, this.httpOptions).pipe(operators_1.map(data => data), operators_1.tap(announcements => {
+            this.locationSession.next(announcements);
             this.logger.info('locations retrieved!' + announcements);
         }), operators_1.share());
-        return respons;
     }
 }
 exports.LocationService = LocationService;
