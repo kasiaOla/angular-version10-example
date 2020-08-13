@@ -6,6 +6,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - npm install or npm i
 
+## Compilation
+
+- npm run build ( without SSR)
+- npm run build:ssr ( with SSR)
+
 ## Run
 Run production `ng run angular10-example:serve-ssr` in the terminal or dev:ssr in npm script. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
