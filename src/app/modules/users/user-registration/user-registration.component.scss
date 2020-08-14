@@ -4,3 +4,13 @@
     margin: 10%;
     box-shadow: $boxShadow
 }
+
+form .ng-invalid.ng-touched,
+form .ng-invalid.ng-dirty {
+    border: 2px solid red !important;
+}
+
+form .ng-invalid.ng-touched~.validation-feedback,
+form .ng-invalid.ng-dirty~.validation-feedback {
+    color: red;
+}

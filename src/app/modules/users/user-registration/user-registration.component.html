@@ -6,16 +6,44 @@
         <div class="panel-body">
             <form [formGroup]="registrationForm" (ngSubmit)="registration()">
                 <div class="form-group">
-                    <label for="userName">Nazwa użytkownika  <sup>*</sup></label>
-                    <input required type="text" class="form-control" formControlName="username" id="username" name="username" />
+                    <label for="userName">Nazwa użytkownika<sup>*</sup></label>
+                    <input required type="text" class="form-control" formControlName="username" />
+                    <div class="validation-feedback" *ngIf="registrationForm.get('username').touched || registrationForm.get('username').dirty">
+                        <div *ngIf="registrationForm.get('username').hasError('required')">
+                            Nazwa użytkownika jest wymagana!
+                        </div>
+                        <div *ngIf="registrationForm.get('username').getError('minlength') as error">
+                            Długość znaków musi być {{error.requiredLength}}. Brakuje {{error.requiredLength - error.actualLength}} znaku/ów!
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="password">Hasło<sup>*</sup></label>
-                    <input required type="text" class="form-control" formControlName="password" id="password" name="password" />
+                    <input required type="text" class="form-control" formControlName="password" />
+                    <div class="validation-feedback" *ngIf="registrationForm.get('password').touched || registrationForm.get('password').dirty">
+
+                        <div *ngIf="registrationForm.get('password').hasError('required')">
+                            Hasło użytkownika jest wymagana!
+                        </div>
+                        <div *ngIf="f.errors">
+                            Hasło musi zawierać
+                            <span *ngIf="f.password.errors.lowercase === false"> małe litery</span>
+                            <span *ngIf="f.password.errors.uppercase === false"> duże litery</span>!
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email<sup>*</sup></label>
-                    <input required type="text" class="form-control" formControlName="email" id="email" name="email" />
+                    <input required type="text" class="form-control" formControlName="email" />
+                    <div class="validation-feedback" *ngIf="registrationForm.get('email').touched || registrationForm.get('email').dirty">
+
+                        <div *ngIf="registrationForm.get('email').hasError('required')">
+                            Email użytkownika jest wymagana!
+                        </div>
+                        <div *ngIf="registrationForm.get('email').hasError('email')">
+                            Adres email jest niepoprawny!
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="type">Typ<sup>*</sup></label>

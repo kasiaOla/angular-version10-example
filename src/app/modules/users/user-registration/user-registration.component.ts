@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn, ValidationErrors, AbstractControl, } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User, CustomerType } from '../user';
 import { AuthService } from '../../core/authentication/auth/auth.service';
@@ -29,16 +29,52 @@ export class UserRegistrationComponent implements OnInit {
 
   ngOnInit(): void {
     this.registrationForm = this.fb.group({
-      username: this.makeFormControl(),
-      password: this.makeFormControl(),
-      email: this.makeFormControl(),
+      username: this.fb.control('', [Validators.required, Validators.minLength(3)]),
+      password: this.fb.control('', [
+        Validators.required,
+        this.validatePassword
+      ]), // duża litera, mała litera i liczbę  Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$')
+      email: this.fb.control('', [Validators.required, Validators.email]),
       type: this.makeFormControl(),
     });
+    console.log(this.registrationForm)
   }
 
   makeFormControl(): FormControl {
     const cloned = new FormControl('', [Validators.required]);
     return cloned;
+  }
+
+  validatePassword<ValidatorFn>(control: FormControl): ValidationErrors {
+    const hasUppercase = control.value.match(/[A-Z]/);
+    const hasLowercase = control.value.match(/[a-z]/);
+
+    if (hasUppercase && hasLowercase) {
+      return null;
+    }
+    if (hasUppercase === null) {
+      return {
+        'uppercase': false,
+      } as ValidationErrors;
+
+    }
+    if (hasLowercase === null) {
+      return {
+        'lowercase': false,
+      } as ValidationErrors;
+
+    } else {
+      return {
+        'password': true,
+        'uppercase': true,
+        'lowercase': true,
+      } as ValidationErrors;
+    }
+  }
+
+
+   get f(): { [key: string]: AbstractControl; } {
+    return this.registrationForm.controls;
   }
 
   registration(): void {
