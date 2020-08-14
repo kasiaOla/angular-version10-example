@@ -50,8 +50,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.resutDataAnnouncement.add(this.getDataAnnouncement$.subscribe({
-      next: (Res: { [x: string]: Announcement[]; }) => {
-        this.rowDatatAnnouncement = Res['respons'];
+      next: (Res: Announcement[]) => {
+        this.rowDatatAnnouncement = Res;
       },
       error: (Err: Error) => {
         this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);

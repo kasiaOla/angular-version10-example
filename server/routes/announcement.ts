@@ -50,11 +50,7 @@ export class AnnouncementRoute {
             message: 'Error processing request ' + error
           });
         } else {
-          return res.status(200).json({
-            success: true,
-            message: 'Create was successful.',
-            respons: data
-          });
+          return res.status(200).json(data);
         }
       });
     });

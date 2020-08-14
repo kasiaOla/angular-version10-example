@@ -1,1 +1,21 @@
-<p>list-announcements works!</p>
+<table class="table">
+    <thead class="table-primary">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nazwa</th>
+            <th scope="col">Cena</th>
+            <th scope="col">Powierzchnia</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let listAnnouncement of listAnnouncements | async">
+            <th scope="row">{{listAnnouncement._id}}</th>
+            <td>{{listAnnouncement.price}}</td>
+            <td>{{listAnnouncement.pricePerM}}</td>
+            <td>
+                <span class="edit" [routerLink]="['/edit-announcement/', listAnnouncement._id]">Edytuj </span>
+                <span class="delete" (click)="removeAnnouncement(listAnnouncement, listAnnouncement._id)">Usuń</span>
+            </td>
+        </tr>
+    </tbody>
+</table>

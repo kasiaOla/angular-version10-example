@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AnnouncementService } from '../../../shared/shared-services/announcement/announcement.service';
+import { Announcement } from '../announcement';
+
 
 @Component({
   selector: 'app-list-announcements',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListAnnouncementsComponent implements OnInit {
 
-  constructor() { }
+  public listAnnouncements = this.announcementService.getAnnouncement();
 
-  ngOnInit(): void {
-  }
+  constructor(public announcementService: AnnouncementService) {}
 
+  ngOnInit(): void {}
+
+  removeAnnouncement(value: Announcement, id: string): void {}
 }

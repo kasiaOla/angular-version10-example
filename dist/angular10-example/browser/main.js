@@ -606,6 +606,7 @@ AddCategoryAnnouncementComponent.ɵcmp = i0.ɵɵdefineComponent({ type: AddCateg
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AnnouncementRoutingModule = void 0;
+const list_announcements_component_1 = __webpack_require__(/*! ./list-announcements/list-announcements.component */ "./src/app/modules/announcements/list-announcements/list-announcements.component.ts");
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const add_announcement_component_1 = __webpack_require__(/*! ./add-announcement/add-announcement.component */ "./src/app/modules/announcements/add-announcement/add-announcement.component.ts");
@@ -627,7 +628,16 @@ const routes = [
                 path: 'category/:id_category/type/:id_type',
                 data: { title: 'Dodaj ogłoszenie' },
                 component: add_announcement_component_1.AddAnnouncementComponent,
-                pathMatch: 'full'
+                pathMatch: 'full',
+            },
+            {
+                path: 'list-announcements',
+                data: { title: 'Lista ogłoszeń' },
+                component: list_announcements_component_1.ListAnnouncementsComponent,
+            },
+            {
+                path: 'edit-announcement/:id',
+                component: announcement_component_1.AnnouncementComponent,
             }
         ]
     }
@@ -669,6 +679,7 @@ const router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@ang
 const add_category_announcement_component_1 = __webpack_require__(/*! ./add-category-announcement/add-category-announcement.component */ "./src/app/modules/announcements/add-category-announcement/add-category-announcement.component.ts");
 const announcement_service_1 = __webpack_require__(/*! ../../shared/shared-services/announcement/announcement.service */ "./src/app/shared/shared-services/announcement/announcement.service.ts");
 const announcement_component_1 = __webpack_require__(/*! ./announcement/announcement.component */ "./src/app/modules/announcements/announcement/announcement.component.ts");
+const list_announcements_component_1 = __webpack_require__(/*! ./list-announcements/list-announcements.component */ "./src/app/modules/announcements/list-announcements/list-announcements.component.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 class AnnouncementModule {
 }
@@ -682,19 +693,22 @@ AnnouncementModule.ɵinj = i0.ɵɵdefineInjector({ factory: function Announcemen
         ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && i0.ɵɵsetNgModuleScope(AnnouncementModule, { declarations: [announcement_component_1.AnnouncementComponent,
         add_announcement_component_1.AddAnnouncementComponent,
-        add_category_announcement_component_1.AddCategoryAnnouncementComponent], imports: [common_1.CommonModule,
+        add_category_announcement_component_1.AddCategoryAnnouncementComponent,
+        list_announcements_component_1.ListAnnouncementsComponent], imports: [common_1.CommonModule,
         announcement_routing_module_1.AnnouncementRoutingModule,
         router_1.RouterModule,
         forms_1.ReactiveFormsModule], exports: [announcement_component_1.AnnouncementComponent,
         add_announcement_component_1.AddAnnouncementComponent,
-        add_category_announcement_component_1.AddCategoryAnnouncementComponent] }); })();
+        add_category_announcement_component_1.AddCategoryAnnouncementComponent,
+        list_announcements_component_1.ListAnnouncementsComponent] }); })();
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(AnnouncementModule, [{
         type: core_1.NgModule,
         args: [{
                 declarations: [
                     announcement_component_1.AnnouncementComponent,
                     add_announcement_component_1.AddAnnouncementComponent,
-                    add_category_announcement_component_1.AddCategoryAnnouncementComponent
+                    add_category_announcement_component_1.AddCategoryAnnouncementComponent,
+                    list_announcements_component_1.ListAnnouncementsComponent
                 ],
                 imports: [
                     common_1.CommonModule,
@@ -705,7 +719,8 @@ AnnouncementModule.ɵinj = i0.ɵɵdefineInjector({ factory: function Announcemen
                 exports: [
                     announcement_component_1.AnnouncementComponent,
                     add_announcement_component_1.AddAnnouncementComponent,
-                    add_category_announcement_component_1.AddCategoryAnnouncementComponent
+                    add_category_announcement_component_1.AddCategoryAnnouncementComponent,
+                    list_announcements_component_1.ListAnnouncementsComponent
                 ],
                 providers: [announcement_service_1.AnnouncementService]
             }]
@@ -779,6 +794,105 @@ AnnouncementComponent.ɵcmp = i0.ɵɵdefineComponent({ type: AnnouncementCompone
                 styleUrls: ['./announcement.component.scss']
             }]
     }], function () { return []; }, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/modules/announcements/list-announcements/list-announcements.component.ts":
+/*!******************************************************************************************!*\
+  !*** ./src/app/modules/announcements/list-announcements/list-announcements.component.ts ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ListAnnouncementsComponent = void 0;
+const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i1 = __webpack_require__(/*! ../../../shared/shared-services/announcement/announcement.service */ "./src/app/shared/shared-services/announcement/announcement.service.ts");
+const i2 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+const i3 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+const _c0 = function (a1) { return ["/edit-announcement/", a1]; };
+function ListAnnouncementsComponent_tr_12_Template(rf, ctx) { if (rf & 1) {
+    const _r3 = i0.ɵɵgetCurrentView();
+    i0.ɵɵelementStart(0, "tr");
+    i0.ɵɵelementStart(1, "th", 4);
+    i0.ɵɵtext(2);
+    i0.ɵɵelementEnd();
+    i0.ɵɵelementStart(3, "td");
+    i0.ɵɵtext(4);
+    i0.ɵɵelementEnd();
+    i0.ɵɵelementStart(5, "td");
+    i0.ɵɵtext(6);
+    i0.ɵɵelementEnd();
+    i0.ɵɵelementStart(7, "td");
+    i0.ɵɵelementStart(8, "span", 5);
+    i0.ɵɵtext(9, "Edytuj ");
+    i0.ɵɵelementEnd();
+    i0.ɵɵelementStart(10, "span", 6);
+    i0.ɵɵlistener("click", function ListAnnouncementsComponent_tr_12_Template_span_click_10_listener() { i0.ɵɵrestoreView(_r3); const listAnnouncement_r1 = ctx.$implicit; const ctx_r2 = i0.ɵɵnextContext(); return ctx_r2.removeAnnouncement(listAnnouncement_r1, listAnnouncement_r1._id); });
+    i0.ɵɵtext(11, "Usu\u0144");
+    i0.ɵɵelementEnd();
+    i0.ɵɵelementEnd();
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    const listAnnouncement_r1 = ctx.$implicit;
+    i0.ɵɵadvance(2);
+    i0.ɵɵtextInterpolate(listAnnouncement_r1._id);
+    i0.ɵɵadvance(2);
+    i0.ɵɵtextInterpolate(listAnnouncement_r1.price);
+    i0.ɵɵadvance(2);
+    i0.ɵɵtextInterpolate(listAnnouncement_r1.pricePerM);
+    i0.ɵɵadvance(2);
+    i0.ɵɵproperty("routerLink", i0.ɵɵpureFunction1(4, _c0, listAnnouncement_r1._id));
+} }
+class ListAnnouncementsComponent {
+    constructor(announcementService) {
+        this.announcementService = announcementService;
+        this.listAnnouncements = this.announcementService.getAnnouncement();
+    }
+    ngOnInit() { }
+    removeAnnouncement(value, id) { }
+}
+exports.ListAnnouncementsComponent = ListAnnouncementsComponent;
+ListAnnouncementsComponent.ɵfac = function ListAnnouncementsComponent_Factory(t) { return new (t || ListAnnouncementsComponent)(i0.ɵɵdirectiveInject(i1.AnnouncementService)); };
+ListAnnouncementsComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ListAnnouncementsComponent, selectors: [["app-list-announcements"]], decls: 14, vars: 3, consts: [[1, "table"], [1, "table-primary"], ["scope", "col"], [4, "ngFor", "ngForOf"], ["scope", "row"], [1, "edit", 3, "routerLink"], [1, "delete", 3, "click"]], template: function ListAnnouncementsComponent_Template(rf, ctx) { if (rf & 1) {
+        i0.ɵɵelementStart(0, "table", 0);
+        i0.ɵɵelementStart(1, "thead", 1);
+        i0.ɵɵelementStart(2, "tr");
+        i0.ɵɵelementStart(3, "th", 2);
+        i0.ɵɵtext(4, "#");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(5, "th", 2);
+        i0.ɵɵtext(6, "Nazwa");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(7, "th", 2);
+        i0.ɵɵtext(8, "Cena");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(9, "th", 2);
+        i0.ɵɵtext(10, "Powierzchnia");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(11, "tbody");
+        i0.ɵɵtemplate(12, ListAnnouncementsComponent_tr_12_Template, 12, 6, "tr", 3);
+        i0.ɵɵpipe(13, "async");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementEnd();
+    } if (rf & 2) {
+        i0.ɵɵadvance(12);
+        i0.ɵɵproperty("ngForOf", i0.ɵɵpipeBind1(13, 1, ctx.listAnnouncements));
+    } }, directives: [i2.NgForOf, i3.RouterLink], pipes: [i2.AsyncPipe], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvYW5ub3VuY2VtZW50cy9saXN0LWFubm91bmNlbWVudHMvbGlzdC1hbm5vdW5jZW1lbnRzLmNvbXBvbmVudC5zY3NzIn0= */"] });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(ListAnnouncementsComponent, [{
+        type: core_1.Component,
+        args: [{
+                selector: 'app-list-announcements',
+                templateUrl: './list-announcements.component.html',
+                styleUrls: ['./list-announcements.component.scss']
+            }]
+    }], function () { return [{ type: i1.AnnouncementService }]; }, null); })();
 
 
 /***/ }),
@@ -1010,6 +1124,41 @@ AuthenticationModule.ɵinj = i0.ɵɵdefineInjector({ factory: function Authentic
 
 /***/ }),
 
+/***/ "./src/app/modules/core/authentication/deactivate-guard/deactivate-guard.service.ts":
+/*!******************************************************************************************!*\
+  !*** ./src/app/modules/core/authentication/deactivate-guard/deactivate-guard.service.ts ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DeactivateGuardService = void 0;
+const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+class DeactivateGuardService {
+    constructor() { }
+    canDeactivate(component, currentRoute, currentState, nextState) {
+        console.log('component.locations ', component.locations);
+        console.log('!!component.locations ', !!component.locations);
+        console.log('!component.locations ', !component.locations);
+        return !!component.locations; // jesli jest coś w polu locations można będzie przełączać się na inne komponenty
+    }
+}
+exports.DeactivateGuardService = DeactivateGuardService;
+DeactivateGuardService.ɵfac = function DeactivateGuardService_Factory(t) { return new (t || DeactivateGuardService)(); };
+DeactivateGuardService.ɵprov = i0.ɵɵdefineInjectable({ token: DeactivateGuardService, factory: DeactivateGuardService.ɵfac, providedIn: 'root' });
+/*@__PURE__*/ (function () { i0.ɵsetClassMetadata(DeactivateGuardService, [{
+        type: core_1.Injectable,
+        args: [{
+                providedIn: 'root'
+            }]
+    }], function () { return []; }, null); })();
+
+
+/***/ }),
+
 /***/ "./src/app/modules/core/core.module.ts":
 /*!*********************************************!*\
   !*** ./src/app/modules/core/core.module.ts ***!
@@ -1178,43 +1327,57 @@ const i1 = __webpack_require__(/*! ../authentication/auth/auth.service */ "./src
 const i2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const i3 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
 function NavbarComponent_a_6_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "a", 11);
+    i0.ɵɵelementStart(0, "a", 12);
     i0.ɵɵtext(1, "Rejestracja");
     i0.ɵɵelementEnd();
 } if (rf & 2) {
     i0.ɵɵproperty("routerLink", "/user/registration");
 } }
 function NavbarComponent_a_8_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "a", 12);
+    i0.ɵɵelementStart(0, "a", 13);
     i0.ɵɵtext(1, "Zaloguj");
     i0.ɵɵelementEnd();
 } if (rf & 2) {
     i0.ɵɵproperty("routerLink", "/user/login");
 } }
 function NavbarComponent_a_10_Template(rf, ctx) { if (rf & 1) {
-    const _r6 = i0.ɵɵgetCurrentView();
-    i0.ɵɵelementStart(0, "a", 13);
-    i0.ɵɵlistener("click", function NavbarComponent_a_10_Template_a_click_0_listener() { i0.ɵɵrestoreView(_r6); const ctx_r5 = i0.ɵɵnextContext(); return ctx_r5.loginOut(); });
+    const _r8 = i0.ɵɵgetCurrentView();
+    i0.ɵɵelementStart(0, "a", 14);
+    i0.ɵɵlistener("click", function NavbarComponent_a_10_Template_a_click_0_listener() { i0.ɵɵrestoreView(_r8); const ctx_r7 = i0.ɵɵnextContext(); return ctx_r7.loginOut(); });
     i0.ɵɵtext(1, "Wyloguj");
     i0.ɵɵelementEnd();
 } }
 function NavbarComponent_a_15_Template(rf, ctx) { if (rf & 1) {
-    i0.ɵɵelementStart(0, "a", 14);
+    i0.ɵɵelementStart(0, "a", 15);
     i0.ɵɵtext(1, "Profil");
     i0.ɵɵelementEnd();
 } if (rf & 2) {
     i0.ɵɵproperty("routerLink", "/user/profile");
 } }
-function NavbarComponent_div_16_Template(rf, ctx) { if (rf & 1) {
+function NavbarComponent_a_17_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "a", 16);
+    i0.ɵɵtext(1, "Lista og\u0142osze\u0144");
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    i0.ɵɵproperty("routerLink", "/list-announcements");
+} }
+function NavbarComponent_div_18_Template(rf, ctx) { if (rf & 1) {
     i0.ɵɵelementStart(0, "div");
     i0.ɵɵelementStart(1, "strong");
     i0.ɵɵtext(2);
     i0.ɵɵelementEnd();
     i0.ɵɵelementEnd();
 } if (rf & 2) {
-    const ctx_r4 = i0.ɵɵnextContext();
+    const ctx_r5 = i0.ɵɵnextContext();
     i0.ɵɵadvance(2);
-    i0.ɵɵtextInterpolate1("Cze\u015B\u0107, ", ctx_r4.authService.getCurrentUser(), " ");
+    i0.ɵɵtextInterpolate1("Cze\u015B\u0107, ", ctx_r5.authService.getCurrentUser(), " ");
+} }
+function NavbarComponent_button_19_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "button", 17);
+    i0.ɵɵtext(1, "Dodaj og\u0142oszenie");
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    i0.ɵɵproperty("routerLink", "/announcement/category");
 } }
 class NavbarComponent {
     constructor(authService) {
@@ -1228,7 +1391,7 @@ class NavbarComponent {
 }
 exports.NavbarComponent = NavbarComponent;
 NavbarComponent.ɵfac = function NavbarComponent_Factory(t) { return new (t || NavbarComponent)(i0.ɵɵdirectiveInject(i1.AuthService)); };
-NavbarComponent.ɵcmp = i0.ɵɵdefineComponent({ type: NavbarComponent, selectors: [["app-navbar"]], decls: 21, vars: 8, consts: [[1, "card-body"], [1, "navbar", "navbar-light", "bg-light"], ["routerLinkActive", "active", "name", "home", 1, "navbar-brand", 3, "routerLink"], ["class", "navbar-brand", "routerLinkActive", "active", "name", "registration", 3, "routerLink", 4, "ngIf"], ["class", "navbar-brand", "routerLinkActive", "active", "name", "login", 3, "routerLink", 4, "ngIf"], ["class", "navbar-brand", "name", "loginOut", 3, "click", 4, "ngIf"], ["routerLinkActive", "active", "name", "contact", 1, "navbar-brand", 3, "routerLink"], ["class", "navbar-brand", "name", "profile", 3, "routerLink", 4, "ngIf"], [4, "ngIf"], ["routerLinkActive", "active", 1, "btn", "btn-default", "link-button--save", 3, "routerLink"], [1, "card-text"], ["routerLinkActive", "active", "name", "registration", 1, "navbar-brand", 3, "routerLink"], ["routerLinkActive", "active", "name", "login", 1, "navbar-brand", 3, "routerLink"], ["name", "loginOut", 1, "navbar-brand", 3, "click"], ["name", "profile", 1, "navbar-brand", 3, "routerLink"]], template: function NavbarComponent_Template(rf, ctx) { if (rf & 1) {
+NavbarComponent.ɵcmp = i0.ɵɵdefineComponent({ type: NavbarComponent, selectors: [["app-navbar"]], decls: 22, vars: 9, consts: [[1, "card-body"], [1, "navbar", "navbar-light", "bg-light"], ["routerLinkActive", "active", "name", "home", 1, "navbar-brand", 3, "routerLink"], ["class", "navbar-brand", "routerLinkActive", "active", "name", "registration", 3, "routerLink", 4, "ngIf"], ["class", "navbar-brand", "routerLinkActive", "active", "name", "login", 3, "routerLink", 4, "ngIf"], ["class", "navbar-brand", "name", "loginOut", 3, "click", 4, "ngIf"], ["routerLinkActive", "active", "name", "contact", 1, "navbar-brand", 3, "routerLink"], ["class", "navbar-brand", "name", "profile", 3, "routerLink", 4, "ngIf"], ["class", "navbar-brand", "name", "listAnnouncements", 3, "routerLink", 4, "ngIf"], [4, "ngIf"], ["class", "btn btn-default link-button--save", "routerLinkActive", "active", 3, "routerLink", 4, "ngIf"], [1, "card-text"], ["routerLinkActive", "active", "name", "registration", 1, "navbar-brand", 3, "routerLink"], ["routerLinkActive", "active", "name", "login", 1, "navbar-brand", 3, "routerLink"], ["name", "loginOut", 1, "navbar-brand", 3, "click"], ["name", "profile", 1, "navbar-brand", 3, "routerLink"], ["name", "listAnnouncements", 1, "navbar-brand", 3, "routerLink"], ["routerLinkActive", "active", 1, "btn", "btn-default", "link-button--save", 3, "routerLink"]], template: function NavbarComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "div", 0);
         i0.ɵɵelementStart(1, "nav", 1);
         i0.ɵɵelementStart(2, "div");
@@ -1253,13 +1416,14 @@ NavbarComponent.ɵcmp = i0.ɵɵdefineComponent({ type: NavbarComponent, selector
         i0.ɵɵelementStart(14, "div");
         i0.ɵɵtemplate(15, NavbarComponent_a_15_Template, 2, 1, "a", 7);
         i0.ɵɵelementEnd();
-        i0.ɵɵtemplate(16, NavbarComponent_div_16_Template, 3, 1, "div", 8);
+        i0.ɵɵelementStart(16, "div");
+        i0.ɵɵtemplate(17, NavbarComponent_a_17_Template, 2, 1, "a", 8);
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(17, "button", 9);
-        i0.ɵɵtext(18, "Dodaj og\u0142oszenie");
+        i0.ɵɵtemplate(18, NavbarComponent_div_18_Template, 3, 1, "div", 9);
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(19, "p", 10);
-        i0.ɵɵelement(20, "router-outlet");
+        i0.ɵɵtemplate(19, NavbarComponent_button_19_Template, 2, 1, "button", 10);
+        i0.ɵɵelementStart(20, "p", 11);
+        i0.ɵɵelement(21, "router-outlet");
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
     } if (rf & 2) {
@@ -1275,11 +1439,13 @@ NavbarComponent.ɵcmp = i0.ɵɵdefineComponent({ type: NavbarComponent, selector
         i0.ɵɵproperty("routerLink", "/user/contact");
         i0.ɵɵadvance(3);
         i0.ɵɵproperty("ngIf", ctx.authService.isAuthenticated);
+        i0.ɵɵadvance(2);
+        i0.ɵɵproperty("ngIf", ctx.authService.isAuthenticated);
         i0.ɵɵadvance(1);
         i0.ɵɵproperty("ngIf", ctx.authService.isAuthenticated);
         i0.ɵɵadvance(1);
-        i0.ɵɵproperty("routerLink", "/announcement/category");
-    } }, directives: [i2.RouterLinkWithHref, i2.RouterLinkActive, i3.NgIf, i2.RouterLink, i2.RouterOutlet], styles: [".navbar[_ngcontent-%COMP%] {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n\n.navbar-brand[_ngcontent-%COMP%] {\n  opacity: 0.6;\n  margin-right: 3rem;\n  font: 400 24px Roboto, \"Helvetica Neue\", sans-serif;\n}\n\n.bg-light[_ngcontent-%COMP%] {\n  background-color: white !important;\n  justify-content: flex-end !important;\n}\n\n.navbar[_ngcontent-%COMP%]   .navbar-expand-lg[_ngcontent-%COMP%]   .navbar-light[_ngcontent-%COMP%]   .bg-light[_ngcontent-%COMP%] {\n  justify-content: flex-end !important;\n}\n\n.card[_ngcontent-%COMP%] {\n  justify-content: flex-end;\n}\n\n.card-body[_ngcontent-%COMP%] {\n  padding: 0;\n}\n\nbutton[_ngcontent-%COMP%] {\n  padding: 10px;\n  margin: 10px 5px 0px 15px;\n}\n\n.link-button--save[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0px;\n  left: 5%;\n  margin: 0px;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n  border: 1px #222 solid;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL25hdi5zY3NzIiwic3JjL2FwcC9tb2R1bGVzL2NvcmUvbmF2YmFyL25hdmJhci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksNENBQUE7QUNDSjs7QURFQTtFQUNJLFlBQUE7RUFDQSxrQkFBQTtFQUNBLG1EQUFBO0FDQ0o7O0FERUE7RUFDSSxrQ0FBQTtFQUNBLG9DQUFBO0FDQ0o7O0FERUE7RUFDSSxvQ0FBQTtBQ0NKOztBQWZBO0VBQ0kseUJBQUE7QUFrQko7O0FBZkE7RUFDSSxVQUFBO0FBa0JKOztBQWZBO0VBQ0ksYUFBQTtFQUNBLHlCQUFBO0FBa0JKOztBQWZBO0VBQ0ksa0JBQUE7RUFDQSxRQUFBO0VBQ0EsUUFBQTtFQUNBLFdBQUE7RUFDQSwyRkFBQTtFQUNBLHNCQ2xCSztBRG9DVCIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvY29yZS9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm5hdmJhciB7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHJnYmEoMCwgMCwgMCwgLjEyKTtcbn1cblxuLm5hdmJhci1icmFuZCB7XG4gICAgb3BhY2l0eTogLjY7XG4gICAgbWFyZ2luLXJpZ2h0OiAzcmVtO1xuICAgIGZvbnQ6IDQwMCAyNHB4IFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmO1xufVxuXG4uYmctbGlnaHQge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlICFpbXBvcnRhbnQ7XG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZCAhaW1wb3J0YW50O1xufVxuXG4ubmF2YmFyIC5uYXZiYXItZXhwYW5kLWxnIC5uYXZiYXItbGlnaHQgLmJnLWxpZ2h0IHtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59IiwiLm5hdmJhciB7XG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCByZ2JhKDAsIDAsIDAsIDAuMTIpO1xufVxuXG4ubmF2YmFyLWJyYW5kIHtcbiAgb3BhY2l0eTogMC42O1xuICBtYXJnaW4tcmlnaHQ6IDNyZW07XG4gIGZvbnQ6IDQwMCAyNHB4IFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmO1xufVxuXG4uYmctbGlnaHQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5uYXZiYXIgLm5hdmJhci1leHBhbmQtbGcgLm5hdmJhci1saWdodCAuYmctbGlnaHQge1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5jYXJkIHtcbiAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbn1cblxuLmNhcmQtYm9keSB7XG4gIHBhZGRpbmc6IDA7XG59XG5cbmJ1dHRvbiB7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIG1hcmdpbjogMTBweCA1cHggMHB4IDE1cHg7XG59XG5cbi5saW5rLWJ1dHRvbi0tc2F2ZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwcHg7XG4gIGxlZnQ6IDUlO1xuICBtYXJnaW46IDBweDtcbiAgYm94LXNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSwgMTBweCAxMHB4IDIwcHggI2M4Y2VkNSwgaW5zZXQgMCAwIDEwcHggI2M4Y2VkNTtcbiAgYm9yZGVyOiAxcHggIzIyMiBzb2xpZDtcbn0iLCIkYm94U2hhZG93OiBpbnNldCAtMTBweCAtMTBweCAxMDBweCAjYzhjZWQ1LFxuMTBweCAxMHB4IDIwcHggI2M4Y2VkNSxcbmluc2V0IDAgMCAxMHB4ICNjOGNlZDU7XG4kYm9yZGVyOiAxcHggIzIyMiBzb2xpZDsiXX0= */"] });
+        i0.ɵɵproperty("ngIf", ctx.authService.isAuthenticated);
+    } }, directives: [i2.RouterLinkWithHref, i2.RouterLinkActive, i3.NgIf, i2.RouterOutlet, i2.RouterLink], styles: [".navbar[_ngcontent-%COMP%] {\n  border-bottom: 1px solid rgba(0, 0, 0, 0.12);\n}\n\n.navbar-brand[_ngcontent-%COMP%] {\n  opacity: 0.6;\n  margin-right: 3rem;\n  font: 400 24px Roboto, \"Helvetica Neue\", sans-serif;\n}\n\n.bg-light[_ngcontent-%COMP%] {\n  background-color: white !important;\n  justify-content: flex-end !important;\n}\n\n.navbar[_ngcontent-%COMP%]   .navbar-expand-lg[_ngcontent-%COMP%]   .navbar-light[_ngcontent-%COMP%]   .bg-light[_ngcontent-%COMP%] {\n  justify-content: flex-end !important;\n}\n\n.card[_ngcontent-%COMP%] {\n  justify-content: flex-end;\n}\n\n.card-body[_ngcontent-%COMP%] {\n  padding: 0;\n}\n\nbutton[_ngcontent-%COMP%] {\n  padding: 10px;\n  margin: 10px 5px 0px 15px;\n}\n\n.link-button--save[_ngcontent-%COMP%] {\n  position: absolute;\n  top: 0px;\n  left: 5%;\n  margin: 0px;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n  border: 1px #222 solid;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL25hdi5zY3NzIiwic3JjL2FwcC9tb2R1bGVzL2NvcmUvbmF2YmFyL25hdmJhci5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksNENBQUE7QUNDSjs7QURFQTtFQUNJLFlBQUE7RUFDQSxrQkFBQTtFQUNBLG1EQUFBO0FDQ0o7O0FERUE7RUFDSSxrQ0FBQTtFQUNBLG9DQUFBO0FDQ0o7O0FERUE7RUFDSSxvQ0FBQTtBQ0NKOztBQWZBO0VBQ0kseUJBQUE7QUFrQko7O0FBZkE7RUFDSSxVQUFBO0FBa0JKOztBQWZBO0VBQ0ksYUFBQTtFQUNBLHlCQUFBO0FBa0JKOztBQWZBO0VBQ0ksa0JBQUE7RUFDQSxRQUFBO0VBQ0EsUUFBQTtFQUNBLFdBQUE7RUFDQSwyRkFBQTtFQUNBLHNCQ2xCSztBRG9DVCIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvY29yZS9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm5hdmJhciB7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHJnYmEoMCwgMCwgMCwgLjEyKTtcbn1cblxuLm5hdmJhci1icmFuZCB7XG4gICAgb3BhY2l0eTogLjY7XG4gICAgbWFyZ2luLXJpZ2h0OiAzcmVtO1xuICAgIGZvbnQ6IDQwMCAyNHB4IFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmO1xufVxuXG4uYmctbGlnaHQge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlICFpbXBvcnRhbnQ7XG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZCAhaW1wb3J0YW50O1xufVxuXG4ubmF2YmFyIC5uYXZiYXItZXhwYW5kLWxnIC5uYXZiYXItbGlnaHQgLmJnLWxpZ2h0IHtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59IiwiLm5hdmJhciB7XG4gIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCByZ2JhKDAsIDAsIDAsIDAuMTIpO1xufVxuXG4ubmF2YmFyLWJyYW5kIHtcbiAgb3BhY2l0eTogMC42O1xuICBtYXJnaW4tcmlnaHQ6IDNyZW07XG4gIGZvbnQ6IDQwMCAyNHB4IFJvYm90bywgXCJIZWx2ZXRpY2EgTmV1ZVwiLCBzYW5zLXNlcmlmO1xufVxuXG4uYmctbGlnaHQge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZSAhaW1wb3J0YW50O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5uYXZiYXIgLm5hdmJhci1leHBhbmQtbGcgLm5hdmJhci1saWdodCAuYmctbGlnaHQge1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kICFpbXBvcnRhbnQ7XG59XG5cbi5jYXJkIHtcbiAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZDtcbn1cblxuLmNhcmQtYm9keSB7XG4gIHBhZGRpbmc6IDA7XG59XG5cbmJ1dHRvbiB7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIG1hcmdpbjogMTBweCA1cHggMHB4IDE1cHg7XG59XG5cbi5saW5rLWJ1dHRvbi0tc2F2ZSB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiAwcHg7XG4gIGxlZnQ6IDUlO1xuICBtYXJnaW46IDBweDtcbiAgYm94LXNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSwgMTBweCAxMHB4IDIwcHggI2M4Y2VkNSwgaW5zZXQgMCAwIDEwcHggI2M4Y2VkNTtcbiAgYm9yZGVyOiAxcHggIzIyMiBzb2xpZDtcbn0iLCIkYm94U2hhZG93OiBpbnNldCAtMTBweCAtMTBweCAxMDBweCAjYzhjZWQ1LFxuMTBweCAxMHB4IDIwcHggI2M4Y2VkNSxcbmluc2V0IDAgMCAxMHB4ICNjOGNlZDU7XG4kYm9yZGVyOiAxcHggIzIyMiBzb2xpZDsiXX0= */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(NavbarComponent, [{
         type: core_1.Component,
         args: [{
@@ -1479,7 +1645,7 @@ class HomeComponent {
     ngOnInit() {
         this.resutDataAnnouncement.add(this.getDataAnnouncement$.subscribe({
             next: (Res) => {
-                this.rowDatatAnnouncement = Res['respons'];
+                this.rowDatatAnnouncement = Res;
             },
             error: (Err) => {
                 this.logger.info('Błąd pobrania ogłoszeń. Error: ' + Err);
@@ -1732,6 +1898,96 @@ const i1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/fo
 const i2 = __webpack_require__(/*! ../../../shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
 const i3 = __webpack_require__(/*! ../../core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
 const i4 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+const i5 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+function UserRegistrationComponent_div_13_div_1_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div");
+    i0.ɵɵtext(1, " Nazwa u\u017Cytkownika jest wymagana! ");
+    i0.ɵɵelementEnd();
+} }
+function UserRegistrationComponent_div_13_div_2_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div");
+    i0.ɵɵtext(1);
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    const error_r5 = ctx.ngIf;
+    i0.ɵɵadvance(1);
+    i0.ɵɵtextInterpolate2(" D\u0142ugo\u015B\u0107 znak\u00F3w musi by\u0107 ", error_r5.requiredLength, ". Brakuje ", error_r5.requiredLength - error_r5.actualLength, " znaku/\u00F3w! ");
+} }
+function UserRegistrationComponent_div_13_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div", 18);
+    i0.ɵɵtemplate(1, UserRegistrationComponent_div_13_div_1_Template, 2, 0, "div", 19);
+    i0.ɵɵtemplate(2, UserRegistrationComponent_div_13_div_2_Template, 2, 2, "div", 19);
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    const ctx_r0 = i0.ɵɵnextContext();
+    i0.ɵɵadvance(1);
+    i0.ɵɵproperty("ngIf", ctx_r0.registrationForm.get("username").hasError("required"));
+    i0.ɵɵadvance(1);
+    i0.ɵɵproperty("ngIf", ctx_r0.registrationForm.get("username").getError("minlength"));
+} }
+function UserRegistrationComponent_div_20_div_1_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div");
+    i0.ɵɵtext(1, " Has\u0142o u\u017Cytkownika jest wymagane! ");
+    i0.ɵɵelementEnd();
+} }
+function UserRegistrationComponent_div_20_div_2_span_2_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "span");
+    i0.ɵɵtext(1, " ma\u0142e litery");
+    i0.ɵɵelementEnd();
+} }
+function UserRegistrationComponent_div_20_div_2_span_3_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "span");
+    i0.ɵɵtext(1, " du\u017Ce litery");
+    i0.ɵɵelementEnd();
+} }
+function UserRegistrationComponent_div_20_div_2_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div");
+    i0.ɵɵtext(1, " Has\u0142o musi zawiera\u0107 ");
+    i0.ɵɵtemplate(2, UserRegistrationComponent_div_20_div_2_span_2_Template, 2, 0, "span", 19);
+    i0.ɵɵtemplate(3, UserRegistrationComponent_div_20_div_2_span_3_Template, 2, 0, "span", 19);
+    i0.ɵɵtext(4, "! ");
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    const ctx_r7 = i0.ɵɵnextContext(2);
+    i0.ɵɵadvance(2);
+    i0.ɵɵproperty("ngIf", ctx_r7.f.password.errors.lowercase === false);
+    i0.ɵɵadvance(1);
+    i0.ɵɵproperty("ngIf", ctx_r7.f.password.errors.uppercase === false);
+} }
+function UserRegistrationComponent_div_20_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div", 18);
+    i0.ɵɵtemplate(1, UserRegistrationComponent_div_20_div_1_Template, 2, 0, "div", 19);
+    i0.ɵɵtemplate(2, UserRegistrationComponent_div_20_div_2_Template, 5, 2, "div", 19);
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    const ctx_r1 = i0.ɵɵnextContext();
+    i0.ɵɵadvance(1);
+    i0.ɵɵproperty("ngIf", ctx_r1.registrationForm.get("password").hasError("required"));
+    i0.ɵɵadvance(1);
+    i0.ɵɵproperty("ngIf", ctx_r1.f.errors);
+} }
+function UserRegistrationComponent_div_27_div_1_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div");
+    i0.ɵɵtext(1, " Email u\u017Cytkownika jest wymagany! ");
+    i0.ɵɵelementEnd();
+} }
+function UserRegistrationComponent_div_27_div_2_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div");
+    i0.ɵɵtext(1, " Adres email jest niepoprawny! ");
+    i0.ɵɵelementEnd();
+} }
+function UserRegistrationComponent_div_27_Template(rf, ctx) { if (rf & 1) {
+    i0.ɵɵelementStart(0, "div", 18);
+    i0.ɵɵtemplate(1, UserRegistrationComponent_div_27_div_1_Template, 2, 0, "div", 19);
+    i0.ɵɵtemplate(2, UserRegistrationComponent_div_27_div_2_Template, 2, 0, "div", 19);
+    i0.ɵɵelementEnd();
+} if (rf & 2) {
+    const ctx_r2 = i0.ɵɵnextContext();
+    i0.ɵɵadvance(1);
+    i0.ɵɵproperty("ngIf", ctx_r2.registrationForm.get("email").hasError("required"));
+    i0.ɵɵadvance(1);
+    i0.ɵɵproperty("ngIf", ctx_r2.registrationForm.get("email").hasError("email"));
+} }
 class UserRegistrationComponent {
     constructor(fb, logger, authService, router) {
         this.fb = fb;
@@ -1742,15 +1998,45 @@ class UserRegistrationComponent {
     }
     ngOnInit() {
         this.registrationForm = this.fb.group({
-            username: this.makeFormControl(),
-            password: this.makeFormControl(),
-            email: this.makeFormControl(),
+            username: this.fb.control('', [forms_1.Validators.required, forms_1.Validators.minLength(3)]),
+            password: this.fb.control('', [
+                forms_1.Validators.required,
+                this.validatePassword
+            ]),
+            email: this.fb.control('', [forms_1.Validators.required, forms_1.Validators.email]),
             type: this.makeFormControl(),
         });
     }
     makeFormControl() {
         const cloned = new forms_1.FormControl('', [forms_1.Validators.required]);
         return cloned;
+    }
+    validatePassword(control) {
+        const hasUppercase = control.value.match(/[A-Z]/);
+        const hasLowercase = control.value.match(/[a-z]/);
+        if (hasUppercase && hasLowercase) {
+            return null;
+        }
+        if (hasUppercase === null) {
+            return {
+                'uppercase': false,
+            };
+        }
+        if (hasLowercase === null) {
+            return {
+                'lowercase': false,
+            };
+        }
+        else {
+            return {
+                'password': true,
+                'uppercase': true,
+                'lowercase': true,
+            };
+        }
+    }
+    get f() {
+        return this.registrationForm.controls;
     }
     registration() {
         if (this.registrationForm.dirty && this.registrationForm.valid) {
@@ -1784,7 +2070,7 @@ class UserRegistrationComponent {
 }
 exports.UserRegistrationComponent = UserRegistrationComponent;
 UserRegistrationComponent.ɵfac = function UserRegistrationComponent_Factory(t) { return new (t || UserRegistrationComponent)(i0.ɵɵdirectiveInject(i1.FormBuilder), i0.ɵɵdirectiveInject(i2.LoggerService), i0.ɵɵdirectiveInject(i3.AuthService), i0.ɵɵdirectiveInject(i4.Router)); };
-UserRegistrationComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserRegistrationComponent, selectors: [["app-user-registration"]], decls: 41, vars: 4, consts: [[1, "jumbotron", "content"], [1, "panel", "panel-default"], [1, "panel-heading", "text-center"], [1, "panel-body"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "userName"], ["required", "", "type", "text", "formControlName", "username", "id", "username", "name", "username", 1, "form-control"], ["for", "password"], ["required", "", "type", "text", "formControlName", "password", "id", "password", "name", "password", 1, "form-control"], ["for", "email"], ["required", "", "type", "text", "formControlName", "email", "id", "email", "name", "email", 1, "form-control"], ["for", "type"], ["required", "", "formControlName", "type", "name", "type", 1, "form-control"], [3, "value"], ["type", "button", 1, "btn", "btn-default"], ["type", "submit", 1, "btn", "btn-success"]], template: function UserRegistrationComponent_Template(rf, ctx) { if (rf & 1) {
+UserRegistrationComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserRegistrationComponent, selectors: [["app-user-registration"]], decls: 44, vars: 7, consts: [[1, "jumbotron", "content"], [1, "panel", "panel-default"], [1, "panel-heading", "text-center"], [1, "panel-body"], [3, "formGroup", "ngSubmit"], [1, "form-group"], ["for", "userName"], ["required", "", "type", "text", "formControlName", "username", 1, "form-control"], ["class", "validation-feedback", 4, "ngIf"], ["for", "password"], ["required", "", "type", "text", "formControlName", "password", 1, "form-control"], ["for", "email"], ["required", "", "type", "text", "formControlName", "email", 1, "form-control"], ["for", "type"], ["required", "", "formControlName", "type", "name", "type", 1, "form-control"], [3, "value"], ["type", "button", 1, "btn", "btn-default"], ["type", "submit", 1, "btn", "btn-success"], [1, "validation-feedback"], [4, "ngIf"]], template: function UserRegistrationComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "div", 0);
         i0.ɵɵelementStart(1, "div", 1);
         i0.ɵɵelementStart(2, "div", 2);
@@ -1797,55 +2083,58 @@ UserRegistrationComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserRegistratio
         i0.ɵɵlistener("ngSubmit", function UserRegistrationComponent_Template_form_ngSubmit_6_listener() { return ctx.registration(); });
         i0.ɵɵelementStart(7, "div", 5);
         i0.ɵɵelementStart(8, "label", 6);
-        i0.ɵɵtext(9, "Nazwa u\u017Cytkownika ");
+        i0.ɵɵtext(9, "Nazwa u\u017Cytkownika");
         i0.ɵɵelementStart(10, "sup");
         i0.ɵɵtext(11, "*");
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
         i0.ɵɵelement(12, "input", 7);
+        i0.ɵɵtemplate(13, UserRegistrationComponent_div_13_Template, 3, 2, "div", 8);
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(13, "div", 5);
-        i0.ɵɵelementStart(14, "label", 8);
-        i0.ɵɵtext(15, "Has\u0142o");
-        i0.ɵɵelementStart(16, "sup");
-        i0.ɵɵtext(17, "*");
-        i0.ɵɵelementEnd();
-        i0.ɵɵelementEnd();
-        i0.ɵɵelement(18, "input", 9);
-        i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(19, "div", 5);
-        i0.ɵɵelementStart(20, "label", 10);
-        i0.ɵɵtext(21, "Email");
-        i0.ɵɵelementStart(22, "sup");
-        i0.ɵɵtext(23, "*");
+        i0.ɵɵelementStart(14, "div", 5);
+        i0.ɵɵelementStart(15, "label", 9);
+        i0.ɵɵtext(16, "Has\u0142o");
+        i0.ɵɵelementStart(17, "sup");
+        i0.ɵɵtext(18, "*");
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
-        i0.ɵɵelement(24, "input", 11);
+        i0.ɵɵelement(19, "input", 10);
+        i0.ɵɵtemplate(20, UserRegistrationComponent_div_20_Template, 3, 2, "div", 8);
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(25, "div", 5);
-        i0.ɵɵelementStart(26, "label", 12);
-        i0.ɵɵtext(27, "Typ");
-        i0.ɵɵelementStart(28, "sup");
-        i0.ɵɵtext(29, "*");
-        i0.ɵɵelementEnd();
-        i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(30, "select", 13);
-        i0.ɵɵelementStart(31, "option", 14);
-        i0.ɵɵtext(32, "Standard");
-        i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(33, "option", 14);
-        i0.ɵɵtext(34, "Premium");
-        i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(35, "option", 14);
-        i0.ɵɵtext(36, "VIP");
+        i0.ɵɵelementStart(21, "div", 5);
+        i0.ɵɵelementStart(22, "label", 11);
+        i0.ɵɵtext(23, "Email");
+        i0.ɵɵelementStart(24, "sup");
+        i0.ɵɵtext(25, "*");
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
+        i0.ɵɵelement(26, "input", 12);
+        i0.ɵɵtemplate(27, UserRegistrationComponent_div_27_Template, 3, 2, "div", 8);
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(37, "button", 15);
-        i0.ɵɵtext(38, "Resetuj");
+        i0.ɵɵelementStart(28, "div", 5);
+        i0.ɵɵelementStart(29, "label", 13);
+        i0.ɵɵtext(30, "Typ");
+        i0.ɵɵelementStart(31, "sup");
+        i0.ɵɵtext(32, "*");
         i0.ɵɵelementEnd();
-        i0.ɵɵelementStart(39, "button", 16);
-        i0.ɵɵtext(40, "Rejestracja");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(33, "select", 14);
+        i0.ɵɵelementStart(34, "option", 15);
+        i0.ɵɵtext(35, "Standard");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(36, "option", 15);
+        i0.ɵɵtext(37, "Premium");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(38, "option", 15);
+        i0.ɵɵtext(39, "VIP");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(40, "button", 16);
+        i0.ɵɵtext(41, "Resetuj");
+        i0.ɵɵelementEnd();
+        i0.ɵɵelementStart(42, "button", 17);
+        i0.ɵɵtext(43, "Rejestracja");
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
         i0.ɵɵelementEnd();
@@ -1854,13 +2143,19 @@ UserRegistrationComponent.ɵcmp = i0.ɵɵdefineComponent({ type: UserRegistratio
     } if (rf & 2) {
         i0.ɵɵadvance(6);
         i0.ɵɵproperty("formGroup", ctx.registrationForm);
-        i0.ɵɵadvance(25);
+        i0.ɵɵadvance(7);
+        i0.ɵɵproperty("ngIf", ctx.registrationForm.get("username").touched || ctx.registrationForm.get("username").dirty);
+        i0.ɵɵadvance(7);
+        i0.ɵɵproperty("ngIf", ctx.registrationForm.get("password").touched || ctx.registrationForm.get("password").dirty);
+        i0.ɵɵadvance(7);
+        i0.ɵɵproperty("ngIf", ctx.registrationForm.get("email").touched || ctx.registrationForm.get("email").dirty);
+        i0.ɵɵadvance(7);
         i0.ɵɵproperty("value", ctx.CustomerType.Standard);
         i0.ɵɵadvance(2);
         i0.ɵɵproperty("value", ctx.CustomerType.Premium);
         i0.ɵɵadvance(2);
         i0.ɵɵproperty("value", ctx.CustomerType.VIP);
-    } }, directives: [i1.ɵangular_packages_forms_forms_y, i1.NgControlStatusGroup, i1.FormGroupDirective, i1.DefaultValueAccessor, i1.RequiredValidator, i1.NgControlStatus, i1.FormControlName, i1.SelectControlValueAccessor, i1.NgSelectOption, i1.ɵangular_packages_forms_forms_x], styles: [".content[_ngcontent-%COMP%] {\n  width: 80%;\n  margin: 10%;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy91c2Vycy91c2VyLXJlZ2lzdHJhdGlvbi91c2VyLXJlZ2lzdHJhdGlvbi5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBO0VBQ0ksVUFBQTtFQUNBLFdBQUE7RUFDQSwyRkNKUTtBRElaIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy91c2Vycy91c2VyLXJlZ2lzdHJhdGlvbi91c2VyLXJlZ2lzdHJhdGlvbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuLi8uLi8uLi9zaGFyZWQvc2hhcmVkLXNjc3MvdmFyaWFibGVzLnNjc3NcIjtcclxuLmNvbnRlbnQge1xyXG4gICAgd2lkdGg6IDgwJTtcclxuICAgIG1hcmdpbjogMTAlO1xyXG4gICAgYm94LXNoYWRvdzogJGJveFNoYWRvd1xyXG59XHJcbiIsIiRib3hTaGFkb3c6IGluc2V0IC0xMHB4IC0xMHB4IDEwMHB4ICNjOGNlZDUsXG4xMHB4IDEwcHggMjBweCAjYzhjZWQ1LFxuaW5zZXQgMCAwIDEwcHggI2M4Y2VkNTtcbiRib3JkZXI6IDFweCAjMjIyIHNvbGlkOyJdfQ== */"] });
+    } }, directives: [i1.ɵangular_packages_forms_forms_y, i1.NgControlStatusGroup, i1.FormGroupDirective, i1.DefaultValueAccessor, i1.RequiredValidator, i1.NgControlStatus, i1.FormControlName, i5.NgIf, i1.SelectControlValueAccessor, i1.NgSelectOption, i1.ɵangular_packages_forms_forms_x], styles: [".content[_ngcontent-%COMP%] {\n  width: 80%;\n  margin: 10%;\n  box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;\n}\n\nform[_ngcontent-%COMP%]   .ng-invalid.ng-touched[_ngcontent-%COMP%], form[_ngcontent-%COMP%]   .ng-invalid.ng-dirty[_ngcontent-%COMP%] {\n  border: 2px solid red !important;\n}\n\nform[_ngcontent-%COMP%]   .ng-invalid.ng-touched[_ngcontent-%COMP%]    ~ .validation-feedback[_ngcontent-%COMP%], form[_ngcontent-%COMP%]   .ng-invalid.ng-dirty[_ngcontent-%COMP%]    ~ .validation-feedback[_ngcontent-%COMP%] {\n  color: red;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbW9kdWxlcy91c2Vycy91c2VyLXJlZ2lzdHJhdGlvbi91c2VyLXJlZ2lzdHJhdGlvbi5jb21wb25lbnQuc2NzcyIsInNyYy9hcHAvc2hhcmVkL3NoYXJlZC1zY3NzL3ZhcmlhYmxlcy5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBO0VBQ0ksVUFBQTtFQUNBLFdBQUE7RUFDQSwyRkNKUTtBRElaOztBQUdBOztFQUVJLGdDQUFBO0FBQUo7O0FBR0E7O0VBRUksVUFBQTtBQUFKIiwiZmlsZSI6InNyYy9hcHAvbW9kdWxlcy91c2Vycy91c2VyLXJlZ2lzdHJhdGlvbi91c2VyLXJlZ2lzdHJhdGlvbi5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIkBpbXBvcnQgXCIuLi8uLi8uLi9zaGFyZWQvc2hhcmVkLXNjc3MvdmFyaWFibGVzLnNjc3NcIjtcclxuLmNvbnRlbnQge1xyXG4gICAgd2lkdGg6IDgwJTtcclxuICAgIG1hcmdpbjogMTAlO1xyXG4gICAgYm94LXNoYWRvdzogJGJveFNoYWRvd1xyXG59XHJcblxyXG5mb3JtIC5uZy1pbnZhbGlkLm5nLXRvdWNoZWQsXHJcbmZvcm0gLm5nLWludmFsaWQubmctZGlydHkge1xyXG4gICAgYm9yZGVyOiAycHggc29saWQgcmVkICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbmZvcm0gLm5nLWludmFsaWQubmctdG91Y2hlZH4udmFsaWRhdGlvbi1mZWVkYmFjayxcclxuZm9ybSAubmctaW52YWxpZC5uZy1kaXJ0eX4udmFsaWRhdGlvbi1mZWVkYmFjayB7XHJcbiAgICBjb2xvcjogcmVkO1xyXG59IiwiJGJveFNoYWRvdzogaW5zZXQgLTEwcHggLTEwcHggMTAwcHggI2M4Y2VkNSxcbjEwcHggMTBweCAyMHB4ICNjOGNlZDUsXG5pbnNldCAwIDAgMTBweCAjYzhjZWQ1O1xuJGJvcmRlcjogMXB4ICMyMjIgc29saWQ7Il19 */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(UserRegistrationComponent, [{
         type: core_1.Component,
         args: [{
@@ -1951,6 +2246,7 @@ const user_login_component_1 = __webpack_require__(/*! ./user-login/user-login.c
 const auth_guard_service_1 = __webpack_require__(/*! ../core/authentication/auth-guard/auth-guard.service */ "./src/app/modules/core/authentication/auth-guard/auth-guard.service.ts");
 const user_profile_component_1 = __webpack_require__(/*! ./user-profile/user-profile.component */ "./src/app/modules/users/user-profile/user-profile.component.ts");
 const contact_component_1 = __webpack_require__(/*! ../pages/contact/contact.component */ "./src/app/modules/pages/contact/contact.component.ts");
+const deactivate_guard_service_1 = __webpack_require__(/*! ../core/authentication/deactivate-guard/deactivate-guard.service */ "./src/app/modules/core/authentication/deactivate-guard/deactivate-guard.service.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const routes = [
@@ -1973,6 +2269,7 @@ const routes = [
                 path: 'contact',
                 data: { title: 'Kontakt' },
                 component: contact_component_1.ContactComponent,
+                canDeactivate: [deactivate_guard_service_1.DeactivateGuardService]
             },
             {
                 path: 'profile',
@@ -2022,6 +2319,7 @@ const user_profile_component_1 = __webpack_require__(/*! ./user-profile/user-pro
 const auth_interceptor_service_1 = __webpack_require__(/*! ../core/authentication/auth-interceptor/auth-interceptor.service */ "./src/app/modules/core/authentication/auth-interceptor/auth-interceptor.service.ts");
 const http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 const contact_component_1 = __webpack_require__(/*! ../pages/contact/contact.component */ "./src/app/modules/pages/contact/contact.component.ts");
+const deactivate_guard_service_1 = __webpack_require__(/*! ../core/authentication/deactivate-guard/deactivate-guard.service */ "./src/app/modules/core/authentication/deactivate-guard/deactivate-guard.service.ts");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 class UsersModule {
 }
@@ -2032,7 +2330,8 @@ UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factor
             provide: http_1.HTTP_INTERCEPTORS,
             useClass: auth_interceptor_service_1.AuthInterceptorService,
             multi: true // przekazanie wszystkich np serviców do tablicy HTTP_INTERCEPTORS
-        }
+        },
+        deactivate_guard_service_1.DeactivateGuardService
     ], imports: [[
             common_1.CommonModule,
             users_routing_module_1.UsersRoutingModule,
@@ -2079,7 +2378,8 @@ UsersModule.ɵinj = i0.ɵɵdefineInjector({ factory: function UsersModule_Factor
                         provide: http_1.HTTP_INTERCEPTORS,
                         useClass: auth_interceptor_service_1.AuthInterceptorService,
                         multi: true // przekazanie wszystkich np serviców do tablicy HTTP_INTERCEPTORS
-                    }
+                    },
+                    deactivate_guard_service_1.DeactivateGuardService
                 ]
             }]
     }], null, null); })();
@@ -2240,6 +2540,8 @@ class AnnouncementService {
     constructor(httpClient, logger) {
         this.httpClient = httpClient;
         this.logger = logger;
+        this.listAnnouncements = new rxjs_1.BehaviorSubject(null);
+        this.listAnnouncements$ = this.listAnnouncements.asObservable();
         this.httpOptions = {
             headers: new http_1.HttpHeaders({ 'Content-Type': 'application/json' })
         };
@@ -2248,6 +2550,7 @@ class AnnouncementService {
         return this.httpClient.post(`/category/${idCategory}/type/${idType}`, newAnnouncement, this.httpOptions)
             .pipe(operators_1.catchError(this.handleError('Add Announcement')));
     }
+    //      this.listAnnouncements.next(announcements);
     getAnnouncement() {
         return this.httpClient.get(`/api/get-announcements`).pipe(operators_1.tap(announcements => this.logger.info('Announcements retrieved!' + announcements)), operators_1.share());
     }

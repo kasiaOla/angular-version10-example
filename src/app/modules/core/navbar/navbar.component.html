@@ -6,9 +6,10 @@
         <div><a class="navbar-brand" (click)="loginOut()" *ngIf="authService.isAuthenticated" name='loginOut'>Wyloguj</a></div>
         <div><a class="navbar-brand" [routerLink]="'/user/contact'" routerLinkActive="active" name='contact'>Kontakt</a></div>
         <div><a class="navbar-brand" [routerLink]="'/user/profile'" *ngIf="authService.isAuthenticated" name='profile'>Profil</a></div>
+        <div><a class="navbar-brand" [routerLink]="'/list-announcements'" *ngIf="authService.isAuthenticated" name='listAnnouncements'>Lista ogłoszeń</a></div>
         <div *ngIf="authService.isAuthenticated"><strong>Cześć, {{authService.getCurrentUser()}} </strong></div>
     </nav>
-    <button class="btn btn-default link-button--save" [routerLink]="'/announcement/category'" routerLinkActive="active">Dodaj ogłoszenie</button>
+    <button *ngIf="authService.isAuthenticated" class="btn btn-default link-button--save" [routerLink]="'/announcement/category'" routerLinkActive="active">Dodaj ogłoszenie</button>
     <p class="card-text">
         <router-outlet></router-outlet>
     </p>
