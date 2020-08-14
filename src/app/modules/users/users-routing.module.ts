@@ -6,6 +6,7 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { AuthGuardService } from '../core/authentication/auth-guard/auth-guard.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ContactComponent } from '../pages/contact/contact.component';
+import { DeactivateGuardService } from '../core/authentication/deactivate-guard/deactivate-guard.service';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
         path: 'contact',
         data: { title: 'Kontakt' },
         component: ContactComponent,
+        canDeactivate: [DeactivateGuardService]
       },
       {
         path: 'profile',

@@ -21,9 +21,8 @@
                     <label for="password">Hasło<sup>*</sup></label>
                     <input required type="text" class="form-control" formControlName="password" />
                     <div class="validation-feedback" *ngIf="registrationForm.get('password').touched || registrationForm.get('password').dirty">
-
                         <div *ngIf="registrationForm.get('password').hasError('required')">
-                            Hasło użytkownika jest wymagana!
+                            Hasło użytkownika jest wymagane!
                         </div>
                         <div *ngIf="f.errors">
                             Hasło musi zawierać
@@ -38,7 +37,7 @@
                     <div class="validation-feedback" *ngIf="registrationForm.get('email').touched || registrationForm.get('email').dirty">
 
                         <div *ngIf="registrationForm.get('email').hasError('required')">
-                            Email użytkownika jest wymagana!
+                            Email użytkownika jest wymagany!
                         </div>
                         <div *ngIf="registrationForm.get('email').hasError('email')">
                             Adres email jest niepoprawny!

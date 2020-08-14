@@ -10,6 +10,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AuthInterceptorService } from '../core/authentication/auth-interceptor/auth-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ContactComponent } from '../pages/contact/contact.component';
+import { DeactivateGuardService } from '../core/authentication/deactivate-guard/deactivate-guard.service';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ContactComponent } from '../pages/contact/contact.component';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true // przekazanie wszystkich np serviców do tablicy HTTP_INTERCEPTORS
-    }
+    },
+    DeactivateGuardService
   ]
 })
 export class UsersModule { }

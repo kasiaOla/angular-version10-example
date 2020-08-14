@@ -37,7 +37,6 @@ export class UserRegistrationComponent implements OnInit {
       email: this.fb.control('', [Validators.required, Validators.email]),
       type: this.makeFormControl(),
     });
-    console.log(this.registrationForm)
   }
 
   makeFormControl(): FormControl {
