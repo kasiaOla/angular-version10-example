@@ -1,3 +1,4 @@
+import { ListAnnouncementsComponent } from './list-announcements/list-announcements.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddAnnouncementComponent } from './add-announcement/add-announcement.component';
@@ -19,7 +20,13 @@ const routes: Routes = [
         data: { title: 'Dodaj ogłoszenie' },
         component: AddAnnouncementComponent,
         pathMatch: 'full'
-      }
+      },
+      {
+        path: 'list-announcements',
+        data: { title: 'Lista ogłoszeń' },
+        component: ListAnnouncementsComponent,
+      },
+
     ]
   }
 ];

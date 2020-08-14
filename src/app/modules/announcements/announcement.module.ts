@@ -7,13 +7,15 @@ import { RouterModule } from '@angular/router';
 import { AddCategoryAnnouncementComponent } from './add-category-announcement/add-category-announcement.component';
 import { AnnouncementService } from '../../shared/shared-services/announcement/announcement.service';
 import { AnnouncementComponent } from './announcement/announcement.component';
+import { ListAnnouncementsComponent } from './list-announcements/list-announcements.component';
 
 
 @NgModule({
   declarations: [
     AnnouncementComponent,
     AddAnnouncementComponent,
-    AddCategoryAnnouncementComponent
+    AddCategoryAnnouncementComponent,
+    ListAnnouncementsComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { AnnouncementComponent } from './announcement/announcement.component';
   exports: [
     AnnouncementComponent,
     AddAnnouncementComponent,
-    AddCategoryAnnouncementComponent
+    AddCategoryAnnouncementComponent,
+    ListAnnouncementsComponent
   ],
   providers: [AnnouncementService]
 })
