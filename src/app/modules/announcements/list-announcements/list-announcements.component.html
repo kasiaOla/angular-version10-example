@@ -1,21 +1,44 @@
-<table class="table">
-    <thead class="table-primary">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nazwa</th>
-            <th scope="col">Cena</th>
-            <th scope="col">Powierzchnia</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let listAnnouncement of listAnnouncements | async">
-            <th scope="row">{{listAnnouncement._id}}</th>
-            <td>{{listAnnouncement.price}}</td>
-            <td>{{listAnnouncement.pricePerM}}</td>
-            <td>
-                <span class="edit" [routerLink]="['/edit-announcement/', listAnnouncement._id]">Edytuj </span>
-                <span class="delete" (click)="removeAnnouncement(listAnnouncement, listAnnouncement._id)">Usuń</span>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="dashboard">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="dashboard__section dashboard__section--small">
+                    <div class="dashboard__heading dashboard__heading--mail">
+                        <h2>Twoja lista ogłoszeń</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="dashboard__section">
+                    <div class="dashboard__heading">
+                        <h3>Lista ogłoszeń</h3>
+                    </div>
+                    <table class="table">
+                        <thead class="table__thead"></thead>
+                        <tr>
+                            <th class="table__th">#</th>
+                            <th class="table__th">Nazwa</th>
+                            <th class="table__th">Cena</th>
+                            <th class="table__th">Powierzchnia</th>
+                        </tr>
+                        <tbody class="table__tbody">
+                            <tr class="table__tr" *ngFor="let listAnnouncement of listAnnouncements | async">
+                                <td class="table__td">{{listAnnouncement._id}}</td>
+                                <td class="table__td">{{listAnnouncement.price}}</td>
+                                <td class="table__td">{{listAnnouncement.pricePerM}}</td>
+                                <td class="table__td">
+                                    <button class="material-icons table__action-icon" [routerLink]="['/edit-announcement/', listAnnouncement._id]">edit </button>
+                                    <button class="material-icons table__action-icon" (click)="removeAnnouncement(listAnnouncement, listAnnouncement._id)">delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
