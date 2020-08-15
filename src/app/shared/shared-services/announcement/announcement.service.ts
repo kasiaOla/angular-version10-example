@@ -9,6 +9,7 @@ import { LoggerService } from '../logger/logger.service';
   providedIn: 'root'
 })
 export class AnnouncementService {
+
   private listAnnouncements = new BehaviorSubject<Announcement[]>(null);
   public listAnnouncements$ = this.listAnnouncements.asObservable();
   httpOptions = {
@@ -24,13 +25,17 @@ export class AnnouncementService {
       );
   }
 
-  //      this.listAnnouncements.next(announcements);
   public getAnnouncement(): Observable<Announcement[]> {
     return this.httpClient.get<Announcement[]>(`/api/get-announcements`).pipe(
       tap(announcements => this.logger.info('Announcements retrieved!' + announcements)), share()
     );
   }
 
+  public getAnnouncementUser(idUser: string): Observable<Announcement[]> {
+    return this.httpClient.get<Announcement[]>(`/api/get-announcements-user/${idUser}`).pipe(
+      tap(announcements => this.logger.info('The announcements of the logged in user have been retrieved!' + announcements)), share()
+    );
+  }
 
   private handleError<T>(operation = 'operation', result?: T): any {
     return (error: any): Observable<T> => {

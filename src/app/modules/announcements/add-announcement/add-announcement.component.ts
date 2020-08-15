@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AnnouncementsCategories, AnnouncementType, Announcement } from '../announcement';
 import { AnnouncementService } from 'src/app/shared/shared-services/announcement/announcement.service';
 import { LoggerService } from '../../../shared/shared-services/logger/logger.service';
+import { AuthService } from '../../core/authentication/auth/auth.service';
 
 @Component({
   selector: 'app-add-announcement',
@@ -20,9 +21,11 @@ export class AddAnnouncementComponent implements OnInit {
   AnnouncementType = AnnouncementType;
   id_category: string;
   id_type: string;
+  id_user: string;
 
   constructor(private fb: FormBuilder,
               private logger: LoggerService,
+              private authService: AuthService,
               private announcementService: AnnouncementService,
               private route: ActivatedRoute) {}
 
@@ -65,6 +68,7 @@ export class AddAnnouncementComponent implements OnInit {
 
   addAnnouncement(): void {
     const setAnnouncement: Announcement = {
+      userid: '' + this.authService.getCurrentUser(),
       title: this.announcementForm.value.title,
       price: this.announcementForm.value.price,
       surface: this.announcementForm.value.surface,
@@ -82,7 +86,7 @@ export class AddAnnouncementComponent implements OnInit {
       description: this.announcementForm.value.description,
       floor: this.announcementForm.value.floor,
     };
-
+    console.log('currect user' , this.authService.getCurrentUser());
     this.announcementService.addAnnouncement(setAnnouncement, this.id_category, this.id_type)
       .subscribe(data => {
         Syntax:

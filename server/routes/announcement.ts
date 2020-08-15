@@ -14,6 +14,7 @@ export class AnnouncementRoute {
           });
         } else {
           const announcementData = {
+            userid: req.body.userid,
             title: req.body.title,
             price: req.body.price,
             surface: req.body.surface,
@@ -44,6 +45,21 @@ export class AnnouncementRoute {
     });
     app.route('/api/get-announcements').get((req: Request, res: Response, next: NextFunction) => {
       Announcement.find((error, data) => {
+        if (error) {
+          return res.status(400).json({
+            success: false,
+            message: 'Error processing request ' + error
+          });
+        } else {
+          return res.status(200).json(data);
+        }
+      });
+    });
+
+    app.route('/api/get-announcements-user/:id_user').get((req: Request, res: Response, next: NextFunction) => {
+      Announcement.find({
+        userid: req.params.id_user
+      }, (error, data) => {
         if (error) {
           return res.status(400).json({
             success: false,

@@ -258,12 +258,14 @@ const announcement_1 = __webpack_require__(/*! ../announcement */ "./src/app/mod
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 const i2 = __webpack_require__(/*! ../../../shared/shared-services/logger/logger.service */ "./src/app/shared/shared-services/logger/logger.service.ts");
-const i3 = __webpack_require__(/*! src/app/shared/shared-services/announcement/announcement.service */ "./src/app/shared/shared-services/announcement/announcement.service.ts");
-const i4 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+const i3 = __webpack_require__(/*! ../../core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
+const i4 = __webpack_require__(/*! src/app/shared/shared-services/announcement/announcement.service */ "./src/app/shared/shared-services/announcement/announcement.service.ts");
+const i5 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 class AddAnnouncementComponent {
-    constructor(fb, logger, announcementService, route) {
+    constructor(fb, logger, authService, announcementService, route) {
         this.fb = fb;
         this.logger = logger;
+        this.authService = authService;
         this.announcementService = announcementService;
         this.route = route;
         this.AnnouncementsCategories = announcement_1.AnnouncementsCategories;
@@ -303,6 +305,7 @@ class AddAnnouncementComponent {
     }
     addAnnouncement() {
         const setAnnouncement = {
+            userid: '' + this.authService.getCurrentUser(),
             title: this.announcementForm.value.title,
             price: this.announcementForm.value.price,
             surface: this.announcementForm.value.surface,
@@ -320,6 +323,7 @@ class AddAnnouncementComponent {
             description: this.announcementForm.value.description,
             floor: this.announcementForm.value.floor,
         };
+        console.log('currect user', this.authService.getCurrentUser());
         this.announcementService.addAnnouncement(setAnnouncement, this.id_category, this.id_type)
             .subscribe(data => {
             Syntax: switch (data.success) {
@@ -341,7 +345,7 @@ class AddAnnouncementComponent {
     }
 }
 exports.AddAnnouncementComponent = AddAnnouncementComponent;
-AddAnnouncementComponent.ɵfac = function AddAnnouncementComponent_Factory(t) { return new (t || AddAnnouncementComponent)(i0.ɵɵdirectiveInject(i1.FormBuilder), i0.ɵɵdirectiveInject(i2.LoggerService), i0.ɵɵdirectiveInject(i3.AnnouncementService), i0.ɵɵdirectiveInject(i4.ActivatedRoute)); };
+AddAnnouncementComponent.ɵfac = function AddAnnouncementComponent_Factory(t) { return new (t || AddAnnouncementComponent)(i0.ɵɵdirectiveInject(i1.FormBuilder), i0.ɵɵdirectiveInject(i2.LoggerService), i0.ɵɵdirectiveInject(i3.AuthService), i0.ɵɵdirectiveInject(i4.AnnouncementService), i0.ɵɵdirectiveInject(i5.ActivatedRoute)); };
 AddAnnouncementComponent.ɵcmp = i0.ɵɵdefineComponent({ type: AddAnnouncementComponent, selectors: [["app-add-announcement"]], decls: 80, vars: 3, consts: [[1, "jumbotron", "content"], [1, "panel", "panel-default"], [1, "panel-heading", "text-center"], [1, "row"], [1, "col-xs-12", "col-lg-12"], [1, "panel-body"], [3, "formGroup", "ngSubmit"], [1, "form-group", "col-sm-12", "col-md-6"], ["for", "title"], ["type", "text", "formControlName", "title", 1, "form-control"], [1, "form-group", "col-sm-12", "col-md-2"], ["for", "price"], ["type", "text", "formControlName", "price", 1, "form-control"], ["for", "surface"], ["type", "text", "formControlName", "surface", 1, "form-control"], ["for", "pricePerM"], ["type", "text", "formControlName", "pricePerM", 1, "form-control"], ["for", "numberOfRooms"], ["type", "number", "formControlName", "numberOfRooms", 1, "form-control"], ["for", "floor"], ["type", "number", "formControlName", "floor", 1, "form-control"], [1, "form-group", "col-sm-12", "col-md-4"], ["for", "multimedia"], ["required", "", "type", "text", "formControlName", "multimedia", 1, "form-control"], [1, "border", "p-2", "col-sm-12", "col-md-10"], ["formGroupName", "address", 1, "row"], ["for", "city"], ["type", "text", "formControlName", "city", 1, "form-control"], ["for", "street"], ["type", "text", "formControlName", "street", 1, "form-control"], ["for", "houseNumber"], ["type", "number", "formControlName", "houseNumber", 1, "form-control"], ["for", "postCode"], ["type", "text", "formControlName", "postCode", 1, "form-control"], [1, "form-group", "col-sm-12", "col-md-8"], ["for", "description"], ["formControlName", "description", "placeholder", "Opis", "rows", "3", 1, "form-control"], ["for", "announcementType"], ["type", "text", "id", "announcementType", "name", "announcementType", "disabled", "", 1, "form-control", 3, "value"], [1, "col-sm-12", "col-md-4", "form-group"], ["type", "button", 1, "btn", "btn-default"], ["type", "submit", 1, "btn", "btn-success"]], template: function AddAnnouncementComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "div", 0);
         i0.ɵɵelementStart(1, "div", 1);
@@ -486,7 +490,7 @@ AddAnnouncementComponent.ɵcmp = i0.ɵɵdefineComponent({ type: AddAnnouncementC
                 templateUrl: './add-announcement.component.html',
                 styleUrls: ['./add-announcement.component.scss']
             }]
-    }], function () { return [{ type: i1.FormBuilder }, { type: i2.LoggerService }, { type: i3.AnnouncementService }, { type: i4.ActivatedRoute }]; }, null); })();
+    }], function () { return [{ type: i1.FormBuilder }, { type: i2.LoggerService }, { type: i3.AuthService }, { type: i4.AnnouncementService }, { type: i5.ActivatedRoute }]; }, null); })();
 
 
 /***/ }),
@@ -812,8 +816,9 @@ exports.ListAnnouncementsComponent = void 0;
 const core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i0 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 const i1 = __webpack_require__(/*! ../../../shared/shared-services/announcement/announcement.service */ "./src/app/shared/shared-services/announcement/announcement.service.ts");
-const i2 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-const i3 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+const i2 = __webpack_require__(/*! ../../core/authentication/auth/auth.service */ "./src/app/modules/core/authentication/auth/auth.service.ts");
+const i3 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+const i4 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 const _c0 = function (a1) { return ["/edit-announcement/", a1]; };
 function ListAnnouncementsComponent_tr_12_Template(rf, ctx) { if (rf & 1) {
     const _r3 = i0.ɵɵgetCurrentView();
@@ -849,15 +854,17 @@ function ListAnnouncementsComponent_tr_12_Template(rf, ctx) { if (rf & 1) {
     i0.ɵɵproperty("routerLink", i0.ɵɵpureFunction1(4, _c0, listAnnouncement_r1._id));
 } }
 class ListAnnouncementsComponent {
-    constructor(announcementService) {
+    constructor(announcementService, authService) {
         this.announcementService = announcementService;
-        this.listAnnouncements = this.announcementService.getAnnouncement();
+        this.authService = authService;
+        this.idUser = this.authService.getCurrentUser().toString();
+        this.listAnnouncements = this.announcementService.getAnnouncementUser(this.idUser);
     }
     ngOnInit() { }
     removeAnnouncement(value, id) { }
 }
 exports.ListAnnouncementsComponent = ListAnnouncementsComponent;
-ListAnnouncementsComponent.ɵfac = function ListAnnouncementsComponent_Factory(t) { return new (t || ListAnnouncementsComponent)(i0.ɵɵdirectiveInject(i1.AnnouncementService)); };
+ListAnnouncementsComponent.ɵfac = function ListAnnouncementsComponent_Factory(t) { return new (t || ListAnnouncementsComponent)(i0.ɵɵdirectiveInject(i1.AnnouncementService), i0.ɵɵdirectiveInject(i2.AuthService)); };
 ListAnnouncementsComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ListAnnouncementsComponent, selectors: [["app-list-announcements"]], decls: 14, vars: 3, consts: [[1, "table"], [1, "table-primary"], ["scope", "col"], [4, "ngFor", "ngForOf"], ["scope", "row"], [1, "edit", 3, "routerLink"], [1, "delete", 3, "click"]], template: function ListAnnouncementsComponent_Template(rf, ctx) { if (rf & 1) {
         i0.ɵɵelementStart(0, "table", 0);
         i0.ɵɵelementStart(1, "thead", 1);
@@ -884,7 +891,7 @@ ListAnnouncementsComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ListAnnounceme
     } if (rf & 2) {
         i0.ɵɵadvance(12);
         i0.ɵɵproperty("ngForOf", i0.ɵɵpipeBind1(13, 1, ctx.listAnnouncements));
-    } }, directives: [i2.NgForOf, i3.RouterLink], pipes: [i2.AsyncPipe], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvYW5ub3VuY2VtZW50cy9saXN0LWFubm91bmNlbWVudHMvbGlzdC1hbm5vdW5jZW1lbnRzLmNvbXBvbmVudC5zY3NzIn0= */"] });
+    } }, directives: [i3.NgForOf, i4.RouterLink], pipes: [i3.AsyncPipe], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvYW5ub3VuY2VtZW50cy9saXN0LWFubm91bmNlbWVudHMvbGlzdC1hbm5vdW5jZW1lbnRzLmNvbXBvbmVudC5zY3NzIn0= */"] });
 /*@__PURE__*/ (function () { i0.ɵsetClassMetadata(ListAnnouncementsComponent, [{
         type: core_1.Component,
         args: [{
@@ -892,7 +899,7 @@ ListAnnouncementsComponent.ɵcmp = i0.ɵɵdefineComponent({ type: ListAnnounceme
                 templateUrl: './list-announcements.component.html',
                 styleUrls: ['./list-announcements.component.scss']
             }]
-    }], function () { return [{ type: i1.AnnouncementService }]; }, null); })();
+    }], function () { return [{ type: i1.AnnouncementService }, { type: i2.AuthService }]; }, null); })();
 
 
 /***/ }),
@@ -1017,6 +1024,7 @@ class AuthService {
         this.httpClient = httpClient;
         this.logger = logger;
         this.userSession = new rxjs_1.BehaviorSubject(null);
+        this.userSession$ = this.userSession.asObservable();
         this.isAuthenticated = false;
         // state - stan czy użytkownik jest zalogowany
         this.state = this.userSession.pipe(operators_1.map(session => session && !!session.token), operators_1.tap(state => this.isAuthenticated = state));
@@ -1052,7 +1060,7 @@ class AuthService {
     }
     getCurrentUser() {
         const session = this.userSession.getValue();
-        return session && session !== null && session.respons !== null ? session.respons.username : session;
+        return session && session !== null && session.respons !== null ? session.respons._id : session;
     }
 }
 exports.AuthService = AuthService;
@@ -2550,9 +2558,11 @@ class AnnouncementService {
         return this.httpClient.post(`/category/${idCategory}/type/${idType}`, newAnnouncement, this.httpOptions)
             .pipe(operators_1.catchError(this.handleError('Add Announcement')));
     }
-    //      this.listAnnouncements.next(announcements);
     getAnnouncement() {
         return this.httpClient.get(`/api/get-announcements`).pipe(operators_1.tap(announcements => this.logger.info('Announcements retrieved!' + announcements)), operators_1.share());
+    }
+    getAnnouncementUser(idUser) {
+        return this.httpClient.get(`/api/get-announcements-user/${idUser}`).pipe(operators_1.tap(announcements => this.logger.info('The announcements of the logged in user have been retrieved!' + announcements)), operators_1.share());
     }
     handleError(operation = 'operation', result) {
         return (error) => {

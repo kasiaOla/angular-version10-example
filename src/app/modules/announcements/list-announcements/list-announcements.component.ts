@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnnouncementService } from '../../../shared/shared-services/announcement/announcement.service';
 import { Announcement } from '../announcement';
+import { AuthService } from '../../core/authentication/auth/auth.service';
 
 
 @Component({
@@ -9,10 +10,11 @@ import { Announcement } from '../announcement';
   styleUrls: ['./list-announcements.component.scss']
 })
 export class ListAnnouncementsComponent implements OnInit {
+  private idUser = this.authService.getCurrentUser().toString();
+  public listAnnouncements = this.announcementService.getAnnouncementUser(this.idUser);
 
-  public listAnnouncements = this.announcementService.getAnnouncement();
-
-  constructor(public announcementService: AnnouncementService) {}
+  constructor(public announcementService: AnnouncementService,
+              public authService: AuthService) {}
 
   ngOnInit(): void {}
 

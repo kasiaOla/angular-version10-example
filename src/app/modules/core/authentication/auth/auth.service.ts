@@ -11,6 +11,7 @@ import { LoggerService } from '../../../../shared/shared-services/logger/logger.
 })
 export class AuthService {
   private userSession = new BehaviorSubject<Session>(null);
+  public userSession$ = this.userSession.asObservable();
   public isAuthenticated = false;
 
   // state - stan czy użytkownik jest zalogowany
@@ -61,7 +62,7 @@ export class AuthService {
 
   getCurrentUser(): Session | string {
     const session = this.userSession.getValue();
-    return session && session !== null && session.respons !== null ? session.respons.username : session;
+    return session && session !== null && session.respons !== null ? session.respons._id : session;
   }
   constructor(private httpClient: HttpClient, private logger: LoggerService) { }
 

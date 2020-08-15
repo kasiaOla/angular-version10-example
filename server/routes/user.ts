@@ -63,14 +63,14 @@ export class UserRoute {
           return res.status(400).json({
             success: false,
             message: 'Error processing request ' + err,
-            respons: req.body
+            respons: user
           });
         }
         if (!user) {
           return res.status(401).json({
             success: false,
             message: 'Incorrect login credentials.',
-            respons: req.body
+            respons: user
           });
         } else if (user) {
           return res.status(200).json({
@@ -79,7 +79,7 @@ export class UserRoute {
             token: jwt.sign(user.toObject(), 'secret-key', {
               expiresIn: 60 * 60
             }),
-            respons: req.body
+            respons: user
           });
         }
       });

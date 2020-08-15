@@ -4,6 +4,7 @@ import { Schema, Document } from 'mongoose';
 const AnnouncementSchema: Schema = new Schema({
 
   id: Number,
+  userid: String,
   title: String,
   price: String,
   surface: String,

@@ -1,5 +1,6 @@
 export interface Announcement {
   _id?: number;
+  userid?: string;
   title?: string;
   price?: string;
   surface?: string;
