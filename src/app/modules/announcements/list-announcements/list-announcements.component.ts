@@ -10,7 +10,7 @@ import { AuthService } from '../../core/authentication/auth/auth.service';
   styleUrls: ['./list-announcements.component.scss']
 })
 export class ListAnnouncementsComponent implements OnInit {
-  private idUser = this.authService.getCurrentUser().toString();
+  private idUser = '' + this.authService.getCurrentUser();
   public listAnnouncements = this.announcementService.getAnnouncementUser(this.idUser);
 
   constructor(public announcementService: AnnouncementService,
