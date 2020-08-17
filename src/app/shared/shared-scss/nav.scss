@@ -4,8 +4,20 @@
     justify-content: flex-end !important;
 }
 
-.navbar-brand {
+.navbar__brand {
+    font-size: 1.5rem;
+    color: rgba(0, 0, 0, 0.54);
     opacity: .6;
     margin-right: 3rem;
     font: 400 24px Roboto, "Helvetica Neue", sans-serif;
+    &:hover,
+    &:active {
+        text-decoration: none;
+    }
 }
+
+// .navbar_brand {
+//     opacity: .6;
+//     margin-right: 3rem;
+//     font: 400 24px Roboto, "Helvetica Neue", sans-serif;
+// }
