@@ -1,24 +1,16 @@
 @import "../../../shared/shared-scss/variables.scss";
 @import "../../../shared/shared-scss/app.scss";
 @import "../../../shared/shared-scss/nav.scss";
-.card {
-    justify-content: flex-end;
-}
-
-.card-body {
-    padding: 0;
-}
-
 button {
     padding: 10px;
     margin: 10px 5px 0px 15px;
 }
 
-.link-button--save {
+.link__button--save {
     position: absolute;
-    top: 0px;
+    top: 25px;
     left: 5%;
     margin: 0px;
-    box-shadow: inset -10px -10px 100px #c8ced5, 10px 10px 20px #c8ced5, inset 0 0 10px #c8ced5;
+    box-shadow: $boxShadow;
     border: $border;
 }

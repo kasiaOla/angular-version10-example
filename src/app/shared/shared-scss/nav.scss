@@ -1,20 +1,11 @@
 .navbar {
-    //  border-bottom: 1px solid rgba(0, 0, 0, .12);
     display: flex;
     height: 5rem;
+    justify-content: flex-end !important;
 }
 
 .navbar-brand {
     opacity: .6;
     margin-right: 3rem;
     font: 400 24px Roboto, "Helvetica Neue", sans-serif;
-}
-
-.bg-light {
-    //   background-color: white !important;
-    justify-content: flex-end !important;
-}
-
-.navbar .navbar-expand-lg .navbar-light .bg-light {
-    justify-content: flex-end !important;
 }
