@@ -1,7 +1,6 @@
 @import "./app.scss";
 .dashboard {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 3rem 5rem;
     .dashboard__heading {
         margin-bottom: 2rem;
         &.dashboard__heading--mail {
