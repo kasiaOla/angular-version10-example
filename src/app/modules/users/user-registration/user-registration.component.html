@@ -1,4 +1,79 @@
-<div class="jumbotron content">
+<div class="dashboard">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="dashboard__section dashboard__section--small">
+                    <div class="dashboard__heading dashboard__heading--mail">
+                        <h2>Rejestracja</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="dashboard__section">
+                    <div class="dashboard__heading">
+                        <h3>Wprowadź dane</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form [formGroup]="registrationForm" (ngSubmit)="registration()">
+                            <div class="form-group">
+                                <label for="userName">Nazwa użytkownika<sup>*</sup></label>
+                                <input required type="text" class="form-control" formControlName="username" />
+                                <div class="validation-feedback" *ngIf="registrationForm.get('username').touched || registrationForm.get('username').dirty">
+                                    <div *ngIf="registrationForm.get('username').hasError('required')">
+                                        Nazwa użytkownika jest wymagana!
+                                    </div>
+                                    <div *ngIf="registrationForm.get('username').getError('minlength') as error">
+                                        Długość znaków musi być {{error.requiredLength}}. Brakuje {{error.requiredLength - error.actualLength}} znaku/ów!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Hasło<sup>*</sup></label>
+                                <input required type="text" class="form-control" formControlName="password" />
+                                <div class="validation-feedback" *ngIf="registrationForm.get('password').touched || registrationForm.get('password').dirty">
+                                    <div *ngIf="registrationForm.get('password').hasError('required')">
+                                        Hasło użytkownika jest wymagane!
+                                    </div>
+                                    <div *ngIf="f.errors">
+                                        Hasło musi zawierać
+                                        <span *ngIf="f.password.errors.lowercase === false"> małe litery</span>
+                                        <span *ngIf="f.password.errors.uppercase === false"> duże litery</span>!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email<sup>*</sup></label>
+                                <input required type="text" class="form-control" formControlName="email" />
+                                <div class="validation-feedback" *ngIf="registrationForm.get('email').touched || registrationForm.get('email').dirty">
+
+                                    <div *ngIf="registrationForm.get('email').hasError('required')">
+                                        Email użytkownika jest wymagany!
+                                    </div>
+                                    <div *ngIf="registrationForm.get('email').hasError('email')">
+                                        Adres email jest niepoprawny!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Typ<sup>*</sup></label>
+                                <select required class="form-control" formControlName="type" name="type">
+                                <option [value]="CustomerType.Standard">Standard</option>
+                                <option [value]="CustomerType.Premium">Premium</option>
+                                <option [value]="CustomerType.VIP">VIP</option>
+                              </select>
+                            </div>
+                            <button type="button" class="btn btn-default">Resetuj</button>
+                            <button type="submit" class="btn btn-success">Rejestracja</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="jumbotron content">
     <div class="panel panel-default">
         <div class="panel-heading text-center">
             <h2>Rejestracja użytkownika</h2>
@@ -57,4 +132,4 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->
