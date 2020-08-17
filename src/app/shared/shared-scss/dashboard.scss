@@ -1,8 +1,7 @@
 @import "./app.scss";
 .dashboard {
-    margin: 0 2rem;
-    min-height: 100vh;
-    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
     .dashboard__heading {
         margin-bottom: 2rem;
         &.dashboard__heading--mail {
@@ -13,7 +12,6 @@
         box-shadow: $boxShadow;
         padding: 2rem 1rem;
         margin-top: 2rem;
-        // background: $light;
         border-radius: .25rem;
         &.dashboard__section--small {
             padding-top: 1rem;

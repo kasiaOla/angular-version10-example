@@ -1,5 +1,15 @@
 @import "./reset.scss";
 @import "./variables.scss";
+.app {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    .app__page {
+        width: 100%;
+        background: #fafafa;
+    }
+}
+
 h2 {
     font-size: $font-size-xl;
     color: $dark-secondary;

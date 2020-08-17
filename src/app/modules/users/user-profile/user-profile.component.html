@@ -1,12 +1,40 @@
-<div>
-    <h3>Profil</h3>
-    <dl class="row">
-        <dt class="col-3">Nazwa</dt>
-        <dd class="col-9"></dd>
-        <dt class="col-3">Email</dt>
-        <dd class="col-9"></dd>
-        <dt class="col-3">Typ użytkownika</dt>
-        <dd class="col-9"></dd>
-    </dl>
-    <button (click)='authService.loginOut()'>Wyloguj się</button>
+<div class="dashboard">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="dashboard__section dashboard__section--small">
+                    <div class="dashboard__heading dashboard__heading--mail">
+                        <h2>Profil</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="dashboard__section">
+                    <div class="dashboard__heading">
+                        <h3>Lista ogłoszeń</h3>
+                    </div>
+                    <table class="table">
+                        <thead class="table__thead"></thead>
+                        <tr>
+                            <th class="table__th">#</th>
+                            <th class="table__th">Nazwa</th>
+                            <th class="table__th">Email</th>
+                            <th class="table__th">Typ użytkownika</th>
+                        </tr>
+                        <tbody class="table__tbody">
+                            <tr class="table__tr" *ngFor="let profil of [] | async">
+                                <td class="table__td">{{profil._id}}</td>
+                                <td class="table__td">
+                                    <button (click)='authService.loginOut()'>Wyloguj się</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

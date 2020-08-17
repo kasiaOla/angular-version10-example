@@ -1,3 +1,25 @@
-<ag-grid-angular *ngIf='rowDatatAnnouncement.length > 0' class="ag-theme-material ag-grid__tab" [rowData]="rowDatatAnnouncement" [frameworkComponents]="frameworkComponents" (gridReady)="onGridReady($event)" [columnDefs]="columnDefs" [gridOptions]='gridOptions'
-    [defaultColDef]="defaultColumn">
-</ag-grid-angular>
+<div class="dashboard">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="dashboard__section dashboard__section--small">
+                    <div class="dashboard__heading dashboard__heading--mail">
+                        <h2>Lista ogłoszeń</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="dashboard__section">
+                    <div class="dashboard__heading">
+                        <h3>Lista ogłoszeń</h3>
+                    </div>
+                    <ag-grid-angular *ngIf='rowDatatAnnouncement.length > 0' class="ag-theme-material ag-grid__tab" [rowData]="rowDatatAnnouncement" [frameworkComponents]="frameworkComponents" (gridReady)="onGridReady($event)" [columnDefs]="columnDefs" [gridOptions]='gridOptions'
+                        [defaultColDef]="defaultColumn">
+                    </ag-grid-angular>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

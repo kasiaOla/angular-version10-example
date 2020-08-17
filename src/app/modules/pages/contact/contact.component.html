@@ -1,42 +1,35 @@
-<div class="jumbotron content">
-    <div class="panel panel-default">
+<div class="dashboard">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" (keyup)="search($event.target.value)" placeholder="Wprowadź znaki ...">
-                </div>
-                <h3>Wybierz lokalizację</h3>
-                <div class="list-group">
-                    <div class="list-group-item" *ngFor="let location of locations | async  | slice:0: limit ">
-                        {{location.name}}
+            <div class="col-12">
+                <div class="dashboard__section dashboard__section--small">
+                    <div class="dashboard__heading dashboard__heading--mail">
+                        <input type="text" class="form-control" (keyup)="search($event.target.value)" placeholder="Wprowadź znaki ...">
                     </div>
-                </div>
-                <div class="input-group mt-3">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">Ustaw limit</div>
-                    </div>
-                    <select class="form-control" (change)="setLimit($event.target.value)">
-                      <option value="10">10</option>
-                      <option value="20">20</option>
-                      <option value="30">30</option>
-                    </select>
                 </div>
             </div>
         </div>
-        <div class="panel-body">
-            <h2>Kontakt</h2>
-            <div class="col-md-3 mb-md-0 mb-3">
-                <h5 class="text-uppercase">Adres</h5>
-                <p>
-                    <i class="fa fa-home mr-3"></i> Warszawa 02-942 Konstancińska 7b/36</p>
-                <p>
-                    <i class="fa fa-envelope mr-3"></i> test@example.com</p>
-                <p>
-                    <i class="fa fa-phone mr-3"></i> + </p>
-                <p>
-                    <i class="fa fa-print mr-3"></i> + 01 234 567 89</p>
+        <div class="row">
+            <div class="col-12">
+                <div class="dashboard__section">
+                    <div class="dashboard__heading">
+                        <h3>Lista ogłoszeń</h3>
+                    </div>
+                    <div class="list-group">
+                        <select class="form-control" *ngFor="let location of locations | async  | slice:0: limit ">
+                          <option value="location.name" > {{location.name}}</option>
+                        </select>
+                    </div>
+                    <div class="input-group mt-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Ustaw limit</div>
+                        </div>
+                        <select class="form-control" (change)="setLimit($event.target.value)">
+                          <option value="10">10</option>
+                          <option value="20">20</option>
+                          <option value="30">30</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-
         </div>
-    </div>
-</div>
