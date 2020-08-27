@@ -13,9 +13,6 @@ export class DeactivateGuardService implements CanDeactivate<ContactComponent> {
                 currentRoute: ActivatedRouteSnapshot,
                 currentState: RouterStateSnapshot,
                 nextState?: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
-                  console.log('component.locations ', component.locations);
-                  console.log('!!component.locations ', !!component.locations);
-                  console.log('!component.locations ', !component.locations);
 
     return !!component.locations; // jesli jest coś w polu locations można będzie przełączać się na inne komponenty
   }
