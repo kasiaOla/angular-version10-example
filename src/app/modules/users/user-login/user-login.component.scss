@@ -1,7 +1,12 @@
 @import "../../../shared/shared-scss/variables.scss";
 @import "../../../shared/shared-scss/dashboard.scss";
+@import "../../../shared/shared-scss/app.scss";
 .content {
     width: 80%;
     margin: 10%;
     box-shadow: $boxShadow;
+}
+
+input .form-control:hover {
+    outline: none;
 }

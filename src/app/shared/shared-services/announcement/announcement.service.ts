@@ -5,6 +5,7 @@ import { catchError, tap, share } from 'rxjs/operators';
 import { Announcement } from '../../../modules/announcements/announcement';
 import { LoggerService } from '../logger/logger.service';
 
+
 @Injectable({
   providedIn: 'root'
 })

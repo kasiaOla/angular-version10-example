@@ -4,7 +4,7 @@ export interface Location {
   id: string;
   name: string;
   department: string;
-  country: Country;
+  readonly country: Country;
   address: Address;
 }
 

@@ -7,12 +7,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
 import { UsersModule } from '../users/users.module';
 import { AnnouncementModule } from '../announcements/announcement.module';
+import { HighlightDirective } from './directive/highlight.directive';
 
 
 @NgModule({
   declarations: [
     FooterComponent,
     NavbarComponent,
+    HighlightDirective,
   ],
   imports: [
     CommonModule,

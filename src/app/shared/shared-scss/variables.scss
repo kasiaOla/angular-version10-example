@@ -1,5 +1,5 @@
 $boxShadow: inset -10px -10px 100px #c8ced5,
-10px 10px 20px #c8ced5,
+10px 10px 20px #a4bfdd,
 inset 0 0 10px #c8ced5;
 $border: 1px #222 solid;
 $font-size-xxs: .625rem;
@@ -9,7 +9,12 @@ $font-size-md: 1rem;
 $font-size-lg: 1.25rem;
 $font-size-xl: 1.5rem;
 $font-size-xxl: 2rem;
-$light: #fff;
+$color-red: #FF0000;
+$color-green-15: #004d1a;
+$color-gray-90: #bbbbba;
+$color-gray-25: #4d4d33;
+$color-green-55: #53c653;
+$white: #fff;
 $dark: rgba(#000, .87);
 $dark-secondary: rgba(#000, .54);
 $dark-disabled: rgba(#000, .38);

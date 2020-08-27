@@ -1,4 +1,4 @@
-@import "./reset.scss";
+// @import "./reset.scss";
 @import "./variables.scss";
 .app {
     display: flex;
@@ -24,4 +24,28 @@ h3 {
 label {
     font-size: $font-size-sm;
     color: $dark-secondary;
+}
+
+.form-group {
+    padding-right: 1rem;
+    margin-top: 1rem;
+}
+
+fieldset {
+    margin-top: 1rem;
+}
+
+@mixin outline--none {
+    outline: none !important;
+    -webkit-appearance: none;
+    outline: 0;
+}
+
+input {
+    &:focus {
+        @include outline--none;
+    }
+    &:active {
+        @include outline--none;
+    }
 }
